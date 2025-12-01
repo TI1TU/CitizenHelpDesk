@@ -1,901 +1,2835 @@
+// 3D Scene Setup using Three.js
+
+// Wait for the DOM to be fully loaded
+document.addEventListener('DOMContentLoaded', () => {
+    const container = document.getElementById('canvas-container');
+    if (!container) return;
+
+    // Scene setup
+    const scene = new THREE.Scene();
+    // scene.background = new THREE.Color(0xf8fafc); // Match --background-color
+
+    // Camera setup
+    const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
+    camera.position.z = 5;
+
+    // Renderer setup
+    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+    renderer.setSize(container.clientWidth, container.clientHeight);
+    renderer.setPixelRatio(window.devicePixelRatio);
+    container.appendChild(renderer.domElement);
+
+    // Objects
+    const geometryGroup = new THREE.Group();
+    scene.add(geometryGroup);
+
+    // Materials using site colors
+    // Primary: #2563eb, Accent: #3b82f6, Secondary: #64748b
+    const materialPrimary = new THREE.MeshStandardMaterial({
+        color: 0x2563eb,
+        roughness: 0.4,
+        metalness: 0.1
+    });
+    const materialAccent = new THREE.MeshStandardMaterial({
+        color: 0x3b82f6,
+        roughness: 0.3,
+        metalness: 0.2
+    });
+    const materialSecondary = new THREE.MeshStandardMaterial({
+        color: 0x64748b,
+        roughness: 0.5,
+        metalness: 0.1
+    });
+    const materialGlass = new THREE.MeshPhysicalMaterial({
+        color: 0xffffff,
+        metalness: 0,
+        roughness: 0,
+        transmission: 0.9, // Add transparency
+        thickness: 0.5, // Add refraction
+        transparent: true,
+        opacity: 0.8
+    });
+
+
+    // Main floating shape (Icosahedron)
+    const mainShapeGeo = new THREE.IcosahedronGeometry(1.5, 0);
+    const mainShape = new THREE.Mesh(mainShapeGeo, materialPrimary);
+    mainShape.position.set(0, 0, 0);
+    geometryGroup.add(mainShape);
+
+    // Orbiting shapes
+    const torusGeo = new THREE.TorusGeometry(2.2, 0.1, 16, 100);
+    const torus = new THREE.Mesh(torusGeo, materialAccent);
+    torus.rotation.x = Math.PI / 2;
+    geometryGroup.add(torus);
+
+    const cubeGeo = new THREE.BoxGeometry(0.5, 0.5, 0.5);
+
+    const cube1 = new THREE.Mesh(cubeGeo, materialSecondary);
+    cube1.position.set(2.5, 1.5, -1);
+    geometryGroup.add(cube1);
+
+    const cube2 = new THREE.Mesh(cubeGeo, materialGlass);
+    cube2.position.set(-2.5, -1, 1);
+    geometryGroup.add(cube2);
+
+    const sphereGeo = new THREE.SphereGeometry(0.3, 32, 32);
+    const sphere1 = new THREE.Mesh(sphereGeo, materialAccent);
+    sphere1.position.set(1.5, -2, 0.5);
+    geometryGroup.add(sphere1);
+
+    // Lighting
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+    scene.add(ambientLight);
+
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+    directionalLight.position.set(5, 5, 5);
+    scene.add(directionalLight);
+
+    const pointLight = new THREE.PointLight(0x2563eb, 2, 10);
+    pointLight.position.set(-2, 3, 2);
+    scene.add(pointLight);
+
+    // Animation variables
+    let mouseX = 0;
+    let mouseY = 0;
+    let targetRotationX = 0;
+    let targetRotationY = 0;
+
+    // Mouse interaction
+    document.addEventListener('mousemove', (event) => {
+        const windowHalfX = window.innerWidth / 2;
+        const windowHalfY = window.innerHeight / 2;
+
+        mouseX = (event.clientX - windowHalfX) / 100;
+        mouseY = (event.clientY - windowHalfY) / 100;
+    });
+
+    // Animation Loop
+    const animate = () => {
+        requestAnimationFrame(animate);
+
+        // Continuous rotation
+        mainShape.rotation.y += 0.005;
+        mainShape.rotation.x += 0.002;
+
+        torus.rotation.z -= 0.003;
+        torus.rotation.x += 0.002;
+
+        cube1.rotation.x += 0.01;
+        cube1.rotation.y += 0.01;
+
+        cube2.rotation.x -= 0.01;
+        cube2.rotation.z += 0.01;
+
+        // Floating effect
+        const time = Date.now() * 0.001;
+        cube1.position.y += Math.sin(time) * 0.002;
+        cube2.position.y += Math.cos(time * 0.8) * 0.002;
+        sphere1.position.y += Math.sin(time * 1.2) * 0.002;
+
+        // Mouse interaction smoothing
+        targetRotationX = mouseY * 0.5;
+        targetRotationY = mouseX * 0.5;
+
+        geometryGroup.rotation.x += 0.05 * (targetRotationX - geometryGroup.rotation.x);
+        geometryGroup.rotation.y += 0.05 * (targetRotationY - geometryGroup.rotation.y);
+
+        renderer.render(scene, camera);
+    };
+
+    animate();
+
+    // Handle Window Resize
+    window.addEventListener('resize', () => {
+        const width = container.clientWidth;
+        const height = container.clientHeight;
+
+        camera.aspect = width / height;
+        camera.updateProjectionMatrix();
+
+        renderer.setSize(width, height);
+    });
+});
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <title>Citizen HelpDesk – Government Rules Explained Simply</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Citizen HelpDesk explains traffic rules, documents, police and government schemes in simple language for everyday citizens." />
-
-  <style>
-    :root {
-      --bg: #f4f6fb;
-      --bg-card: #ffffff;
-      --primary: #1d4ed8;
-      --primary-soft: #e0ebff;
-      --text-main: #0f172a;
-      --text-muted: #6b7280;
-      --border: #e5e7eb;
-      --danger: #b91c1c;
-      --shadow-soft: 0 18px 40px rgba(15, 23, 42, 0.09);
-      --radius-lg: 18px;
-      --radius-md: 12px;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: radial-gradient(circle at top left, #e0ebff 0, #f4f6fb 45%, #f4f6fb 100%);
-      color: var(--text-main);
-      line-height: 1.5;
-    }
-
-    /* HEADER */
-
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      backdrop-filter: blur(10px);
-      background: rgba(244, 246, 251, 0.9);
-      border-bottom: 1px solid rgba(226, 232, 240, 0.8);
-    }
-
-    .nav-inner {
-      max-width: 1080px;
-      margin: 0 auto;
-      padding: 10px 14px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 14px;
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .logo-icon {
-      width: 36px;
-      height: 36px;
-      border-radius: 12px;
-      background: radial-gradient(circle at 30% 0, #60a5fa 0, #1d4ed8 55%, #172554 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #fff;
-      font-weight: 700;
-      font-size: 18px;
-      box-shadow: 0 10px 25px rgba(37, 99, 235, 0.5);
-      animation: float 2.4s ease-in-out infinite;
-    }
-
-    .logo-text {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .logo-text strong {
-      font-size: 1.05rem;
-    }
-
-    .logo-text span {
-      font-size: 0.72rem;
-      color: var(--text-muted);
-    }
-
-    nav {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      font-size: 0.9rem;
-    }
-
-    nav a {
-      text-decoration: none;
-      color: #475569;
-      padding: 6px 10px;
-      border-radius: 999px;
-    }
-
-    nav a:hover {
-      background: var(--primary-soft);
-      color: var(--primary);
-    }
-
-    @media (max-width: 720px) {
-      nav {
-        display: none;
-      }
-    }
-
-    .nav-cta {
-      font-size: 0.8rem;
-      border-radius: 999px;
-      padding: 7px 12px;
-      border: 1px solid rgba(37, 99, 235, 0.4);
-      background: #eff6ff;
-      color: #1d4ed8;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      cursor: pointer;
-    }
-
-    .nav-cta span {
-      font-size: 0.72rem;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-    }
-
-    /* LAYOUT */
-
-    .page {
-      max-width: 1080px;
-      margin: 0 auto;
-      padding: 18px 16px 40px;
-    }
-
-    /* HERO */
-
-    .hero {
-      display: grid;
-      grid-template-columns: minmax(0, 1.7fr) minmax(0, 1.3fr);
-      gap: 22px;
-      padding: 18px 0 26px;
-      align-items: center;
-    }
-
-    @media (max-width: 880px) {
-      .hero {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .badge-row {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 4px 10px;
-      border-radius: 999px;
-      background: rgba(22, 163, 74, 0.06);
-      color: #15803d;
-      font-size: 0.78rem;
-      margin-bottom: 10px;
-    }
-
-    .badge-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 999px;
-      background: #22c55e;
-      box-shadow: 0 0 0 5px rgba(34, 197, 94, 0.2);
-    }
-
-    .hero h1 {
-      font-size: clamp(1.9rem, 3vw + 0.6rem, 2.5rem);
-      line-height: 1.15;
-      margin-bottom: 10px;
-    }
-
-    .hero h1 span {
-      color: var(--primary);
-    }
-
-    .hero-sub {
-      font-size: 0.98rem;
-      color: var(--text-muted);
-      margin-bottom: 16px;
-      max-width: 32rem;
-    }
-
-    .hero-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 16px;
-      font-size: 0.78rem;
-      color: #1f2937;
-    }
-
-    .hero-tag {
-      background: rgba(37, 99, 235, 0.08);
-      color: #1d4ed8;
-      padding: 3px 9px;
-      border-radius: 999px;
-    }
-
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 10px;
-    }
-
-    .btn-primary {
-      background: var(--primary);
-      color: #fff;
-      border: none;
-      padding: 9px 16px;
-      border-radius: 999px;
-      font-size: 0.88rem;
-      cursor: pointer;
-      box-shadow: 0 10px 20px rgba(37, 99, 235, 0.35);
-    }
-
-    .btn-secondary {
-      background: #e5e7eb;
-      color: #111827;
-      border: none;
-      padding: 9px 16px;
-      border-radius: 999px;
-      font-size: 0.88rem;
-      cursor: pointer;
-    }
-
-    .hero-note {
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      margin-top: 4px;
-    }
-
-    .hero-box {
-      background: var(--bg-card);
-      border-radius: var(--radius-lg);
-      padding: 16px 16px 14px;
-      box-shadow: var(--shadow-soft);
-      border: 1px solid rgba(226, 232, 240, 0.9);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero-box::before {
-      content: "";
-      position: absolute;
-      inset: -40%;
-      background: radial-gradient(circle at 10% 0, rgba(59, 130, 246, 0.16), transparent 55%),
-                  radial-gradient(circle at 100% 100%, rgba(37, 99, 235, 0.12), transparent 55%);
-      opacity: 0.6;
-      pointer-events: none;
-    }
-
-    .hero-box-inner {
-      position: relative;
-      z-index: 1;
-    }
-
-    .hero-box-title {
-      font-size: 0.96rem;
-      font-weight: 600;
-      margin-bottom: 4px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .hero-box-pill {
-      font-size: 0.7rem;
-      padding: 3px 8px;
-      border-radius: 999px;
-      background: rgba(239, 246, 255, 0.9);
-      color: var(--primary);
-    }
-
-    .hero-box-sub {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      margin-bottom: 9px;
-    }
-
-    .search-row {
-      display: flex;
-      gap: 8px;
-      margin-bottom: 8px;
-    }
-
-    .search-row input {
-      flex: 1;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      padding: 7px 11px;
-      font-size: 0.85rem;
-      outline: none;
-    }
-
-    .search-row input:focus {
-      border-color: var(--primary);
-      box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.25);
-    }
-
-    .btn-search {
-      border-radius: 999px;
-      border: none;
-      padding: 7px 11px;
-      font-size: 0.84rem;
-      background: #111827;
-      color: #f9fafb;
-      cursor: pointer;
-    }
-
-    .chip-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-bottom: 10px;
-      font-size: 0.74rem;
-    }
-
-    .chip {
-      padding: 4px 8px;
-      border-radius: 999px;
-      background: rgba(15, 23, 42, 0.04);
-      color: #111827;
-      border: 1px solid rgba(148, 163, 184, 0.5);
-    }
-
-    .hero-checklist {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 4px 10px;
-      font-size: 0.78rem;
-      margin-top: 6px;
-    }
-
-    .hero-check {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      color: #065f46;
-    }
-
-    .hero-check span.icon {
-      width: 16px;
-      height: 16px;
-      border-radius: 999px;
-      border: 1px solid #22c55e;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.7rem;
-      background: rgba(34, 197, 94, 0.08);
-    }
-
-    /* SECTION: TOPICS */
-
-    .section {
-      margin-top: 26px;
-    }
-
-    .section-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      gap: 10px;
-      margin-bottom: 10px;
-    }
-
-    .section-title {
-      font-size: 1.1rem;
-      font-weight: 700;
-    }
-
-    .section-sub {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-    }
-
-    .link-inline {
-      font-size: 0.8rem;
-      color: var(--primary);
-      text-decoration: none;
-    }
-
-    .card-grid {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 12px;
-    }
-
-    @media (max-width: 960px) {
-      .card-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-    }
-    @media (max-width: 600px) {
-      .card-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .card {
-      background: var(--bg-card);
-      border-radius: var(--radius-md);
-      padding: 11px 12px 10px;
-      border: 1px solid var(--border);
-      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.03);
-      font-size: 0.86rem;
-    }
-
-    .card-icon {
-      width: 26px;
-      height: 26px;
-      border-radius: 999px;
-      background: #eff6ff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--primary);
-      font-size: 0.9rem;
-      margin-bottom: 6px;
-    }
-
-    .card h3 {
-      font-size: 0.95rem;
-      margin-bottom: 4px;
-    }
-
-    .card p {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      margin-bottom: 6px;
-    }
-
-    .card ul {
-      padding-left: 16px;
-      font-size: 0.78rem;
-      color: #4b5563;
-    }
-
-    .card ul li {
-      margin-bottom: 2px;
-    }
-
-    /* QUICK GUIDES */
-
-    .guide-list {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 10px;
-      font-size: 0.82rem;
-    }
-
-    @media (max-width: 900px) {
-      .guide-list {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-    }
-    @media (max-width: 600px) {
-      .guide-list {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .guide-item {
-      background: rgba(255, 255, 255, 0.9);
-      border-radius: 10px;
-      padding: 8px 10px;
-      border: 1px dashed rgba(148, 163, 184, 0.7);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .guide-item-main {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-
-    .guide-item-title {
-      font-weight: 600;
-      font-size: 0.84rem;
-    }
-
-    .guide-item-meta {
-      font-size: 0.72rem;
-      color: var(--text-muted);
-    }
-
-    .pill-small {
-      font-size: 0.7rem;
-      padding: 3px 7px;
-      border-radius: 999px;
-      background: rgba(37, 99, 235, 0.06);
-      color: var(--primary);
-    }
-
-    /* FAQ */
-
-    .faq-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1.2fr);
-      gap: 18px;
-      font-size: 0.86rem;
-    }
-
-    @media (max-width: 880px) {
-      .faq-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .faq-item {
-      margin-bottom: 10px;
-      padding: 9px 10px;
-      border-radius: 10px;
-      background: rgba(255, 255, 255, 0.9);
-      border: 1px solid rgba(226, 232, 240, 0.9);
-    }
-
-    .faq-q {
-      font-weight: 600;
-      margin-bottom: 3px;
-    }
-
-    .faq-a {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-    }
-
-    .note-box {
-      background: #fef2f2;
-      border-radius: 10px;
-      padding: 10px 12px;
-      border: 1px solid #fee2e2;
-      font-size: 0.8rem;
-      color: #7f1d1d;
-    }
-
-    /* FOOTER */
-
-    footer {
-      background: #020617;
-      color: #9ca3af;
-      font-size: 0.8rem;
-      padding: 16px 14px 18px;
-      margin-top: 32px;
-    }
-
-    .footer-inner {
-      max-width: 1080px;
-      margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .footer-top {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      gap: 10px;
-    }
-
-    .footer-brand {
-      font-weight: 600;
-      color: #e5e7eb;
-    }
-
-    .footer-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .footer-links a {
-      color: #9ca3af;
-      text-decoration: none;
-    }
-
-    .footer-links a:hover {
-      color: #e5e7eb;
-    }
-
-    @keyframes float {
-      0%   { transform: translateY(-6px); }
-      50%  { transform: translateY(2px); }
-      100% { transform: translateY(-6px); }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aadhaar Address Change – Step-by-Step (2025 Update) - CitizenHelpDesk</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
+
 <body>
-  <header>
-    <div class="nav-inner">
-      <div class="logo">
-        <div class="logo-icon">CH</div>
-        <div class="logo-text">
-          <strong>Citizen HelpDesk</strong>
-          <span>Government rules, in simple words.</span>
-        </div>
-      </div>
-
-      <nav>
-        <a href="#traffic">Traffic rules</a>
-        <a href="#documents">Documents & IDs</a>
-        <a href="#police">Police & FIR</a>
-        <a href="#schemes">Schemes</a>
-        <a href="#faq">FAQ</a>
-      </nav>
-
-      <button class="nav-cta" type="button">
-        <span>NEW</span> Quick challan guide
-      </button>
-    </div>
-  </header>
-
-  <main class="page">
-    <!-- HERO -->
-    <section class="hero">
-      <div>
-        <div class="badge-row">
-          <span class="badge-dot"></span>
-          Live now for Indian citizens
-        </div>
-        <h1>
-          Government rules, <span>explained like you ask a friend.</span>
-        </h1>
-        <p class="hero-sub">
-          No legal language, no confusion. Citizen HelpDesk breaks traffic, documents, police and scheme
-          rules into simple, step-by-step guides you can actually follow.
-        </p>
-
-        <div class="hero-tags">
-          <span class="hero-tag">Traffic challans</span>
-          <span class="hero-tag">Licence & documents</span>
-          <span class="hero-tag">Online FIR basics</span>
-          <span class="hero-tag">Govt schemes</span>
-        </div>
-
-        <div class="hero-actions">
-          <button class="btn-primary" type="button">Start with traffic rules</button>
-          <button class="btn-secondary" type="button">See document guides</button>
-        </div>
-        <p class="hero-note">
-          We share simplified public information. This is <strong>not</strong> an official government website.
-          Always confirm details on official portals.
-        </p>
-      </div>
-
-      <aside class="hero-box" aria-label="Quick help panel">
-        <div class="hero-box-inner">
-          <div class="hero-box-title">
-            <span>What do you need help with today?</span>
-            <span class="hero-box-pill">1–2 minute reads</span>
-          </div>
-          <p class="hero-box-sub">
-            Type a keyword and start reading a clear, to-the-point guide.
-          </p>
-
-          <div class="search-row">
-            <input type="search" placeholder="Example: pay challan online, lost licence, online FIR" />
-            <button class="btn-search" type="button">Search</button>
-          </div>
-
-          <div class="chip-row">
-            <span class="chip">Pay traffic challan</span>
-            <span class="chip">Helmet rule fine</span>
-            <span class="chip">Aadhaar address update</span>
-            <span class="chip">Lost PAN card</span>
-            <span class="chip">Online FIR for lost mobile</span>
-          </div>
-
-          <div class="hero-checklist">
-            <div class="hero-check">
-              <span class="icon">✓</span>
-              <span>Simple English + examples</span>
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                Citizen<span>HelpDesk</span>
+            </a>
+            <button class="mobile-menu-btn">☰</button>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="traffic.html" class="nav-link">Traffic Rules</a>
+                <a href="documents.html" class="nav-link">Documents</a>
+                <a href="police.html" class="nav-link">Police Help</a>
+                <a href="schemes.html" class="nav-link">Schemes</a>
             </div>
-            <div class="hero-check">
-              <span class="icon">✓</span>
-              <span>Short, step-by-step guides</span>
-            </div>
-            <div class="hero-check">
-              <span class="icon">✓</span>
-              <span>No fake promises or agents</span>
-            </div>
-            <div class="hero-check">
-              <span class="icon">✓</span>
-              <span>Links to official sites</span>
-            </div>
-          </div>
         </div>
-      </aside>
-    </section>
+    </nav>
 
-    <!-- TOPIC CARDS -->
-    <section class="section" id="traffic">
-      <div class="section-header">
-        <div>
-          <h2 class="section-title">Start with a topic</h2>
-          <p class="section-sub">
-            Pick the area you’re confused about. Each topic has clear explanations and real-life examples.
-          </p>
+    <header class="blog-hero" style="background-image: url('images/blog-aadhaar.png');">
+        <div class="blog-hero-content">
+            <div class="blog-meta">Documents & ID • 2025 Update</div>
+            <h1>Aadhaar Address Change – Step-by-Step (2025 Update)</h1>
         </div>
-      </div>
+    </header>
 
-      <div class="card-grid">
-        <article class="card">
-          <div class="card-icon">🚦</div>
-          <h3>Traffic rules & challans</h3>
-          <p>Understand fines, documents and your rights on the road.</p>
-          <ul>
-            <li>Helmet & seat belt rules</li>
-            <li>How to check & pay challan</li>
-            <li>What if police stop you?</li>
-          </ul>
-        </article>
+    <main class="blog-container">
+        <div class="blog-content">
+            <p>If you recently moved to a new house or city, you should update your Aadhaar address. Here’s a simple
+                guide.</p>
 
-        <article class="card" id="documents">
-          <div class="card-icon">📄</div>
-          <h3>Documents & ID guides</h3>
-          <p>Step-by-step help for common ID and document problems.</p>
-          <ul>
-            <li>Aadhaar update & corrections</li>
-            <li>PAN card apply / reprint</li>
-            <li>Driving licence & RC basics</li>
-          </ul>
-        </article>
+            <h2>✔ What You Need</h2>
+            <ul>
+                <li>Aadhaar Number</li>
+                <li>Address proof (e.g., rent agreement, electricity bill, bank statement)</li>
+                <li>Phone number linked with Aadhaar</li>
+            </ul>
 
-        <article class="card" id="police">
-          <div class="card-icon">👮</div>
-          <h3>Police & FIR basics</h3>
-          <p>Know the basics before you panic or sign anything.</p>
-          <ul>
-            <li>FIR vs complaint vs NC</li>
-            <li>Online FIR for lost items</li>
-            <li>What police can & can’t do</li>
-          </ul>
-        </article>
+            <h2>✔ How to Update Address Online</h2>
+            <ol>
+                <li>Visit the Aadhaar Self Service Update Portal.</li>
+                <li>Log in using your Aadhaar + OTP.</li>
+                <li>Select Update Address.</li>
+                <li>Upload your address proof.</li>
+                <li>Review the preview screen.</li>
+                <li>Submit.</li>
+            </ol>
 
-        <article class="card" id="schemes">
-          <div class="card-icon">💰</div>
-          <h3>Government schemes</h3>
-          <p>Short summaries of benefits, eligibility and how to apply.</p>
-          <ul>
-            <li>Who is eligible?</li>
-            <li>Documents you must carry</li>
-            <li>Where to apply online</li>
-          </ul>
-        </article>
-      </div>
-    </section>
+            <h2>✔ Processing Time</h2>
+            <p>Usually 3–7 days.</p>
 
-    <!-- QUICK GUIDES -->
-    <section class="section">
-      <div class="section-header">
-        <div>
-          <h2 class="section-title">Popular quick guides</h2>
-          <p class="section-sub">
-            1-page explainers for the problems people face every day.
-          </p>
+            <h2>✔ Track Status</h2>
+            <p>You can track using your URN (Update Request Number).</p>
         </div>
-      </div>
+    </main>
 
-      <div class="guide-list">
-        <div class="guide-item">
-          <div class="guide-item-main">
-            <div class="guide-item-title">How to pay traffic challan online</div>
-            <div class="guide-item-meta">Check challan, pay safely, save receipt.</div>
-          </div>
-          <span class="pill-small">Traffic</span>
+    <footer class="section">
+        <div class="container">
+            <p>&copy; 2025 CitizenHelpDesk. Information for general guidance only.</p>
         </div>
+    </footer>
 
-        <div class="guide-item">
-          <div class="guide-item-main">
-            <div class="guide-item-title">Helmet rule & latest fines</div>
-            <div class="guide-item-meta">Rider + pillion, ISI helmet, common myths.</div>
-          </div>
-          <span class="pill-small">Traffic</span>
-        </div>
-
-        <div class="guide-item">
-          <div class="guide-item-main">
-            <div class="guide-item-title">Lost PAN card – what to do</div>
-            <div class="guide-item-meta">Online reprint, e-PAN, when FIR is needed.</div>
-          </div>
-          <span class="pill-small">Documents</span>
-        </div>
-
-        <div class="guide-item">
-          <div class="guide-item-main">
-            <div class="guide-item-title">Aadhaar address change online</div>
-            <div class="guide-item-meta">Documents required and common rejection reasons.</div>
-          </div>
-          <span class="pill-small">Documents</span>
-        </div>
-
-        <div class="guide-item">
-          <div class="guide-item-main">
-            <div class="guide-item-title">Online FIR for lost mobile</div>
-            <div class="guide-item-meta">Simple steps and what details you must mention.</div>
-          </div>
-          <span class="pill-small">Police</span>
-        </div>
-
-        <div class="guide-item">
-          <div class="guide-item-main">
-            <div class="guide-item-title">What to do after an accident</div>
-            <div class="guide-item-meta">Police, insurance, medical help – in the right order.</div>
-          </div>
-          <span class="pill-small">Safety</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- FAQ + DISCLAIMER -->
-    <section class="section" id="faq">
-      <div class="section-header">
-        <div>
-          <h2 class="section-title">Before you rely on any rule...</h2>
-          <p class="section-sub">
-            Read this carefully so you don’t misunderstand what Citizen HelpDesk is.
-          </p>
-        </div>
-      </div>
-
-      <div class="faq-grid">
-        <div>
-          <div class="faq-item">
-            <div class="faq-q">Is this an official government website?</div>
-            <div class="faq-a">
-              No. Citizen HelpDesk is an independent information site. We only explain publicly available
-              rules in simple language and link to official portals where possible.
-            </div>
-          </div>
-          <div class="faq-item">
-            <div class="faq-q">Can I use this as legal advice?</div>
-            <div class="faq-a">
-              No. Our content is for general awareness. For legal disputes, court matters or serious police
-              cases, always talk to a qualified advocate or the concerned authority.
-            </div>
-          </div>
-          <div class="faq-item">
-            <div class="faq-q">Are the rules always 100% up to date?</div>
-            <div class="faq-a">
-              We try to keep guides updated, but laws and procedures change. Always double-check on the
-              official government website, notice or helpline before taking any big decision.
-            </div>
-          </div>
-        </div>
-
-        <div class="note-box">
-          <strong>Important safety note</strong><br /><br />
-          • Never pay any “agent” through random links claiming to fix challans or create documents.
-          Always use official .gov.in or .nic.in websites only.<br /><br />
-          • If a police or government officer behaves illegally or threatens you, stay calm, stay safe and
-          contact a trusted lawyer or local helpline. Don’t argue on the road if it can turn violent.<br /><br />
-          Citizen HelpDesk exists to make rules less scary and more understandable, not to replace
-          professionals. Use it as a clear starting point, not the final word.
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="footer-inner">
-      <div class="footer-top">
-        <div>
-          <div class="footer-brand">Citizen HelpDesk</div>
-          <div>Government rules in human language, for everyday citizens.</div>
-        </div>
-        <div class="footer-links">
-          <a href="#traffic">Traffic</a>
-          <a href="#documents">Documents</a>
-          <a href="#police">Police</a>
-          <a href="#schemes">Schemes</a>
-        </div>
-      </div>
-      <div>
-        This website simplifies public information only. It is not affiliated with any government department.
-        Always verify important details on official government portals.
-      </div>
-    </div>
-  </footer>
+    <script src="script.js"></script>
 </body>
+
+</html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FIR vs Complaint vs NC – What’s the Difference? - CitizenHelpDesk</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                Citizen<span>HelpDesk</span>
+            </a>
+            <button class="mobile-menu-btn">☰</button>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="traffic.html" class="nav-link">Traffic Rules</a>
+                <a href="documents.html" class="nav-link">Documents</a>
+                <a href="police.html" class="nav-link">Police Help</a>
+                <a href="schemes.html" class="nav-link">Schemes</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="blog-hero" style="background-image: url('images/blog-fir.png');">
+        <div class="blog-hero-content">
+            <div class="blog-meta">Police Help • Legal Basics</div>
+            <h1>FIR vs Complaint vs NC – What’s the Difference?</h1>
+        </div>
+    </header>
+
+    <main class="blog-container">
+        <div class="blog-content">
+            <p>Many people get confused between FIR, NC, and a Complaint. Here’s a simple explanation in everyday
+                language.</p>
+
+            <h2>✔ FIR (First Information Report)</h2>
+            <ul>
+                <li>Filed for serious or cognizable offences (the police can arrest without warrant).</li>
+                <li>Examples: theft, assault, major accidents.</li>
+                <li>FIR must be recorded by police when a valid complaint is made.</li>
+            </ul>
+
+            <h2>✔ NC (Non-Cognizable Complaint)</h2>
+            <ul>
+                <li>For minor issues like small fights, verbal arguments, minor damage.</li>
+                <li>Police cannot take action without court order.</li>
+            </ul>
+
+            <h2>✔ Normal Complaint</h2>
+            <ul>
+                <li>A written application explaining the issue.</li>
+                <li>Police may choose to convert it into FIR/NC based on seriousness.</li>
+            </ul>
+
+            <h2>✔ When to File What</h2>
+            <ul>
+                <li><strong>FIR:</strong> Serious crime.</li>
+                <li><strong>NC:</strong> Minor dispute.</li>
+                <li><strong>Complaint:</strong> When you just want to inform police.</li>
+            </ul>
+
+            <h2>✔ Online FIR</h2>
+            <p>Many states allow filing FIR online for:</p>
+            <ul>
+                <li>Lost documents</li>
+                <li>Lost wallet/phone</li>
+                <li>Missing items</li>
+            </ul>
+        </div>
+    </main>
+
+    <footer class="section">
+        <div class="container">
+            <p>&copy; 2025 CitizenHelpDesk. Information for general guidance only.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Helmet Rule in India – Updated Penalties (2025) - CitizenHelpDesk</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                Citizen<span>HelpDesk</span>
+            </a>
+            <button class="mobile-menu-btn">☰</button>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="traffic.html" class="nav-link">Traffic Rules</a>
+                <a href="documents.html" class="nav-link">Documents</a>
+                <a href="police.html" class="nav-link">Police Help</a>
+                <a href="schemes.html" class="nav-link">Schemes</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="blog-hero" style="background-image: url('images/traffic-bg.png');">
+        <div class="blog-hero-content">
+            <div class="blog-meta">Traffic Rules • Safety First</div>
+            <h1>Helmet Rule in India – Updated Penalties (2025)</h1>
+        </div>
+    </header>
+
+    <main class="blog-container">
+        <div class="blog-content">
+            <p>Wearing a helmet is not just a safety measure, it’s the law.</p>
+
+            <h2>✔ Helmet Rules</h2>
+            <ul>
+                <li>Both rider and pillion must wear helmets.</li>
+                <li>Helmet must have ISI mark.</li>
+                <li>Improper or half helmets may be fined.</li>
+            </ul>
+
+            <h2>✔ Fines (may vary by state)</h2>
+            <ul>
+                <li>No helmet: ₹500–₹1000</li>
+                <li>Pillion without helmet: ₹500–₹1000</li>
+                <li>Dangerous driving without helmet: higher penalties</li>
+            </ul>
+
+            <h2>✔ Why Helmet is Important</h2>
+            <ul>
+                <li>80% of serious head injuries happen in two-wheeler accidents.</li>
+                <li>Helmet can reduce the risk of death by 70%.</li>
+            </ul>
+
+            <h2>✔ Tips</h2>
+            <ul>
+                <li>Wear helmet strap properly.</li>
+                <li>Avoid plastic toy helmets.</li>
+                <li>Use reflective stickers for night riding.</li>
+            </ul>
+        </div>
+    </main>
+
+    <footer class="section">
+        <div class="container">
+            <p>&copy; 2025 CitizenHelpDesk. Information for general guidance only.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lost Your PAN Card? Here’s Exactly What to Do - CitizenHelpDesk</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                Citizen<span>HelpDesk</span>
+            </a>
+            <button class="mobile-menu-btn">☰</button>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="traffic.html" class="nav-link">Traffic Rules</a>
+                <a href="documents.html" class="nav-link">Documents</a>
+                <a href="police.html" class="nav-link">Police Help</a>
+                <a href="schemes.html" class="nav-link">Schemes</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="blog-hero" style="background-image: url('images/blog-aadhaar.png');">
+        <div class="blog-hero-content">
+            <div class="blog-meta">Documents & ID • Recovery Guide</div>
+            <h1>Lost Your PAN Card? Here’s Exactly What to Do</h1>
+        </div>
+    </header>
+
+    <main class="blog-container">
+        <div class="blog-content">
+            <p>Losing your PAN card can be stressful, but the process to get a reprint is very simple.</p>
+
+            <h2>✔ Step 1: File a Lost Report</h2>
+            <ul>
+                <li>If stolen, file an Online FIR for Lost Document.</li>
+                <li>If misplaced, this step is optional.</li>
+            </ul>
+
+            <h2>✔ Step 2: Apply for Reprint</h2>
+            <ol>
+                <li>Open the NSDL/UTI portal.</li>
+                <li>Choose Reprint of PAN.</li>
+                <li>Enter Aadhaar + PAN.</li>
+                <li>Pay the small fee.</li>
+                <li>PAN will be printed and delivered to your address.</li>
+            </ol>
+
+            <h2>✔ Digital PAN Available</h2>
+            <p>Even without printing, you get e-PAN, which is accepted everywhere.</p>
+        </div>
+    </main>
+
+    <footer class="section">
+        <div class="container">
+            <p>&copy; 2025 CitizenHelpDesk. Information for general guidance only.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Pay Traffic Challan Online – Full Guide (2025) - CitizenHelpDesk</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                Citizen<span>HelpDesk</span>
+            </a>
+            <button class="mobile-menu-btn">☰</button>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="traffic.html" class="nav-link">Traffic Rules</a>
+                <a href="documents.html" class="nav-link">Documents</a>
+                <a href="police.html" class="nav-link">Police Help</a>
+                <a href="schemes.html" class="nav-link">Schemes</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="blog-hero" style="background-image: url('images/blog-challan.png');">
+        <div class="blog-hero-content">
+            <div class="blog-meta">Traffic Rules • 2025 Guide</div>
+            <h1>How to Pay Traffic Challan Online – Full Guide (2025)</h1>
+        </div>
+    </header>
+
+    <main class="blog-container">
+        <div class="blog-content">
+            <p>Paying a traffic challan online is now very easy. You don’t need to visit any police station or RTO
+                office. Here is a simple step-by-step guide.</p>
+
+            <h2>✔ What You Need</h2>
+            <ul>
+                <li>Vehicle Number</li>
+                <li>Challan Number (optional)</li>
+                <li>Mobile number</li>
+                <li>UPI / Debit Card / Netbanking</li>
+            </ul>
+
+            <h2>✔ Step-by-Step Process</h2>
+            <ol>
+                <li>Open the official challan website (your state traffic police or e-challan portal).</li>
+                <li>Click “Check Challan Status”.</li>
+                <li>Enter:
+                    <ul>
+                        <li>Vehicle Number or</li>
+                        <li>Challan Number or</li>
+                        <li>Driving Licence Number</li>
+                    </ul>
+                </li>
+                <li>Your challans will appear on the screen.</li>
+                <li>Click Pay Now.</li>
+                <li>Choose UPI/Card/Netbanking.</li>
+                <li>After payment, download or screenshot your receipt.</li>
+            </ol>
+
+            <h2>✔ Common Reasons for Challans</h2>
+            <ul>
+                <li>No helmet</li>
+                <li>No seatbelt</li>
+                <li>Wrong parking</li>
+                <li>Triple riding</li>
+                <li>Red light jumping</li>
+            </ul>
+
+            <h2>✔ Tips</h2>
+            <ul>
+                <li>Always check the domain (must be .gov or .nic).</li>
+                <li>Never pay through WhatsApp links.</li>
+                <li>Keep your digital receipt safe.</li>
+            </ul>
+        </div>
+    </main>
+
+    <footer class="section">
+        <div class="container">
+            <p>&copy; 2025 CitizenHelpDesk. Information for general guidance only.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documents & IDs - CitizenHelpDesk</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                Citizen<span>HelpDesk</span>
+            </a>
+            <button class="mobile-menu-btn">☰</button>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="traffic.html" class="nav-link">Traffic Rules</a>
+                <a href="documents.html" class="nav-link active">Documents</a>
+                <a href="police.html" class="nav-link">Police Help</a>
+                <a href="schemes.html" class="nav-link">Schemes</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="page-hero bg-documents-hero">
+        <div class="page-hero-content animate-fade-in">
+            <span
+                style="background: rgba(255,255,255,0.2); color: white; padding: 4px 12px; border-radius: 99px; font-size: 0.875rem; font-weight: 600; display: inline-block; margin-bottom: 1rem;">Last
+                Updated: Dec 2025</span>
+            <h1>Essential Documents</h1>
+            <p>Simple guides to apply for and manage your important government IDs.</p>
+        </div>
+    </div>
+
+    <main class="container section">
+        <div class="grid grid-2" style="margin-top: 3rem;">
+            <!-- Aadhaar Card -->
+            <div class="card">
+                <h2 style="font-size: 1.5rem; margin-bottom: 1rem; color: var(--primary-color);">🆔 Aadhaar Card</h2>
+                <p><strong>What is it?</strong> A 12-digit unique identity number for all residents.</p>
+                <div style="margin-top: 1rem;">
+                    <h4 style="margin-bottom: 0.5rem;">How to Update?</h4>
+                    <ol style="margin-left: 1.5rem; font-size: 0.95rem;">
+                        <li>Visit <strong>myaadhaar.uidai.gov.in</strong></li>
+                        <li>Login with OTP</li>
+                        <li>Select "Update Address" or other details</li>
+                        <li>Upload proof and pay ₹50</li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- PAN Card -->
+            <div class="card">
+                <h2 style="font-size: 1.5rem; margin-bottom: 1rem; color: var(--primary-color);">💳 PAN Card</h2>
+                <p><strong>What is it?</strong> Essential for taxes, bank accounts, and high-value transactions.</p>
+                <div style="margin-top: 1rem;">
+                    <h4 style="margin-bottom: 0.5rem;">Apply Online</h4>
+                    <p style="font-size: 0.95rem;">Visit NSDL or UTIITSL website. Fill Form 49A. Fee is approx ₹110.</p>
+                    <p style="font-size: 0.95rem; margin-top: 0.5rem;"><strong>Instant PAN:</strong> Available for free
+                        via Income Tax Portal using Aadhaar.</p>
+                </div>
+            </div>
+
+            <!-- Passport -->
+            <div class="card">
+                <h2 style="font-size: 1.5rem; margin-bottom: 1rem; color: var(--primary-color);">✈️ Passport</h2>
+                <p><strong>Steps to Apply:</strong></p>
+                <ol style="margin-left: 1.5rem; margin-top: 0.5rem; font-size: 0.95rem;">
+                    <li>Register on <strong>passportindia.gov.in</strong></li>
+                    <li>Fill application & pay fee (₹1500)</li>
+                    <li>Book appointment at PSK</li>
+                    <li>Visit PSK for biometrics & verification</li>
+                    <li>Police Verification at home</li>
+                </ol>
+            </div>
+
+            <!-- Voter ID -->
+            <div class="card">
+                <h2 style="font-size: 1.5rem; margin-bottom: 1rem; color: var(--primary-color);">🗳️ Voter ID</h2>
+                <p><strong>Eligibility:</strong> Indian citizen, 18+ years old.</p>
+                <p style="margin-top: 0.5rem;"><strong>How to Apply:</strong></p>
+                <p style="font-size: 0.95rem;">Visit <strong>voters.eci.gov.in</strong> and fill Form 6. You will need a
+                    photo, age proof, and address proof.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 CitizenHelpDesk. All rights reserved.</p>
+        </div>
+    </footer>
+    <script src="script.js"></script>
+</body>
+
+</html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CitizenHelpDesk - Government Rules Explained</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                Citizen<span>HelpDesk</span>
+            </a>
+            <button class="mobile-menu-btn">☰</button>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link active">Home</a>
+                <a href="traffic.html" class="nav-link">Traffic Rules</a>
+                <a href="documents.html" class="nav-link">Documents</a>
+                <a href="police.html" class="nav-link">Police Help</a>
+                <a href="schemes.html" class="nav-link">Schemes</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="container">
+            <h1 class="hero-title">Government Rules Explained Simply</h1>
+            <p class="hero-subtitle">Understanding laws, rights, and schemes shouldn't be complicated. We break it down
+                for you.</p>
+            <div style="margin-top: 2rem;">
+                <img src="hero-image.png" alt="Government Rules Illustration" class="hero-image">
+            </div>
+            <div style="margin-top: 2rem;">
+                <a href="traffic.html" class="btn btn-primary">Get Started</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="section">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 3rem;">Latest Guides & Updates</h2>
+            <div class="grid grid-3">
+                <!-- Blog 1 -->
+                <article class="guide-card">
+                    <div class="guide-image" style="background-image: url('images/blog-challan.png');"></div>
+                    <div class="guide-content">
+                        <div class="guide-category">Traffic Rules</div>
+                        <h3 class="guide-title"><a href="blog-traffic-challan.html">How to Pay Traffic Challan Online –
+                                Full Guide (2025)</a></h3>
+                        <p class="guide-excerpt">Paying a traffic challan online is now very easy. You don’t need to
+                            visit any police station.</p>
+                        <a href="blog-traffic-challan.html" class="read-more">Read Guide →</a>
+                    </div>
+                </article>
+
+                <!-- Blog 2 -->
+                <article class="guide-card">
+                    <div class="guide-image" style="background-image: url('images/blog-fir.png');"></div>
+                    <div class="guide-content">
+                        <div class="guide-category">Police Help</div>
+                        <h3 class="guide-title"><a href="blog-fir.html">FIR vs Complaint vs NC – What’s the
+                                Difference?</a></h3>
+                        <p class="guide-excerpt">Many people get confused between FIR, NC, and a Complaint. Here’s a
+                            simple explanation.</p>
+                        <a href="blog-fir.html" class="read-more">Read Guide →</a>
+                    </div>
+                </article>
+
+                <!-- Blog 3 -->
+                <article class="guide-card">
+                    <div class="guide-image" style="background-image: url('images/blog-aadhaar.png');"></div>
+                    <div class="guide-content">
+                        <div class="guide-category">Documents & ID</div>
+                        <h3 class="guide-title"><a href="blog-aadhaar.html">Aadhaar Address Change – Step-by-Step (2025
+                                Update)</a></h3>
+                        <p class="guide-excerpt">If you recently moved to a new house or city, you should update your
+                            Aadhaar address.</p>
+                        <a href="blog-aadhaar.html" class="read-more">Read Guide →</a>
+                    </div>
+                </article>
+
+                <!-- Blog 4 -->
+                <article class="guide-card">
+                    <div class="guide-image" style="background-image: url('images/traffic-bg.jpg');"></div>
+                    <div class="guide-content">
+                        <div class="guide-category">Traffic Rules</div>
+                        <h3 class="guide-title"><a href="blog-helmet.html">Helmet Rule in India – Updated Penalties
+                                (2025)</a></h3>
+                        <p class="guide-excerpt">Wearing a helmet is not just a safety measure, it’s the law. Know the
+                            updated fines.</p>
+                        <a href="blog-helmet.html" class="read-more">Read Guide →</a>
+                    </div>
+                </article>
+
+                <!-- Blog 5 -->
+                <article class="guide-card">
+                    <div class="guide-image" style="background-image: url('images/blog-aadhaar.png');"></div>
+                    <div class="guide-content">
+                        <div class="guide-category">Documents & ID</div>
+                        <h3 class="guide-title"><a href="blog-pan.html">Lost Your PAN Card? Here’s Exactly What to
+                                Do</a></h3>
+                        <p class="guide-excerpt">Losing your PAN card can be stressful, but the process to get a reprint
+                            is very simple.</p>
+                        <a href="blog-pan.html" class="read-more">Read Guide →</a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <footer class="section"
+        style="background-color: var(--surface-color); border-top: 1px solid var(--border-color); padding: 4rem 0 2rem;">
+        <div class="container">
+            <div class="grid grid-3">
+                <div>
+                    <a href="index.html" class="logo" style="margin-bottom: 1rem; display: inline-block;">
+                        Citizen<span>HelpDesk</span>
+                    </a>
+                    <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Simplifying government rules and
+                        procedures for every Indian citizen.</p>
+                </div>
+                <div>
+                    <h4 style="font-weight: 700; margin-bottom: 1rem;">Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="traffic.html" style="color: var(--text-muted);">Traffic Rules</a></li>
+                        <li><a href="documents.html" style="color: var(--text-muted);">Documents & ID</a></li>
+                        <li><a href="police.html" style="color: var(--text-muted);">Police Help</a></li>
+                        <li><a href="schemes.html" style="color: var(--text-muted);">Government Schemes</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="font-weight: 700; margin-bottom: 1rem;">Newsletter</h4>
+                    <p style="color: var(--text-muted); margin-bottom: 1rem;">Get the latest rule updates.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Your email" class="newsletter-input">
+                        <button type="submit" class="btn btn-primary" style="padding: 0.5rem 1rem;">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            <div class="copyright text-center">
+                <p>&copy; 2025 CitizenHelpDesk. Information for general guidance only.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        const mobileBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+        mobileBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+    </script>
+</body>
+
+</html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Police & FIR - CitizenHelpDesk</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+</head>
+
+<body class="bg-police">
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                Citizen<span>HelpDesk</span>
+            </a>
+            <button class="mobile-menu-btn">☰</button>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="traffic.html" class="nav-link">Traffic Rules</a>
+                <a href="documents.html" class="nav-link">Documents</a>
+                <a href="police.html" class="nav-link active">Police Help</a>
+                <a href="schemes.html" class="nav-link">Schemes</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="page-hero bg-police-hero">
+        <div class="page-hero-content animate-fade-in">
+            <span
+                style="background: rgba(255,255,255,0.2); color: white; padding: 4px 12px; border-radius: 99px; font-size: 0.875rem; font-weight: 600; display: inline-block; margin-bottom: 1rem;">Last
+                Updated: Dec 2025</span>
+            <h1>Police & FIR Help</h1>
+            <p>Know your rights and how to interact with the police without fear.</p>
+        </div>
+    </div>
+
+    <main class="container section">
+        <div class="grid grid-2" style="margin-top: 3rem;">
+            <!-- FIR Guide -->
+            <div class="card">
+                <h2 style="font-size: 1.5rem; margin-bottom: 1rem; color: var(--primary-color);">📝 How to File an FIR?
+                </h2>
+                <p><strong>FIR (First Information Report)</strong> is the first step in a criminal case.</p>
+                <ol style="margin-left: 1.5rem; margin-top: 1rem; gap: 0.5rem; display: flex; flex-direction: column;">
+                    <li>Go to the nearest police station.</li>
+                    <li>Narrate the incident to the officer.</li>
+                    <li>They will write it down. <strong>Read it before signing.</strong></li>
+                    <li><strong>Important:</strong> You have the right to get a free copy of the FIR.</li>
+                </ol>
+                <p style="margin-top: 1rem; font-size: 0.9rem; color: var(--text-muted);"><em>Note: For minor thefts or
+                        lost items, you can often file an "e-FIR" online.</em></p>
+            </div>
+
+            <!-- Your Rights -->
+            <div class="card">
+                <h2 style="font-size: 1.5rem; margin-bottom: 1rem; color: var(--primary-color);">⚖️ Your Rights</h2>
+                <ul style="margin-left: 1.5rem; gap: 0.8rem; display: flex; flex-direction: column;">
+                    <li><strong>Right to Know:</strong> Police must tell you why you are being arrested.</li>
+                    <li><strong>Right to Family:</strong> You can inform a friend or family member about your arrest.
+                    </li>
+                    <li><strong>24-Hour Rule:</strong> Police cannot hold you for more than 24 hours without presenting
+                        you before a magistrate.</li>
+                    <li><strong>Women's Rights:</strong> Women cannot be arrested after sunset and before sunrise
+                        (except in exceptional cases with a lady officer).</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Emergency Numbers -->
+        <div class="card" style="margin-top: 2rem; background: #fff1f2; border-color: #fda4af;">
+            <h2 style="font-size: 1.5rem; margin-bottom: 1rem; color: #e11d48;">🚨 Emergency Numbers</h2>
+            <div class="grid grid-3">
+                <div style="text-align: center;">
+                    <div style="font-size: 2rem; font-weight: 800; color: #e11d48;">112</div>
+                    <div>All-in-One Emergency</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 2rem; font-weight: 800; color: #e11d48;">100</div>
+                    <div>Police</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 2rem; font-weight: 800; color: #e11d48;">1091</div>
+                    <div>Women Helpline</div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 CitizenHelpDesk. All rights reserved.</p>
+        </div>
+    </footer>
+    <script src="script.js"></script>
+</body>
+
+</html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Government Schemes - CitizenHelpDesk</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                Citizen<span>HelpDesk</span>
+            </a>
+            <button class="mobile-menu-btn">☰</button>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="traffic.html" class="nav-link">Traffic Rules</a>
+                <a href="documents.html" class="nav-link">Documents</a>
+                <a href="police.html" class="nav-link">Police Help</a>
+                <a href="schemes.html" class="nav-link active">Schemes</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="page-hero bg-schemes-hero">
+        <div class="page-hero-content animate-fade-in">
+            <span
+                style="background: rgba(255,255,255,0.2); color: white; padding: 4px 12px; border-radius: 99px; font-size: 0.875rem; font-weight: 600; display: inline-block; margin-bottom: 1rem;">Last
+                Updated: Dec 2025</span>
+            <h1>Government Schemes</h1>
+            <p>Find benefits, subsidies, and welfare programs you might be eligible for.</p>
+        </div>
+    </div>
+
+    <main class="container section">
+        <div class="grid grid-2" style="margin-top: 3rem;">
+            <!-- Health Scheme -->
+            <div class="card">
+                <h2 style="font-size: 1.5rem; margin-bottom: 0.5rem; color: var(--primary-color);">🏥 Ayushman Bharat
+                </h2>
+                <p style="margin-bottom: 1rem;"><strong>Health Insurance</strong></p>
+                <p>Provides free health coverage of up to ₹5 Lakhs per family per year for secondary and tertiary care
+                    hospitalization.</p>
+                <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #eee;">
+                    <strong>Who is eligible?</strong> Low-income families as per SECC database.
+                </div>
+            </div>
+
+            <!-- Housing Scheme -->
+            <div class="card">
+                <h2 style="font-size: 1.5rem; margin-bottom: 0.5rem; color: var(--primary-color);">🏠 PM Awas Yojana
+                </h2>
+                <p style="margin-bottom: 1rem;"><strong>Housing for All</strong></p>
+                <p>Subsidy on home loans for first-time homebuyers or financial assistance for construction of houses
+                    for the poor.</p>
+                <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #eee;">
+                    <strong>Benefit:</strong> Interest subsidy up to ₹2.67 Lakhs.
+                </div>
+            </div>
+
+            <!-- Farmers Scheme -->
+            <div class="card">
+                <h2 style="font-size: 1.5rem; margin-bottom: 0.5rem; color: var(--primary-color);">🌾 PM Kisan Samman
+                </h2>
+                <p style="margin-bottom: 1rem;"><strong>Farmer Income Support</strong></p>
+                <p>Direct cash transfer of ₹6,000 per year to landholding farmer families, paid in three equal
+                    installments.</p>
+            </div>
+
+            <!-- Employment Scheme -->
+            <div class="card">
+                <h2 style="font-size: 1.5rem; margin-bottom: 0.5rem; color: var(--primary-color);">🔨 MGNREGA</h2>
+                <p style="margin-bottom: 1rem;"><strong>Rural Employment</strong></p>
+                <p>Guarantees 100 days of wage employment in a financial year to a rural household whose adult members
+                    volunteer to do unskilled manual work.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 CitizenHelpDesk. All rights reserved.</p>
+        </div>
+    </footer>
+    <script src="script.js"></script>
+</body>
+
+</html>
+document.addEventListener('DOMContentLoaded', () => {
+    // --- Dark Mode Logic ---
+    const darkModeKey = 'rulesSimplifiedDarkMode';
+    const isDarkMode = localStorage.getItem(darkModeKey) === 'true';
+
+    if (isDarkMode) {
+        document.body.classList.add('dark-mode');
+    }
+
+    // Create Toggle Button
+    const navContainer = document.querySelector('.nav-container');
+    const toggleBtn = document.createElement('button');
+    toggleBtn.innerHTML = isDarkMode ? '☀️' : '🌙';
+    toggleBtn.className = 'btn';
+    toggleBtn.style.padding = '0.5rem';
+    toggleBtn.style.fontSize = '1.2rem';
+    toggleBtn.style.marginLeft = '1rem';
+    toggleBtn.style.background = 'transparent';
+    toggleBtn.style.boxShadow = 'none';
+
+    // Insert before mobile menu button
+    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+    navContainer.insertBefore(toggleBtn, mobileMenuBtn);
+
+    toggleBtn.addEventListener('click', () => {
+        document.body.classList.toggle('dark-mode');
+        const isDark = document.body.classList.contains('dark-mode');
+        localStorage.setItem(darkModeKey, isDark);
+        toggleBtn.innerHTML = isDark ? '☀️' : '🌙';
+    });
+
+
+    // --- Mobile Menu Toggle ---
+    const mobileBtn = document.querySelector('.mobile-menu-btn');
+    const navLinks = document.querySelector('.nav-links');
+
+    if (mobileBtn) {
+        mobileBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            const icon = navLinks.classList.contains('active') ? '✕' : '☰';
+            mobileBtn.textContent = icon;
+        });
+    }
+
+    // --- Smooth Scroll for Anchor Links ---
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth'
+                });
+                // Close mobile menu if open
+                if (navLinks.classList.contains('active')) {
+                    navLinks.classList.remove('active');
+                    mobileBtn.textContent = '☰';
+                }
+            }
+        });
+    });
+
+    // --- Scroll Animations (Intersection Observer) ---
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px"
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    // Select elements to animate
+    const animatedElements = document.querySelectorAll('.card, .section h2, .hero-subtitle, .btn');
+    animatedElements.forEach(el => {
+        el.classList.add('fade-in-scroll');
+        observer.observe(el);
+    });
+});
+
+:root {
+    /* Color Palette */
+    --primary-color: #2563eb;
+    /* Royal Blue */
+    --primary-dark: #1e40af;
+    --secondary-color: #64748b;
+    /* Slate */
+    --accent-color: #3b82f6;
+    /* Lighter Blue */
+    --background-color: #f8fafc;
+    /* Very light blue-grey */
+    --surface-color: #ffffff;
+    --text-main: #0f172a;
+    --text-muted: #475569;
+    --success-color: #10b981;
+    --warning-color: #f59e0b;
+    --error-color: #ef4444;
+
+    /* Spacing */
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 4rem;
+
+    /* Border Radius */
+    --radius-sm: 0.375rem;
+    --radius-md: 0.75rem;
+    --radius-lg: 1rem;
+    --radius-full: 9999px;
+
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --shadow-glow: 0 0 15px rgba(37, 99, 235, 0.2);
+
+    /* Transitions */
+    --transition-fast: 150ms ease;
+    --transition-normal: 300ms ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-main);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* Typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    line-height: 1.2;
+    font-weight: 700;
+    color: var(--text-main);
+}
+
+h1 {
+    font-size: 2.5rem;
+}
+
+h2 {
+    font-size: 2rem;
+}
+
+h3 {
+    font-size: 1.5rem;
+}
+
+p {
+    margin-bottom: 1rem;
+    color: var(--text-muted);
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: var(--transition-fast);
+}
+
+/* Layout Utilities */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+}
+
+.section {
+    padding: var(--spacing-xl) 0;
+}
+
+.grid {
+    display: grid;
+    gap: var(--spacing-lg);
+}
+
+.grid-2 {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.grid-3 {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+/* Components */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius-full);
+
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    border: none;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+    box-shadow: var(--shadow-md);
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+.btn-outline {
+    background-color: transparent;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+}
+
+.btn-outline:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.card {
+    background: var(--surface-color);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition-normal);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--primary-color);
+}
+
+/* Glassmorphism Header */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 70px;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--primary-color);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.logo span {
+    color: var(--text-main);
+}
+
+.nav-links {
+    display: flex;
+    gap: var(--spacing-lg);
+}
+
+.nav-link {
+    font-weight: 500;
+    color: var(--text-muted);
+    position: relative;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: var(--primary-color);
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--primary-color);
+    transition: width var(--transition-normal);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    width: 100%;
+}
+
+/* Hero Section */
+.hero {
+    padding-top: 120px;
+    padding-bottom: 80px;
+    text-align: center;
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.05) 0%, rgba(255, 255, 255, 0) 100%);
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    margin-bottom: var(--spacing-md);
+    background: linear-gradient(to right, var(--primary-color), var(--primary-dark));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: float 6s ease-in-out infinite;
+}
+
+.hero-subtitle {
+    font-size: 1.25rem;
+    max-width: 600px;
+    margin: 0 auto var(--spacing-lg);
+}
+
+/* Animations */
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.8s ease-out forwards;
+}
+
+.fade-in-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-in-scroll.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Mobile Menu */
+.mobile-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--text-main);
+}
+
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        right: 0;
+        background: var(--surface-color);
+        flex-direction: column;
+        padding: var(--spacing-lg);
+        box-shadow: var(--shadow-lg);
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .mobile-menu-btn {
+        display: block;
+    }
+
+    .hero-title {
+        font-size: 2.5rem;
+    }
+}
+
+/* 3D Canvas Container */
+#canvas-container {
+    width: 100%;
+    height: 500px;
+    margin-top: 2rem;
+    position: relative;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+}
+
+@media (max-width: 768px) {
+    #canvas-container {
+        height: 350px;
+    }
+}
+
+/* Footer */
+footer {
+    background-color: var(--surface-color);
+    padding: var(--spacing-xl) 0;
+    margin-top: var(--spacing-xl);
+    border-top: 1px solid var(--border-color);
+    text-align: center;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--spacing-lg);
+    text-align: left;
+    margin-bottom: var(--spacing-lg);
+}
+
+.footer-section h4 {
+    margin-bottom: var(--spacing-md);
+    color: var(--primary-color);
+}
+
+.footer-links {
+    list-style: none;
+}
+
+.footer-links li {
+    margin-bottom: 0.5rem;
+}
+
+.footer-links a:hover {
+    color: var(--primary-color);
+}
+
+.newsletter-form {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.newsletter-input {
+    padding: 0.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    flex-grow: 1;
+    background: var(--background-color);
+    color: var(--text-main);
+}
+
+.copyright {
+    padding-top: var(--spacing-lg);
+    border-top: 1px solid var(--border-color);
+    color: var(--text-muted);
+    font-size: 0.875rem;
+}
+
+/* Page Backgrounds */
+.bg-police {
+    background-image: url('images/police-bg.png');
+    background-size: cover;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--primary-color);
+    transition: width var(--transition-normal);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    width: 100%;
+}
+
+/* Hero Section */
+.hero {
+    padding-top: 120px;
+    padding-bottom: 80px;
+    text-align: center;
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.05) 0%, rgba(255, 255, 255, 0) 100%);
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    margin-bottom: var(--spacing-md);
+    background: linear-gradient(to right, var(--primary-color), var(--primary-dark));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: float 6s ease-in-out infinite;
+}
+
+.hero-subtitle {
+    font-size: 1.25rem;
+    max-width: 600px;
+    margin: 0 auto var(--spacing-lg);
+}
+
+/* Animations */
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.8s ease-out forwards;
+}
+
+.fade-in-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-in-scroll.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Mobile Menu */
+.mobile-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+}
+
+.footer-links {
+    list-style: none;
+}
+
+.footer-links li {
+    margin-bottom: 0.5rem;
+}
+
+.footer-links a:hover {
+    color: var(--primary-color);
+}
+
+.newsletter-form {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.newsletter-input {
+    padding: 0.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    flex-grow: 1;
+    background: var(--background-color);
+    color: var(--text-main);
+}
+
+.copyright {
+    padding-top: var(--spacing-lg);
+    border-top: 1px solid var(--border-color);
+    color: var(--text-muted);
+    font-size: 0.875rem;
+}
+
+/* Page Backgrounds */
+.bg-police {
+    background-image: url('images/police-bg.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+
+.bg-traffic {
+    background-image: url('images/traffic-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+
+/* Blog Styles */
+.blog-hero {
+    height: 400px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+    margin-top: 70px;
+}
+
+.blog-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.blog-hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 800px;
+    padding: 0 20px;
+}
+
+.blog-hero h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: white;
+}
+
+.blog-container {
+    max-width: 800px;
+    margin: 4rem auto;
+    padding: 0 20px;
+}
+
+.blog-content h2 {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    color: var(--primary-dark);
+}
+
+.blog-content p {
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+}
+
+.blog-content ul {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+}
+
+.blog-content li {
+    margin-bottom: 0.5rem;
+    color: var(--text-muted);
+}
+
+.blog-meta {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+}
+
+/* Featured Guides Section on Home */
+.featured-guides {
+    background: var(--background-color);
+}
+
+.guide-card {
+    background: white;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    transition: var(--transition-normal);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.guide-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.guide-image {
+    height: 200px;
+    background-size: cover;
+    background-position: center;
+}
+
+.guide-content {
+    padding: 1.5rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.guide-category {
+    color: var(--primary-color);
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.guide-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    color: var(--text-main);
+    line-height: 1.4;
+}
+
+.guide-excerpt {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+    flex-grow: 1;
+}
+
+.read-more {
+    color: var(--primary-color);
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.read-more:hover {
+    gap: 0.75rem;
+}
+
+.hero-image {
+    max-width: 100%;
+    border: none;
+}
+
+.footer-links {
+    list-style: none;
+}
+
+.footer-links li {
+    margin-bottom: 0.5rem;
+}
+
+.footer-links a:hover {
+    color: var(--primary-color);
+}
+
+.newsletter-form {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.newsletter-input {
+    padding: 0.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    flex-grow: 1;
+    background: var(--background-color);
+    color: var(--text-main);
+}
+
+.copyright {
+    padding-top: var(--spacing-lg);
+    border-top: 1px solid var(--border-color);
+    color: var(--text-muted);
+    font-size: 0.875rem;
+}
+
+/* Page Backgrounds */
+.bg-police {
+    background-image: url('images/police-bg.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+
+.bg-traffic {
+    background-image: url('images/traffic-bg.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+
+/* Blog Styles */
+.blog-hero {
+    height: 400px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+    margin-top: 70px;
+}
+
+.blog-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.blog-hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 800px;
+    padding: 0 20px;
+}
+
+.blog-hero h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: white;
+}
+
+.blog-container {
+    max-width: 800px;
+    margin: 4rem auto;
+    padding: 0 20px;
+}
+
+.blog-content h2 {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    color: var(--primary-dark);
+}
+
+.blog-content p {
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+}
+
+.blog-content ul {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+}
+
+.blog-content li {
+    margin-bottom: 0.5rem;
+    color: var(--text-muted);
+}
+
+.blog-meta {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+}
+
+/* Featured Guides Section on Home */
+.featured-guides {
+    background: var(--background-color);
+}
+
+.guide-card {
+    background: white;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    transition: var(--transition-normal);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.guide-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.guide-image {
+    height: 200px;
+    background-size: cover;
+    background-position: center;
+}
+
+.guide-content {
+    padding: 1.5rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.guide-category {
+    color: var(--primary-color);
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.guide-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    color: var(--text-main);
+    line-height: 1.4;
+}
+
+.guide-excerpt {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+    flex-grow: 1;
+}
+
+.read-more {
+    color: var(--primary-color);
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.read-more:hover {
+    gap: 0.75rem;
+}
+
+.hero-image {
+    max-width: 100%;
+    border: none;
+}
+
+.footer-links {
+    list-style: none;
+}
+
+.footer-links li {
+    margin-bottom: 0.5rem;
+}
+
+.footer-links a:hover {
+    color: var(--primary-color);
+}
+
+.newsletter-form {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.newsletter-input {
+    padding: 0.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    flex-grow: 1;
+    background: var(--background-color);
+    color: var(--text-main);
+}
+
+.copyright {
+    padding-top: var(--spacing-lg);
+    border-top: 1px solid var(--border-color);
+    color: var(--text-muted);
+    font-size: 0.875rem;
+}
+
+/* Page Backgrounds */
+.bg-police {
+    background-image: url('images/police-bg.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+
+.bg-traffic {
+    background-image: url('images/traffic-bg.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+
+/* Blog Styles */
+.blog-hero {
+    height: 400px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+    margin-top: 70px;
+}
+
+.blog-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.blog-hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 800px;
+    padding: 0 20px;
+}
+
+.blog-hero h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: white;
+}
+
+.blog-container {
+    max-width: 800px;
+    margin: 4rem auto;
+    padding: 0 20px;
+}
+
+.blog-content h2 {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    color: var(--primary-dark);
+}
+
+.blog-content p {
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+}
+
+.blog-content ul {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+}
+
+.blog-content li {
+    margin-bottom: 0.5rem;
+    color: var(--text-muted);
+}
+
+.blog-meta {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+}
+
+/* Featured Guides Section on Home */
+.featured-guides {
+    background: var(--background-color);
+}
+
+.guide-card {
+    background: white;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    transition: var(--transition-normal);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.guide-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.guide-image {
+    height: 200px;
+    background-size: cover;
+    background-position: center;
+}
+
+.guide-content {
+    padding: 1.5rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.guide-category {
+    color: var(--primary-color);
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.guide-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    color: var(--text-main);
+    line-height: 1.4;
+}
+
+.guide-excerpt {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+    flex-grow: 1;
+}
+
+.read-more {
+    color: var(--primary-color);
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.read-more:hover {
+    gap: 0.75rem;
+}
+
+.hero-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    margin-bottom: var(--spacing-lg);
+    max-height: 400px;
+    object-fit: cover;
+}
+
+.footer-links {
+    list-style: none;
+}
+
+.footer-links li {
+    margin-bottom: 0.5rem;
+}
+
+.footer-links a:hover {
+    color: var(--primary-color);
+}
+
+.newsletter-form {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.newsletter-input {
+    padding: 0.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    flex-grow: 1;
+    background: var(--background-color);
+    color: var(--text-main);
+}
+
+.copyright {
+    padding-top: var(--spacing-lg);
+    border-top: 1px solid var(--border-color);
+    color: var(--text-muted);
+    font-size: 0.875rem;
+}
+
+/* Page Backgrounds */
+.bg-police {
+    background-image: url('images/police-bg.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+
+.bg-traffic {
+    background-image: url('images/traffic-bg.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+
+/* Blog Styles */
+.blog-hero {
+    height: 400px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+    margin-top: 70px;
+}
+
+.blog-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.blog-hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 800px;
+    padding: 0 20px;
+}
+
+.blog-hero h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: white;
+}
+
+.blog-container {
+    max-width: 800px;
+    margin: 4rem auto;
+    padding: 0 20px;
+}
+
+.blog-content h2 {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    color: var(--primary-dark);
+}
+
+.blog-content p {
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+}
+
+.blog-content ul {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+}
+
+.blog-content li {
+    margin-bottom: 0.5rem;
+    color: var(--text-muted);
+}
+
+.blog-meta {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+}
+
+/* Featured Guides Section on Home */
+.featured-guides {
+    background: var(--background-color);
+}
+
+.guide-card {
+    background: white;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    transition: var(--transition-normal);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.guide-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.guide-image {
+    height: 200px;
+    background-size: cover;
+    background-position: center;
+}
+
+.guide-content {
+    padding: 1.5rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.guide-category {
+    color: var(--primary-color);
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.guide-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    color: var(--text-main);
+    line-height: 1.4;
+}
+
+.guide-excerpt {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+    flex-grow: 1;
+}
+
+/* New Design System for Inner Pages */
+.page-hero {
+    height: 300px;
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    margin-top: 70px;
+    position: relative;
+    overflow: hidden;
+}
+
+.page-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('images/pattern.png');
+    opacity: 0.1;
+}
+
+.page-hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 800px;
+    padding: 0 var(--spacing-md);
+}
+
+.page-hero h1 {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+    color: white;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.page-hero p {
+    font-size: 1.25rem;
+    color: rgba(255, 255, 255, 0.9);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.card h2 {
+    color: var(--text-main);
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.card h2 i {
+    color: var(--primary-color);
+    background: #eff6ff;
+    padding: 0.5rem;
+    border-radius: var(--radius-md);
+    font-size: 1.25rem;
+}
+
+/* Specific Page Gradients */
+.bg-traffic-hero {
+    background-image: url('images/traffic-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.bg-police-hero {
+    background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+}
+
+.bg-documents-hero {
+    background: linear-gradient(135deg, #065f46, #10b981);
+}
+
+.bg-schemes-hero {
+    background: linear-gradient(135deg, #9a3412, #f97316);
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traffic Rules - CitizenHelpDesk</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body class="bg-traffic">
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                Citizen<span>HelpDesk</span>
+            </a>
+            <button class="mobile-menu-btn">☰</button>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="traffic.html" class="nav-link active">Traffic Rules</a>
+                <a href="documents.html" class="nav-link">Documents</a>
+                <a href="police.html" class="nav-link">Police Help</a>
+                <a href="schemes.html" class="nav-link">Schemes</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="page-hero bg-traffic-hero">
+        <div class="page-hero-content animate-fade-in">
+            <h1>Traffic & Driving Rules</h1>
+            <p>Simple explanations of traffic laws to keep you safe and fine-free.</p>
+        </div>
+    </div>
+
+    <div class="container section">
+        <div class="grid grid-3">
+            <!-- Common Fines (Existing) -->
+            <div class="card">
+                <h2>⚠️ Common Fines</h2>
+                <ul style="padding-left: 1.5rem; margin-top: 1rem; color: var(--text-muted);">
+                    <li><i class="ri-alert-line"></i> No Helmet: ₹1000</li>
+                    <li><i class="ri-alert-line"></i> No Seatbelt: ₹1000</li>
+                    <li><i class="ri-alert-line"></i> Speeding: ₹1000 - ₹2000</li>
+                    <li><i class="ri-alert-line"></i> Driving without License: ₹5000</li>
+                </ul>
+            </div>
+
+            <!-- Driving Licence Rules -->
+            <div class="card">
+                <h3>🆔 Driving Licence</h3>
+                <ul>
+                    <li><i class="ri-check-line"></i> Must carry valid driving licence.</li>
+                    <li><i class="ri-check-line"></i> Learner licence has restrictions.</li>
+                    <li><i class="ri-check-line"></i> Licence renewal is mandatory.</li>
+                    <li><i class="ri-check-line"></i> Age limits: 16 for gearless, 18 for full licence.</li>
+                    <li><i class="ri-alert-line"></i> Penalty for driving without licence.</li>
+                </ul>
+            </div>
+
+            <!-- Helmet Rules -->
+            <div class="card">
+                <h3><i class="ri-motorbike-line"></i> Helmet Rules</h3>
+                <ul>
+                    <li>Rider and pillion must wear helmets.</li>
+                    <li>Only ISI-marked helmets allowed.</li>
+                    <li>Helmet strap must be locked.</li>
+                    <li>Fine for no helmet.</li>
+                </ul>
+            </div>
+
+            <!-- Seat Belt Rules -->
+            <div class="card">
+                <h3><i class="ri-shield-check-line"></i> Seat Belt Rules</h3>
+                <ul>
+                    <li>Front seat belt mandatory.</li>
+                    <li>Rear seat belt mandatory.</li>
+                    <li>Penalty for no seat belt.</li>
+                </ul>
+            </div>
+
+            <!-- Mobile Phone Rules -->
+            <div class="card">
+                <h3><i class="ri-smartphone-line"></i> Mobile Phone</h3>
+                <ul>
+                    <li>No calling or texting while driving.</li>
+                    <li>Hands-free allowed in some states.</li>
+                    <li>Penalty for mobile use while driving.</li>
+                </ul>
+            </div>
+
+            <!-- Speed Limit Rules -->
+            <div class="card">
+                <h3><i class="ri-speed-up-line"></i> Speed Limits</h3>
+                <ul>
+                    <li>Different limits for city, highways, expressways.</li>
+                    <li>Overspeeding fines apply.</li>
+                    <li>Speed camera challans are automatic.</li>
+                </ul>
+            </div>
+
+            <!-- Drunk Driving Rules -->
+            <div class="card">
+                <h3><i class="ri-goblet-line"></i> Drunk Driving</h3>
+                <ul>
+                    <li>Legal alcohol limit must not be crossed.</li>
+                    <li>Breathalyzer test required.</li>
+                    <li>Penalty and licence suspension possible.</li>
+                    <li>Jail term possible in severe cases.</li>
+                </ul>
+            </div>
+
+            <!-- Number Plate Rules -->
+            <div class="card">
+                <h3><i class="ri-article-line"></i> Number Plate</h3>
+                <ul>
+                    <li>Only standard fonts allowed.</li>
+                    <li>No fancy number plates.</li>
+                    <li>HSRP plates mandatory.</li>
+                    <li>Wrong number plate fine.</li>
+                </ul>
+            </div>
+
+            <!-- Red Light and Stop Line Rules -->
+            <div class="card">
+                <h3><i class="ri-traffic-light-line"></i> Red Light & Stop</h3>
+                <ul>
+                    <li>Stop before stop line.</li>
+                    <li>Red light jumping fine.</li>
+                    <li>Yellow light rules apply.</li>
+                    <li>Cameras generate challans automatically.</li>
+                </ul>
+            </div>
+
+            <!-- Wrong Parking Rules -->
+            <div class="card">
+                <h3><i class="ri-parking-box-line"></i> Wrong Parking</h3>
+                <ul>
+                    <li>No-parking zones are restricted.</li>
+                    <li>Illegal parking can be towed.</li>
+                    <li>Challan and towing charges apply.</li>
+                    <li>Find towed vehicles at nearest yard.</li>
+                </ul>
+            </div>
+
+            <!-- Lane Discipline Rules -->
+            <div class="card">
+                <h3><i class="ri-road-map-line"></i> Lane Discipline</h3>
+                <ul>
+                    <li>Maintain lane while driving.</li>
+                    <li>Wrong-side driving is illegal.</li>
+                    <li>Lane cutting is punishable.</li>
+                    <li>Follow zipper merge rule.</li>
+                </ul>
+            </div>
+
+            <!-- Overtaking Rules -->
+            <div class="card">
+                <h3><i class="ri-car-line"></i> Overtaking</h3>
+                <ul>
+                    <li>Overtake only from right side.</li>
+                    <li>No overtaking near turns or bridges.</li>
+                    <li>No overtaking at pedestrian crossings.</li>
+                    <li>Penalty for dangerous overtaking.</li>
+                </ul>
+            </div>
+
+            <!-- Triple Riding Rules -->
+            <div class="card">
+                <h3><i class="ri-group-line"></i> Triple Riding</h3>
+                <ul>
+                    <li>Only 2 persons allowed on two-wheeler.</li>
+                    <li>Triple riding fine applies.</li>
+                </ul>
+            </div>
+
+            <!-- PUC Rules -->
+            <div class="card">
+                <h3><i class="ri-file-paper-2-line"></i> PUC Rules</h3>
+                <ul>
+                    <li>Valid PUC certificate required.</li>
+                    <li>Penalty for expired PUC.</li>
+                    <li>PUC available at authorized centres.</li>
+                    <li>DigiLocker PUC accepted.</li>
+                </ul>
+            </div>
+
+            <!-- Insurance Rules -->
+            <div class="card">
+                <h3><i class="ri-file-shield-2-line"></i> Insurance</h3>
+                <ul>
+                    <li>Third-party insurance mandatory.</li>
+                    <li>Expired insurance penalty applies.</li>
+                    <li>Documents can be stored in DigiLocker.</li>
+                </ul>
+            </div>
+
+            <!-- Vehicle Document Rules -->
+            <div class="card">
+                <h3><i class="ri-folder-user-line"></i> Documents</h3>
+                <ul>
+                    <li>Must carry RC, Licence, Insurance, PUC.</li>
+                    <li>All documents accepted in DigiLocker or mParivahan.</li>
+                    <li>Challan receipts must be stored safely.</li>
+                </ul>
+            </div>
+
+            <!-- Honking Rules -->
+            <div class="card">
+                <h3><i class="ri-volume-up-line"></i> Honking</h3>
+                <ul>
+                    <li>No unnecessary honking.</li>
+                    <li>No pressure horns.</li>
+                    <li>Silent zones restrict horn use.</li>
+                </ul>
+            </div>
+
+            <!-- Overloading Rules -->
+            <div class="card">
+                <h3>⚖️ Overloading</h3>
+                <ul>
+                    <li><i class="ri-close-circle-line"></i> Overloading two-wheelers is illegal.</li>
+                    <li><i class="ri-close-circle-line"></i> Auto-rickshaw overloading punishable.</li>
+                    <li><i class="ri-close-circle-line"></i> Truck weight violations fined.</li>
+                    <li><i class="ri-close-circle-line"></i> Unauthorized passenger carrying banned.</li>
+                </ul>
+            </div>
+
+            <!-- Headlight and Indicator Rules -->
+            <div class="card">
+                <h3><i class="ri-lightbulb-line"></i> Lights & Indicators</h3>
+                <ul>
+                    <li>Use indicators for turns.</li>
+                    <li>High-beam restrictions apply.</li>
+                    <li>Brake lights must work properly.</li>
+                </ul>
+            </div>
+
+            <!-- Pedestrian and Zebra Crossing Rules -->
+            <div class="card">
+                <h3><i class="ri-walk-line"></i> Pedestrian Crossing</h3>
+                <ul>
+                    <li>Must stop at zebra crossing.</li>
+                    <li>No blocking of crossing lines.</li>
+                    <li>Pedestrian zones have priority.</li>
+                </ul>
+            </div>
+
+            <!-- Riding on Footpath -->
+            <div class="card">
+                <h3><i class="ri-forbid-2-line"></i> Riding on Footpath</h3>
+                <ul>
+                    <li>Riding bike on footpath illegal.</li>
+                    <li>Penalty applies.</li>
+                </ul>
+            </div>
+
+            <!-- Children Safety Rules -->
+            <div class="card">
+                <h3><i class="ri-parent-line"></i> Children Safety</h3>
+                <ul>
+                    <li>Child seat required for small children.</li>
+                    <li>Helmet and harness rules for kids.</li>
+                </ul>
+            </div>
+
+            <!-- Emergency Vehicle Rules -->
+            <div class="card">
+                <h3><i class="ri-ambulance-line"></i> Emergency Vehicles</h3>
+                <ul>
+                    <li><i class="ri-alarm-warning-line"></i> Must give way to ambulance.</li>
+                    <li><i class="ri-alarm-warning-line"></i> Must give way to fire brigade and police vehicles.</li>
+                    <li><i class="ri-alarm-warning-line"></i> Blocking emergency vehicles is punishable.</li>
+                </ul>
+            </div>
+
+            <!-- Traffic Signal Basic Rules -->
+            <div class="card">
+                <h3><i class="ri-signal-tower-line"></i> Traffic Signals</h3>
+                <ul>
+                    <li>Stop, Ready, Go rules.</li>
+                    <li>U-turn rules based on signs.</li>
+                    <li>No-entry signs must be obeyed.</li>
+                    <li>One-way streets must be followed.</li>
+                </ul>
+            </div>
+
+            <!-- Toll and FASTag Rules -->
+            <div class="card">
+                <h3><i class="ri-money-dollar-circle-line"></i> Toll & FASTag</h3>
+                <ul>
+                    <li>FASTag mandatory on highways.</li>
+                    <li>Double toll without FASTag.</li>
+                    <li>Exemptions list available on NHAI guidelines.</li>
+                </ul>
+            </div>
+
+            <!-- New Motor Vehicle Act Penalties -->
+            <div class="card">
+                <h3><i class="ri-alarm-warning-line"></i> New Penalties</h3>
+                <ul>
+                    <li>Updated fines for all major violations.</li>
+                    <li>Penalty table recommended for clarity.</li>
+                </ul>
+            </div>
+
+            <!-- Checking Challan Status -->
+            <div class="card">
+                <h3><i class="ri-search-eye-line"></i> Check Challan</h3>
+                <ul>
+                    <li>Check via mParivahan.</li>
+                    <li>Check via state traffic police website.</li>
+                    <li>Check via e-Challan portal.</li>
+                </ul>
+            </div>
+
+            <!-- Paying Challan Online -->
+            <div class="card">
+                <h3><i class="ri-bank-card-line"></i> Pay Challan</h3>
+                <ul>
+                    <li>Pay using UPI, Card, Netbanking.</li>
+                    <li>Official websites only.</li>
+                    <li>Download receipt after payment.</li>
+                </ul>
+            </div>
+
+            <!-- If Traffic Police Stops You -->
+            <div class="card">
+                <h3><i class="ri-police-car-line"></i> Police Stops</h3>
+                <ul>
+                    <li>Police can ask for RC, DL, Insurance, PUC.</li>
+                    <li>Documents accepted via DigiLocker.</li>
+                    <li>Police cannot take bike keys.</li>
+                    <li>No forced bribe allowed.</li>
+                </ul>
+            </div>
+
+            <!-- Accident Rules -->
+            <div class="card">
+                <h3><i class="ri-first-aid-kit-line"></i> Accident Rules</h3>
+                <ul>
+                    <li>Inform police immediately.</li>
+                    <li>Do not leave the scene.</li>
+                    <li>Take photos and videos.</li>
+                    <li>Insurance claim procedure required.</li>
+                    <li>FIR may be needed.</li>
+                </ul>
+            </div>
+
+            <!-- What Police Cannot Do -->
+            <div class="card">
+                <h3><i class="ri-shield-cross-line"></i> Police Rights</h3>
+                <ul>
+                    <li>Cannot seize keys without reason.</li>
+                    <li>Cannot hit or threaten.</li>
+                    <li>Cannot take phone without legal order.</li>
+                    <li>Cannot force any payment.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <footer class="section">
+        <div class="container">
+            <p>&copy; 2025 CitizenHelpDesk. Information for general guidance only.</p>
+        </div>
+    </footer>
+
+    <script>
+        const mobileBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+        mobileBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+    </script>
+</body>
+
 </html>
