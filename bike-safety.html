@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bike Safety Rules – CitizenHelpDesk</title>
+  <link rel="stylesheet" href="style.css?v=3">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="logo">
+        Citizen<span>HelpDesk</span>
+      </a>
+      <button class="mobile-menu-btn">☰</button>
+      <div class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="traffic.html" class="nav-link active">Traffic Rules</a>
+        <a href="documents.html" class="nav-link">Documents</a>
+        <a href="police.html" class="nav-link">Police Help</a>
+        <a href="schemes.html" class="nav-link">Schemes</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="page-hero bg-traffic-hero">
+    <div class="page-hero-content">
+      <p style="font-size:0.85rem; background:rgba(0,0,0,0.25); display:inline-block; padding:4px 10px; border-radius:999px;">
+        Bike Safety Guide · India
+      </p>
+      <h1>Bike Safety – Easy Story for Kids</h1>
+      <p>Simple language so even children understand how to ride safely and avoid accidents.</p>
+    </div>
+  </section>
+
+  <!-- MAIN CONTENT -->
+  <section class="section">
+    <div class="container">
+      <article class="card">
+        <h2>🏍 Bike Safety Rules – Full Explanation</h2>
+
+        <h3>1. Always wear your helmet</h3>
+        <p>A helmet is like a strong protective hat. If the bike falls or something hits you, the helmet protects your brain. Think of it like a superhero shield for your head.</p>
+
+        <h3>2. The person behind you must also wear a helmet</h3>
+        <p>The person sitting at the back can fall if the bike stops suddenly. A helmet keeps them safe too. Both people need protection.</p>
+
+        <h3>3. Never take 3 people on a bike</h3>
+        <p>A bike is made only for 2 people. With 3 people, the bike shakes, becomes unbalanced, and can fall easily. It’s like putting 3 people on a small chair — it will fall.</p>
+
+        <h3>4. Use indicators when you turn</h3>
+        <p>The blinking orange lights tell others which way you are turning. If you don’t use them, someone may crash into you. Indicators are like raising your hand before turning in school.</p>
+
+        <h3>5. Do NOT ride on the wrong side</h3>
+        <p>Wrong side is very dangerous. Vehicles come fast and don’t expect you. It’s like running into a classroom while others are running out — BOOM!</p>
+
+        <h3>6. Don’t use loud, modified exhaust</h3>
+        <p>Loud bikes disturb old people, babies, hospitals, and animals. Police can also fine you. Bikes should sound normal, not like a rocket.</p>
+
+        <h3>7. Never use mobile phone while riding</h3>
+        <p>Your eyes, hands, and mind must stay on the road. Using a phone is like reading a book while walking — you will bump into something.</p>
+
+        <h3>8. Keep distance from other vehicles</h3>
+        <p>If the vehicle in front stops suddenly, you get time to stop safely. Like walking behind someone — if you walk too close, you bump into them.</p>
+
+        <h3>9. Ride in a straight line, not zig-zag</h3>
+        <p>Zig-zag riding confuses drivers and causes accidents. Ride smooth and straight like drawing a straight line in your notebook.</p>
+
+        <h3>10. Wear proper shoes</h3>
+        <p>Slippers can slip off or get stuck. Shoes give better control, protect your feet, and help you brake safely — like seatbelts for your feet.</p>
+
+        <a href="traffic.html" style="display:inline-block; margin-top:1.5rem; font-weight:500; text-decoration:none; color:var(--primary-color);">
+          ← Back to Traffic Rules
+        </a>
+      </article>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="section" style="background-color: var(--surface-color); border-top: 1px solid rgba(148,148,148,0.25); padding: 4rem 0 2rem;">
+    <div class="container">
+      <div class="grid grid-3 footer-content">
+        <div class="footer-section">
+          <a href="index.html" class="logo" style="margin-bottom: 1rem; display: inline-block;">
+            Citizen<span>HelpDesk</span>
+          </a>
+          <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
+            Simple explanations of rules so citizens and kids can understand easily.
+          </p>
+        </div>
+        <div class="footer-section">
+          <h4>More Guides</h4>
+          <ul class="footer-links">
+            <li><a href="traffic.html">Traffic Rules Overview</a></li>
+            <li><a href="blog-helmet.html">Helmet Rule & Fines</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Note</h4>
+          <p style="color: var(--text-muted);">
+            This is not an official government website. Always confirm rules on your state traffic police website.
+          </p>
+        </div>
+      </div>
+      <div class="copyright" style="text-align:center;">
+        <p>&copy; 2025 CitizenHelpDesk. Information for general guidance only, not legal advice.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const mobileBtn = document.querySelector('.mobile-menu-btn');
+    const navLinks = document.querySelector('.nav-links');
+    mobileBtn.addEventListener('click', () => navLinks.classList.toggle('active'));
+  </script>
+
+</body>
+</html>
