@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Citizen HelpDesk – Government Rules Explained Simply</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f5f7fb;
+      color: #0f172a;
+      line-height: 1.5;
+    }
+    header {
+      background: #ffffff;
+      border-bottom: 1px solid #e5e7eb;
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+    .logo-icon {
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      background: #1d4ed8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 18px;
+    }
+    nav a {
+      margin-left: 16px;
+      text-decoration: none;
+      color: #334155;
+      font-size: 0.95rem;
+    }
+    nav a:hover {
+      color: #1d4ed8;
+    }
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 20px 16px 40px;
+    }
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 2fr) minmax(0, 1.4fr);
+      gap: 24px;
+      align-items: center;
+      padding: 16px 0 32px;
+    }
+    @media (max-width: 768px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+    }
+    .hero-title {
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+    .hero-subtitle {
+      font-size: 1rem;
+      color: #4b5563;
+      margin-bottom: 16px;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #e0ebff;
+      color: #1d4ed8;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      margin-bottom: 10px;
+    }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .btn-primary {
+      background: #1d4ed8;
+      color: #fff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+    .btn-secondary {
+      background: #e5e7eb;
+      color: #111827;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+    .hero-note {
+      font-size: 0.8rem;
+      color: #6b7280;
+    }
+    .hero-card {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 16px;
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.07);
+    }
+    .hero-card h3 {
+      font-size: 1rem;
+      margin-bottom: 8px;
+    }
+    .hero-card ul {
+      font-size: 0.9rem;
+      color: #4b5563;
+      padding-left: 18px;
+    }
+    .hero-card ul li {
+      margin-bottom: 4px;
+    }
+    .search-box {
+      margin-top: 14px;
+      display: flex;
+      gap: 8px;
+    }
+    .search-box input {
+      flex: 1;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid #d1d5db;
+      font-size: 0.9rem;
+      outline: none;
+    }
+    .pill-row {
+      margin-top: 8px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      font-size: 0.75rem;
+    }
+    .pill {
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: #eff6ff;
+      color: #1d4ed8;
+    }
+    .section-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin: 24px 0 10px;
+    }
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+    @media (max-width: 900px) {
+      .card-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+    @media (max-width: 550px) {
+      .card-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .mini-card {
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 10px 12px;
+      border: 1px solid #e5e7eb;
+      font-size: 0.9rem;
+    }
+    .mini-card h4 {
+      font-size: 0.95rem;
+      margin-bottom: 4px;
+    }
+    .mini-card p {
+      font-size: 0.8rem;
+      color: #6b7280;
+    }
+    .faq-list {
+      margin-top: 8px;
+      font-size: 0.9rem;
+    }
+    .faq-item {
+      margin-bottom: 8px;
+    }
+    .faq-q {
+      font-weight: 600;
+    }
+    footer {
+      background: #0f172a;
+      color: #9ca3af;
+      font-size: 0.8rem;
+      padding: 14px 16px;
+      margin-top: 26px;
+    }
+    footer a {
+      color: #e5e7eb;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <div class="logo-icon">CH</div>
+      <span>Citizen HelpDesk</span>
+    </div>
+    <nav>
+      <a href="#traffic">Traffic Rules</a>
+      <a href="#documents">Documents</a>
+      <a href="#police">Police Help</a>
+      <a href="#schemes">Schemes</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div>
+        <div class="hero-badge">New • Government rules in simple language</div>
+        <h1 class="hero-title">Government rules, explained like you’re a normal person.</h1>
+        <p class="hero-subtitle">
+          Citizen HelpDesk turns complicated traffic laws, documents, police and scheme rules into
+          short, clear guides you can actually understand.
+        </p>
+        <div class="hero-actions">
+          <button class="btn-primary">Browse Traffic Rules</button>
+          <button class="btn-secondary">View Documents Help</button>
+        </div>
+        <p class="hero-note">
+          No legal advice. Just simplified public information. Always verify on official government websites.
+        </p>
+      </div>
+      <aside class="hero-card">
+        <h3>Search a rule</h3>
+        <p style="font-size:0.85rem; color:#6b7280; margin-bottom:6px;">
+          Try: “pay challan online”, “lost licence”, “online FIR”.
+        </p>
+        <div class="search-box">
+          <input type="text" placeholder="What do you want to understand today?" />
+          <button class="btn-primary">Go</button>
+        </div>
+        <div class="pill-row">
+          <span class="pill">Traffic challan</span>
+          <span class="pill">Helmet rule</span>
+          <span class="pill">Aadhaar update</span>
+          <span class="pill">Online FIR</span>
+        </div>
+        <ul style="margin-top:10px;">
+          <li>Step–by–step explanations</li>
+          <li>Simple English + easy terms</li>
+          <li>No confusing legal language</li>
+        </ul>
+      </aside>
+    </section>
+
+    <section>
+      <h2 class="section-title">Start with a topic</h2>
+      <div class="card-grid">
+        <div class="mini-card" id="traffic">
+          <h4>Traffic rules</h4>
+          <p>Helmet, challans, signals, speed limits, documents for driving.</p>
+        </div>
+        <div class="mini-card" id="documents">
+          <h4>Documents & IDs</h4>
+          <p>Aadhaar, PAN, DL, Voter ID – apply, update, replace.</p>
+        </div>
+        <div class="mini-card" id="police">
+          <h4>Police & FIR basics</h4>
+          <p>What is FIR, complaint, online FIR and your basic rights.</p>
+        </div>
+        <div class="mini-card" id="schemes">
+          <h4>Government schemes</h4>
+          <p>Simple guides to eligibility and how to apply for schemes.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">Common questions</h2>
+      <div class="faq-list">
+        <div class="faq-item">
+          <div class="faq-q">Can police take my bike keys?</div>
+          <div class="faq-a">In normal checking, they should not forcibly keep your keys or documents without reason.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Is DigiLocker document valid?</div>
+          <div class="faq-a">Yes, in most places digital RC, DL and other documents from DigiLocker or mParivahan are accepted.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">How do I check my traffic challan?</div>
+          <div class="faq-a">Use your state traffic portal, e-Challan website or mParivahan app with your vehicle number.</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div style="max-width:1000px; margin:0 auto;">
+      Citizen HelpDesk simplifies public information about rules.
+      This is <strong>not</strong> an official government website.
+    </div>
+  </footer>
+</body>
+</html>
