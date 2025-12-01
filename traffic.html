@@ -1,165 +1,170 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Traffic Rules – CitizenHelpDesk</title>
-    <link rel="stylesheet" href="style.css?v=2">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Traffic Rules & Challans – CitizenHelpDesk</title>
+  <link rel="stylesheet" href="style.css?v=3">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
-
 <body>
-    <!-- NAVBAR -->
-    <nav class="navbar">
-        <div class="container nav-container">
-            <a href="index.html" class="logo">
-                Citizen<span>HelpDesk</span>
-            </a>
-            <button class="mobile-menu-btn">☰</button>
-            <div class="nav-links">
-                <a href="index.html" class="nav-link">Home</a>
-                <a href="traffic.html" class="nav-link active">Traffic Rules</a>
-                <a href="documents.html" class="nav-link">Documents</a>
-                <a href="police.html" class="nav-link">Police Help</a>
-                <a href="schemes.html" class="nav-link">Schemes</a>
-            </div>
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="logo">
+        Citizen<span>HelpDesk</span>
+      </a>
+      <button class="mobile-menu-btn">☰</button>
+      <div class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="traffic.html" class="nav-link active">Traffic Rules</a>
+        <a href="documents.html" class="nav-link">Documents</a>
+        <a href="police.html" class="nav-link">Police Help</a>
+        <a href="schemes.html" class="nav-link">Schemes</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="page-hero bg-traffic-hero">
+    <div class="page-hero-content">
+      <p style="font-size:0.85rem; background:rgba(0,0,0,0.25); display:inline-block; padding:4px 10px; border-radius:999px;">
+        Last updated: 2025 · India
+      </p>
+      <h1>Traffic Rules & Challans</h1>
+      <p>Know what documents to carry, how fines work and how to deal with police on the road.</p>
+    </div>
+  </section>
+
+  <!-- MAIN CONTENT -->
+  <section class="section">
+    <div class="container">
+      <!-- Quick summary row -->
+      <div class="grid grid-3" style="margin-bottom:2.5rem;">
+        <div class="card">
+          <h2><i>📃</i> Must-have documents</h2>
+          <ul>
+            <li>Driving Licence (DL)</li>
+            <li>RC (Registration Certificate)</li>
+            <li>Insurance certificate</li>
+            <li>Pollution certificate (PUC)</li>
+          </ul>
+          <p style="font-size:0.85rem; color:var(--text-muted); margin-top:0.5rem;">
+            Digital copies in <strong>DigiLocker</strong> or <strong>mParivahan</strong> are accepted in most states.
+          </p>
         </div>
-    </nav>
-
-    <!-- HERO -->
-    <section class="page-hero bg-traffic-hero">
-        <div class="page-hero-content">
-            <h1>Traffic Rules & Challans</h1>
-            <p>Understand helmet rules, challans, documents and your basic rights on the road.</p>
+        <div class="card">
+          <h2><i>🪖</i> Safety rules</h2>
+          <ul>
+            <li>Helmet: rider + pillion must wear, strap locked.</li>
+            <li>Seat belt: front + rear passengers in cars.</li>
+            <li>No triple riding on two-wheelers.</li>
+            <li>No mobile in hand while driving.</li>
+          </ul>
         </div>
-    </section>
-
-    <!-- MAIN CONTENT -->
-    <section class="section">
-        <div class="container grid grid-2">
-            <!-- Card 1 -->
-            <article class="card">
-                <h2><i>🪖</i> Helmet & Seat Belt Rules</h2>
-                <p><strong>Helmet:</strong> Mandatory for rider and pillion. Only ISI-marked helmets are allowed.</p>
-                <ul>
-                    <li>Rider + pillion must wear helmet with strap locked.</li>
-                    <li>Fines apply if anyone on bike is without helmet.</li>
-                    <li>Children on two-wheelers: follow latest safety rules in your state.</li>
-                </ul>
-                <p><strong>Seat Belt:</strong> Front and rear seat belts are compulsory in cars.</p>
-            </article>
-
-            <!-- Card 2 -->
-            <article class="card">
-                <h2><i>📃</i> Documents Required While Driving</h2>
-                <p>Always keep valid copies of:</p>
-                <ul>
-                    <li>Driving Licence (DL)</li>
-                    <li>Registration Certificate (RC)</li>
-                    <li>Insurance Certificate</li>
-                    <li>Pollution Certificate (PUC)</li>
-                </ul>
-                <p>You can store these in <strong>DigiLocker</strong> or <strong>mParivahan</strong>. In most places
-                    digital copies are accepted.</p>
-            </article>
-
-            <!-- Card 3 -->
-            <article class="card">
-                <h2><i>💸</i> Challans & Fines</h2>
-                <p>Common reasons for challan:</p>
-                <ul>
-                    <li>No helmet / no seat belt</li>
-                    <li>Signal jump or wrong-side driving</li>
-                    <li>Overspeeding</li>
-                    <li>Driving without valid documents</li>
-                </ul>
-                <p><strong>How to check challan:</strong> Use your state traffic police website, e-Challan portal or
-                    mParivahan app with your vehicle number.</p>
-            </article>
-
-            <!-- Card 4 -->
-            <article class="card">
-                <h2><i>🌐</i> How to Pay Challan Online</h2>
-                <ol>
-                    <li>Open your state traffic police or <strong>echallan.parivahan.gov.in</strong>.</li>
-                    <li>Enter vehicle number / challan number.</li>
-                    <li>Verify details and select pending challan.</li>
-                    <li>Pay using UPI, net banking, card, etc.</li>
-                    <li>Download and save the payment receipt.</li>
-                </ol>
-                <p style="margin-top:0.5rem; font-size:0.9rem; color:var(--text-muted);">
-                    Always use official websites (.gov.in / .nic.in). Avoid agents or random payment links.
-                </p>
-            </article>
-
-            <!-- Card 5 -->
-            <article class="card">
-                <h2><i>🚗</i> When Police Stop You</h2>
-                <ul>
-                    <li>Stay calm and park safely on the side.</li>
-                    <li>Police can ask for DL, RC, PUC and Insurance.</li>
-                    <li>Digital documents from DigiLocker / mParivahan are usually valid.</li>
-                    <li>They should not forcibly take away your vehicle keys without reason.</li>
-                </ul>
-                <p style="margin-top:0.5rem;">If you feel harassed, note the officer’s name and ID and
-                    contact the local traffic helpline or file a complaint through official channels.</p>
-            </article>
-
-            <!-- Card 6 -->
-            <article class="card">
-                <h2><i>❓</i> Quick FAQs</h2>
-                <p><strong>Q. Is triple riding allowed?</strong><br>
-                    No. Only 2 persons are allowed on most two-wheelers.</p>
-                <p><strong>Q. Is mobile use allowed while driving?</strong><br>
-                    Using mobile while driving is an offence. Use hands-free only where allowed by law.</p>
-                <p><strong>Q. Are number plate designs allowed?</strong><br>
-                    No fancy fonts, stickers or designs. Use standard HSRP plates.</p>
-            </article>
+        <div class="card">
+          <h2><i>⚠️</i> Common offences</h2>
+          <ul>
+            <li>Driving without valid DL / RC / PUC / Insurance.</li>
+            <li>Signal jump, wrong-side, rash driving.</li>
+            <li>Over-speeding and drunk driving.</li>
+            <li>Wrong / fancy number plates.</li>
+          </ul>
         </div>
-    </section>
+      </div>
 
-    <!-- FOOTER (same as home) -->
-    <footer class="section"
-        style="background-color: var(--surface-color); border-top: 1px solid rgba(148,148,148,0.25); padding: 4rem 0 2rem;">
-        <div class="container">
-            <div class="grid grid-3 footer-content">
-                <div class="footer-section">
-                    <a href="index.html" class="logo" style="margin-bottom: 1rem; display: inline-block;">
-                        Citizen<span>HelpDesk</span>
-                    </a>
-                    <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
-                        Simplifying government rules and procedures for every Indian citizen – in easy language.
-                    </p>
-                </div>
-                <div class="footer-section">
-                    <h4>Quick Links</h4>
-                    <ul class="footer-links">
-                        <li><a href="traffic.html">Traffic Rules</a></li>
-                        <li><a href="documents.html">Documents & ID</a></li>
-                        <li><a href="police.html">Police Help</a></li>
-                        <li><a href="schemes.html">Government Schemes</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Note</h4>
-                    <p style="color: var(--text-muted);">
-                        Rules and fines change over time. Always confirm latest details on your state traffic police
-                        website or official government portal.
-                    </p>
-                </div>
-            </div>
-            <div class="copyright" style="text-align:center;">
-                <p>&copy; 2025 CitizenHelpDesk. Information for general guidance only, not legal advice.</p>
-            </div>
+      <!-- How to check & pay challan -->
+      <div class="grid grid-2" style="margin-bottom:2.5rem;">
+        <article class="card">
+          <h2><i>🔎</i> Check pending challans</h2>
+          <ol>
+            <li>Go to your state traffic police site or <strong>echallan.parivahan.gov.in</strong>.</li>
+            <li>Select “Check Challan Status”.</li>
+            <li>Enter vehicle number or challan number.</li>
+            <li>View list of pending challans with details.</li>
+          </ol>
+          <p style="font-size:0.85rem; color:var(--text-muted); margin-top:0.5rem;">
+            If details look wrong, contact the traffic helpline or local RTO with evidence.
+          </p>
+        </article>
+
+        <article class="card">
+          <h2><i>💳</i> Pay challan online</h2>
+          <ol>
+            <li>Select the challan you want to pay.</li>
+            <li>Confirm vehicle and offence details.</li>
+            <li>Choose payment mode – UPI / net banking / card.</li>
+            <li>After payment, download the receipt or save screenshot.</li>
+          </ol>
+          <p style="font-size:0.85rem; color:var(--text-muted); margin-top:0.5rem;">
+            Only use official .gov.in / .nic.in websites. Avoid agents or random payment links on WhatsApp.
+          </p>
+        </article>
+      </div>
+
+      <!-- When police stop you -->
+      <div class="grid grid-2">
+        <article class="card">
+          <h2><i>🚓</i> When police stop your vehicle</h2>
+          <ul>
+            <li>Park safely on the side, switch on parking indicator.</li>
+            <li>Stay calm, speak politely, and keep documents ready.</li>
+            <li>You can show DigiLocker or mParivahan documents.</li>
+            <li>You can ask for officer’s name, ID and police station.</li>
+            <li>Do not offer or accept bribes – ask for proper challan.</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h2><i>❓</i> Quick FAQs</h2>
+          <p><strong>Q. Can police seize my licence?</strong><br>
+            In some serious offences they may take DL details or keep the card and issue receipt. Rules vary by state.</p>
+          <p><strong>Q. Can I record interaction?</strong><br>
+            You can calmly record audio / video from a safe distance if situation feels suspicious, without interfering.</p>
+          <p><strong>Q. Where to complain?</strong><br>
+            Use state traffic police helpline, email or public grievance portal with vehicle & officer details.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER (same design) -->
+  <footer class="section"
+          style="background-color: var(--surface-color); border-top: 1px solid rgba(148,148,148,0.25); padding: 4rem 0 2rem;">
+    <div class="container">
+      <div class="grid grid-3 footer-content">
+        <div class="footer-section">
+          <a href="index.html" class="logo" style="margin-bottom: 1rem; display: inline-block;">
+            Citizen<span>HelpDesk</span>
+          </a>
+          <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
+            Simple explanations of traffic rules so you don’t panic on the road.
+          </p>
         </div>
-    </footer>
+        <div class="footer-section">
+          <h4>Useful Guides</h4>
+          <ul class="footer-links">
+            <li><a href="blog-traffic-challan.html">Pay Traffic Challan Online</a></li>
+            <li><a href="blog-helmet.html">Helmet Rule & Fines</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Note</h4>
+          <p style="color: var(--text-muted);">
+            Laws and fines change. Always confirm latest amounts and rules on your state traffic police website.
+          </p>
+        </div>
+      </div>
+      <div class="copyright" style="text-align:center;">
+        <p>&copy; 2025 CitizenHelpDesk. Information for general guidance only, not legal advice.</p>
+      </div>
+    </div>
+  </footer>
 
-    <script>
-        const mobileBtn = document.querySelector('.mobile-menu-btn');
-        const navLinks = document.querySelector('.nav-links');
-        mobileBtn.addEventListener('click', () => navLinks.classList.toggle('active'));
-    </script>
+  <script>
+    const mobileBtn = document.querySelector('.mobile-menu-btn');
+    const navLinks = document.querySelector('.nav-links');
+    mobileBtn.addEventListener('click', () => navLinks.classList.toggle('active'));
+  </script>
 </body>
-
 </html>
