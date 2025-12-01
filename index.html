@@ -5,11 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CitizenHelpDesk - Government Rules Explained</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=2">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 
 <body>
+    <!-- NAVBAR -->
     <nav class="navbar">
         <div class="container nav-container">
             <a href="index.html" class="logo">
@@ -26,85 +27,171 @@
         </div>
     </nav>
 
+    <!-- HERO -->
     <header class="hero">
         <div class="container">
-            <h1 class="hero-title">Government Rules Explained Simply</h1>
-            <p class="hero-subtitle">Understanding laws, rights, and schemes shouldn't be complicated. We break it down
-                for you.</p>
-            <div style="margin-top: 2rem;">
-                <img src="hero-image.png" alt="Government Rules Illustration" class="hero-image">
-            </div>
-            <div style="margin-top: 2rem;">
-                <a href="traffic.html" class="btn btn-primary">Get Started</a>
+            <div class="grid grid-2">
+                <div class="animate-fade-in">
+                    <h1 class="hero-title">Government rules, explained in normal language.</h1>
+                    <p class="hero-subtitle">
+                        No legal jargon, no confusion. CitizenHelpDesk turns traffic rules, documents,
+                        police processes and government schemes into simple step-by-step guides.
+                    </p>
+
+                    <div style="margin: 1.5rem 0;">
+                        <button class="btn btn-primary" onclick="location.href='traffic.html'">
+                            Start with Traffic Rules
+                        </button>
+                        <button class="btn btn-outline" onclick="location.href='documents.html'" style="margin-left:0.75rem;">
+                            Fix My Documents
+                        </button>
+                    </div>
+
+                    <p style="font-size: 0.9rem; color: var(--text-muted); max-width: 420px;">
+                        This is <strong>not</strong> an official government website. We only simplify public
+                        information and link to official portals where possible.
+                    </p>
+                </div>
+
+                <div class="animate-fade-in">
+                    <img src="hero-image.png" alt="Citizen HelpDesk – Government rules illustration" class="hero-image">
+                </div>
             </div>
         </div>
     </header>
 
+    <!-- TOPIC CARDS -->
+    <section class="section featured-guides">
+        <div class="container">
+            <h2 style="text-align:center; margin-bottom: 0.75rem;">What do you want help with?</h2>
+            <p style="text-align:center; color: var(--text-muted); margin-bottom: 2.5rem;">
+                Choose a topic to see all guides, examples and simple explanations.
+            </p>
+
+            <div class="grid grid-4" style="display:grid; gap:1.5rem; grid-template-columns:repeat(auto-fit,minmax(230px,1fr));">
+                <article class="card fade-in-scroll" onclick="location.href='traffic.html'" style="cursor:pointer;">
+                    <h2><i>🚦</i>Traffic rules & challans</h2>
+                    <p>Understand fines, documents and your basic rights on the road.</p>
+                    <ul>
+                        <li>Helmet & seat belt rules</li>
+                        <li>Check & pay challan online</li>
+                        <li>What if police stop you?</li>
+                    </ul>
+                </article>
+
+                <article class="card fade-in-scroll" onclick="location.href='documents.html'" style="cursor:pointer;">
+                    <h2><i>📄</i>Documents & ID</h2>
+                    <p>Clear guides for Aadhaar, PAN, driving licence, RC and more.</p>
+                    <ul>
+                        <li>Address change in Aadhaar</li>
+                        <li>Lost PAN card – what to do</li>
+                        <li>DL renewal & duplicate RC</li>
+                    </ul>
+                </article>
+
+                <article class="card fade-in-scroll" onclick="location.href='police.html'" style="cursor:pointer;">
+                    <h2><i>👮</i>Police & FIR basics</h2>
+                    <p>Know the process before you panic or sign any document.</p>
+                    <ul>
+                        <li>FIR vs Complaint vs NC</li>
+                        <li>Online FIR for lost items</li>
+                        <li>What police can & can’t do</li>
+                    </ul>
+                </article>
+
+                <article class="card fade-in-scroll" onclick="location.href='schemes.html'" style="cursor:pointer;">
+                    <h2><i>💰</i>Government schemes</h2>
+                    <p>Short, clear explainers of benefits, eligibility and how to apply.</p>
+                    <ul>
+                        <li>Who is eligible</li>
+                        <li>Required documents</li>
+                        <li>Online application links</li>
+                    </ul>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- LATEST GUIDES -->
     <section class="section">
         <div class="container">
-            <h2 style="text-align: center; margin-bottom: 3rem;">Latest Guides & Updates</h2>
+            <h2 style="text-align: center; margin-bottom: 0.75rem;">Latest Guides & Updates</h2>
+            <p style="text-align:center; color: var(--text-muted); margin-bottom: 3rem;">
+                Quick reads for the most common problems citizens face every day.
+            </p>
+
             <div class="grid grid-3">
                 <!-- Blog 1 -->
-                <article class="guide-card">
+                <article class="guide-card fade-in-scroll">
                     <div class="guide-image" style="background-image: url('images/blog-challan.png');"></div>
                     <div class="guide-content">
                         <div class="guide-category">Traffic Rules</div>
-                        <h3 class="guide-title"><a href="blog-traffic-challan.html">How to Pay Traffic Challan Online –
-                                Full Guide (2025)</a></h3>
-                        <p class="guide-excerpt">Paying a traffic challan online is now very easy. You don’t need to
-                            visit any police station.</p>
+                        <h3 class="guide-title">
+                            <a href="blog-traffic-challan.html">How to Pay Traffic Challan Online – Full Guide (2025)</a>
+                        </h3>
+                        <p class="guide-excerpt">
+                            Paying a traffic challan online is now easy. No need to visit a police station if you follow these steps.
+                        </p>
                         <a href="blog-traffic-challan.html" class="read-more">Read Guide →</a>
                     </div>
                 </article>
 
                 <!-- Blog 2 -->
-                <article class="guide-card">
+                <article class="guide-card fade-in-scroll">
                     <div class="guide-image" style="background-image: url('images/blog-fir.png');"></div>
                     <div class="guide-content">
                         <div class="guide-category">Police Help</div>
-                        <h3 class="guide-title"><a href="blog-fir.html">FIR vs Complaint vs NC – What’s the
-                                Difference?</a></h3>
-                        <p class="guide-excerpt">Many people get confused between FIR, NC, and a Complaint. Here’s a
-                            simple explanation.</p>
+                        <h3 class="guide-title">
+                            <a href="blog-fir.html">FIR vs Complaint vs NC – What’s the Difference?</a>
+                        </h3>
+                        <p class="guide-excerpt">
+                            Many people get confused between FIR, NC and a simple complaint. This guide breaks it down clearly.
+                        </p>
                         <a href="blog-fir.html" class="read-more">Read Guide →</a>
                     </div>
                 </article>
 
                 <!-- Blog 3 -->
-                <article class="guide-card">
+                <article class="guide-card fade-in-scroll">
                     <div class="guide-image" style="background-image: url('images/blog-aadhaar.png');"></div>
                     <div class="guide-content">
                         <div class="guide-category">Documents & ID</div>
-                        <h3 class="guide-title"><a href="blog-aadhaar.html">Aadhaar Address Change – Step-by-Step (2025
-                                Update)</a></h3>
-                        <p class="guide-excerpt">If you recently moved to a new house or city, you should update your
-                            Aadhaar address.</p>
+                        <h3 class="guide-title">
+                            <a href="blog-aadhaar.html">Aadhaar Address Change – Step-by-Step (2025 Update)</a>
+                        </h3>
+                        <p class="guide-excerpt">
+                            Moved to a new house or city? Update your Aadhaar address with these simple online steps.
+                        </p>
                         <a href="blog-aadhaar.html" class="read-more">Read Guide →</a>
                     </div>
                 </article>
 
                 <!-- Blog 4 -->
-                <article class="guide-card">
+                <article class="guide-card fade-in-scroll">
                     <div class="guide-image" style="background-image: url('images/traffic-bg.jpg');"></div>
                     <div class="guide-content">
                         <div class="guide-category">Traffic Rules</div>
-                        <h3 class="guide-title"><a href="blog-helmet.html">Helmet Rule in India – Updated Penalties
-                                (2025)</a></h3>
-                        <p class="guide-excerpt">Wearing a helmet is not just a safety measure, it’s the law. Know the
-                            updated fines.</p>
+                        <h3 class="guide-title">
+                            <a href="blog-helmet.html">Helmet Rule in India – Updated Penalties (2025)</a>
+                        </h3>
+                        <p class="guide-excerpt">
+                            Helmet rules now apply to both rider and pillion. Know the fines and common myths.
+                        </p>
                         <a href="blog-helmet.html" class="read-more">Read Guide →</a>
                     </div>
                 </article>
 
                 <!-- Blog 5 -->
-                <article class="guide-card">
+                <article class="guide-card fade-in-scroll">
                     <div class="guide-image" style="background-image: url('images/blog-aadhaar.png');"></div>
                     <div class="guide-content">
                         <div class="guide-category">Documents & ID</div>
-                        <h3 class="guide-title"><a href="blog-pan.html">Lost Your PAN Card? Here’s Exactly What to
-                                Do</a></h3>
-                        <p class="guide-excerpt">Losing your PAN card can be stressful, but the process to get a reprint
-                            is very simple.</p>
+                        <h3 class="guide-title">
+                            <a href="blog-pan.html">Lost Your PAN Card? Here’s Exactly What to Do</a>
+                        </h3>
+                        <p class="guide-excerpt">
+                            Losing your PAN card is stressful, but getting a reprint is simple if you know the right steps.
+                        </p>
                         <a href="blog-pan.html" class="read-more">Read Guide →</a>
                     </div>
                 </article>
@@ -112,50 +199,67 @@
         </div>
     </section>
 
+    <!-- FOOTER -->
     <footer class="section"
-        style="background-color: var(--surface-color); border-top: 1px solid var(--border-color); padding: 4rem 0 2rem;">
+        style="background-color: var(--surface-color); border-top: 1px solid rgba(148,148,148,0.25); padding: 4rem 0 2rem;">
         <div class="container">
-            <div class="grid grid-3">
-                <div>
+            <div class="grid grid-3 footer-content">
+                <div class="footer-section">
                     <a href="index.html" class="logo" style="margin-bottom: 1rem; display: inline-block;">
                         Citizen<span>HelpDesk</span>
                     </a>
-                    <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Simplifying government rules and
-                        procedures for every Indian citizen.</p>
+                    <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
+                        Simplifying government rules and procedures for every Indian citizen – in easy language.
+                    </p>
                 </div>
-                <div>
-                    <h4 style="font-weight: 700; margin-bottom: 1rem;">Quick Links</h4>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
                     <ul class="footer-links">
-                        <li><a href="traffic.html" style="color: var(--text-muted);">Traffic Rules</a></li>
-                        <li><a href="documents.html" style="color: var(--text-muted);">Documents & ID</a></li>
-                        <li><a href="police.html" style="color: var(--text-muted);">Police Help</a></li>
-                        <li><a href="schemes.html" style="color: var(--text-muted);">Government Schemes</a></li>
+                        <li><a href="traffic.html">Traffic Rules</a></li>
+                        <li><a href="documents.html">Documents & ID</a></li>
+                        <li><a href="police.html">Police Help</a></li>
+                        <li><a href="schemes.html">Government Schemes</a></li>
                     </ul>
                 </div>
-                <div>
-                    <h4 style="font-weight: 700; margin-bottom: 1rem;">Newsletter</h4>
-                    <p style="color: var(--text-muted); margin-bottom: 1rem;">Get the latest rule updates.</p>
-                    <form class="newsletter-form">
+                <div class="footer-section">
+                    <h4>Newsletter</h4>
+                    <p style="color: var(--text-muted); margin-bottom: 1rem;">
+                        Get important rule updates and new guides in your inbox.
+                    </p>
+                    <form class="newsletter-form" onsubmit="return false;">
                         <input type="email" placeholder="Your email" class="newsletter-input">
                         <button type="submit" class="btn btn-primary" style="padding: 0.5rem 1rem;">Subscribe</button>
                     </form>
                 </div>
             </div>
-            <div class="copyright text-center">
-                <p>&copy; 2025 CitizenHelpDesk. Information for general guidance only.</p>
+            <div class="copyright" style="text-align:center;">
+                <p>&copy; 2025 CitizenHelpDesk. Information for general guidance only, not legal advice.</p>
             </div>
         </div>
     </footer>
 
-   <!-- <script src="script.js"></script> -->
-<script>
-    const mobileBtn = document.querySelector('.mobile-menu-btn');
-    const navLinks = document.querySelector('.nav-links');
-    mobileBtn.addEventListener('click', () => {
-        navLinks.classList.toggle('active');
-    });
-</script>
+    <script>
+        // mobile menu
+        const mobileBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+        mobileBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // simple scroll reveal for .fade-in-scroll
+        const fadeEls = document.querySelectorAll('.fade-in-scroll');
+        const onScroll = () => {
+            const trigger = window.innerHeight * 0.9;
+            fadeEls.forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < trigger) {
+                    el.classList.add('visible');
+                }
+            });
+        };
+        window.addEventListener('scroll', onScroll);
+        onScroll();
+    </script>
 </body>
 
 </html>
-
