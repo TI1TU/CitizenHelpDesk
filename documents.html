@@ -1,147 +1,137 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Documents & ID – CitizenHelpDesk</title>
-    <link rel="stylesheet" href="style.css?v=2">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Documents & ID – CitizenHelpDesk</title>
+  <link rel="stylesheet" href="style.css?v=3">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
-
 <body>
-    <nav class="navbar">
-        <div class="container nav-container">
-            <a href="index.html" class="logo">
-                Citizen<span>HelpDesk</span>
-            </a>
-            <button class="mobile-menu-btn">☰</button>
-            <div class="nav-links">
-                <a href="index.html" class="nav-link">Home</a>
-                <a href="traffic.html" class="nav-link">Traffic Rules</a>
-                <a href="documents.html" class="nav-link active">Documents</a>
-                <a href="police.html" class="nav-link">Police Help</a>
-                <a href="schemes.html" class="nav-link">Schemes</a>
-            </div>
+  <nav class="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="logo">Citizen<span>HelpDesk</span></a>
+      <button class="mobile-menu-btn">☰</button>
+      <div class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="traffic.html" class="nav-link">Traffic Rules</a>
+        <a href="documents.html" class="nav-link active">Documents</a>
+        <a href="police.html" class="nav-link">Police Help</a>
+        <a href="schemes.html" class="nav-link">Schemes</a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="page-hero bg-documents-hero">
+    <div class="page-hero-content">
+      <p style="font-size:0.85rem; background:rgba(0,0,0,0.25); display:inline-block; padding:4px 10px; border-radius:999px;">
+        Updated: 2025 · Basic info only
+      </p>
+      <h1>Essential Documents & IDs</h1>
+      <p>Short guides for Aadhaar, PAN, voter ID, driving licence, RC and passport.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container grid grid-3">
+      <article class="card">
+        <h2><i>🆔</i>Aadhaar Card</h2>
+        <p><strong>Use:</strong> Identity + address proof for most services.</p>
+        <ul>
+          <li>Address change, name correction, mobile update.</li>
+          <li>Update via <em>myaadhaar.uidai.gov.in</em> or Aadhaar centre.</li>
+          <li>Always carry masked Aadhaar or e-Aadhaar, not photocopies everywhere.</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <h2><i>💳</i>PAN Card</h2>
+        <p><strong>Use:</strong> Tax, bank, investments, high-value transactions.</p>
+        <ul>
+          <li>Apply / reprint via NSDL or UTIITSL portals.</li>
+          <li>Link with Aadhaar if required by law.</li>
+          <li>Use e-PAN PDF for many online services.</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <h2><i>🗳️</i>Voter ID (EPIC)</h2>
+        <p><strong>Use:</strong> Voting and identity proof.</p>
+        <ul>
+          <li>New registration after age 18.</li>
+          <li>Address change when you move city/area.</li>
+          <li>Apply / track through <em>voters.eci.gov.in</em>.</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <h2><i>🚗</i>Driving Licence (DL)</h2>
+        <p><strong>Use:</strong> Legal permission to drive.</p>
+        <ul>
+          <li>Learner’s licence → driving test → permanent DL.</li>
+          <li>Renew before expiry to avoid extra fees.</li>
+          <li>Use <em>parivahan.gov.in</em> for most states.</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <h2><i>📘</i>Vehicle RC & Insurance</h2>
+        <p><strong>RC:</strong> Proof that vehicle is registered in your name.</p>
+        <ul>
+          <li>Transfer RC when selling vehicle.</li>
+          <li>Duplicate RC if original is lost (often needs police report).</li>
+          <li>Ensure active insurance + PUC at all times.</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <h2><i>🛂</i>Passport</h2>
+        <p><strong>Use:</strong> International travel + strong ID proof.</p>
+        <ul>
+          <li>Apply on <em>passportindia.gov.in</em>.</li>
+          <li>Book appointment at nearest PSK/POPSK.</li>
+          <li>Keep police verification and address details ready.</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <footer class="section"
+          style="background-color: var(--surface-color); border-top: 1px solid rgba(148,148,148,0.25); padding: 4rem 0 2rem;">
+    <div class="container">
+      <div class="grid grid-3 footer-content">
+        <div class="footer-section">
+          <a href="index.html" class="logo" style="margin-bottom: 1rem; display: inline-block;">
+            Citizen<span>HelpDesk</span>
+          </a>
+          <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
+            Use these guides as a starting point, then always confirm details on official portals.
+          </p>
         </div>
-    </nav>
-
-    <section class="page-hero bg-documents-hero">
-        <div class="page-hero-content">
-            <h1>Essential Documents</h1>
-            <p>Simple guides to apply for, update and manage your important government IDs.</p>
+        <div class="footer-section">
+          <h4>Helpful Guides</h4>
+          <ul class="footer-links">
+            <li><a href="blog-aadhaar.html">Aadhaar Address Change</a></li>
+            <li><a href="blog-pan.html">Lost PAN Card</a></li>
+          </ul>
         </div>
-    </section>
-
-    <section class="section">
-        <div class="container grid grid-3">
-            <article class="card">
-                <h2><i>🆔</i>Aadhaar Card</h2>
-                <p><strong>What is it?</strong> Unique 12-digit identity number for all residents.</p>
-                <p><strong>Common tasks:</strong></p>
-                <ul>
-                    <li>Address change / correction</li>
-                    <li>Mobile number update</li>
-                    <li>Download e-Aadhaar</li>
-                </ul>
-                <p><strong>Where to update:</strong> <em>myaadhaar.uidai.gov.in</em> or nearest Aadhaar centre.</p>
-            </article>
-
-            <article class="card">
-                <h2><i>💳</i>PAN Card</h2>
-                <p><strong>What is it?</strong> Required for tax, bank accounts and high-value transactions.</p>
-                <ul>
-                    <li>Apply online via NSDL / UTIITSL.</li>
-                    <li>Use e-PAN for many services.</li>
-                    <li>Link PAN with Aadhaar (if required).</li>
-                </ul>
-                <p><strong>Official portals:</strong> incometax.gov.in, nsdl.co.in, utiitsl.com</p>
-            </article>
-
-            <article class="card">
-                <h2><i>🪪</i>Voter ID (EPIC)</h2>
-                <p><strong>What is it?</strong> Identity used for voting in elections.</p>
-                <ul>
-                    <li>New registration (Form 6).</li>
-                    <li>Address change after moving city.</li>
-                    <li>Correction in name / photo.</li>
-                </ul>
-                <p><strong>Official site:</strong> <em>voters.eci.gov.in</em></p>
-            </article>
-
-            <article class="card">
-                <h2><i>🚗</i>Driving Licence (DL)</h2>
-                <p><strong>Use:</strong> Legal permission to drive a vehicle.</p>
-                <ul>
-                    <li>New DL / Learner’s licence</li>
-                    <li>DL renewal</li>
-                    <li>Change of address / duplicate DL</li>
-                </ul>
-                <p><strong>Official portal:</strong> <em>parivahan.gov.in</em></p>
-            </article>
-
-            <article class="card">
-                <h2><i>📘</i>Vehicle RC & Insurance</h2>
-                <p><strong>RC:</strong> Registration Certificate of your vehicle.</p>
-                <ul>
-                    <li>RC transfer when selling vehicle</li>
-                    <li>Duplicate RC if lost</li>
-                    <li>Update address in RC</li>
-                </ul>
-                <p>Always keep valid insurance and PUC (pollution certificate).</p>
-            </article>
-
-            <article class="card">
-                <h2><i>🛂</i>Passport</h2>
-                <p><strong>Use:</strong> Official document for international travel.</p>
-                <ul>
-                    <li>Apply online at <em>passportindia.gov.in</em></li>
-                    <li>Book appointment, visit PSK</li>
-                    <li>Police verification at home (in most cases)</li>
-                </ul>
-            </article>
+        <div class="footer-section">
+          <h4>Tip</h4>
+          <p style="color: var(--text-muted);">
+            Store important documents in DigiLocker and keep a secure backup in your email or cloud drive.
+          </p>
         </div>
-    </section>
+      </div>
+      <div class="copyright" style="text-align:center;">
+        <p>&copy; 2025 CitizenHelpDesk. Information for general guidance only.</p>
+      </div>
+    </div>
+  </footer>
 
-    <footer class="section"
-        style="background-color: var(--surface-color); border-top: 1px solid rgba(148,148,148,0.25); padding: 4rem 0 2rem;">
-        <div class="container">
-            <div class="grid grid-3 footer-content">
-                <div class="footer-section">
-                    <a href="index.html" class="logo" style="margin-bottom: 1rem; display: inline-block;">
-                        Citizen<span>HelpDesk</span>
-                    </a>
-                    <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
-                        Simple, step-by-step explanations for important government documents and IDs.
-                    </p>
-                </div>
-                <div class="footer-section">
-                    <h4>Related Guides</h4>
-                    <ul class="footer-links">
-                        <li><a href="blog-aadhaar.html">Aadhaar Address Change</a></li>
-                        <li><a href="blog-pan.html">Lost PAN Card – What To Do</a></li>
-                        <li><a href="blog-traffic-challan.html">Pay Challan Online</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Reminder</h4>
-                    <p style="color: var(--text-muted);">
-                        Keep digital copies in DigiLocker and always verify rules on the official portals before
-                        travelling or submitting forms.
-                    </p>
-                </div>
-            </div>
-            <div class="copyright" style="text-align:center;">
-                <p>&copy; 2025 CitizenHelpDesk. Information for general guidance only.</p>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        const mobileBtn = document.querySelector('.mobile-menu-btn');
-        const navLinks = document.querySelector('.nav-links');
-        mobileBtn.addEventListener('click', () => navLinks.classList.toggle('active'));
-    </script>
+  <script>
+    const mobileBtn = document.querySelector('.mobile-menu-btn');
+    const navLinks = document.querySelector('.nav-links');
+    mobileBtn.addEventListener('click', () => navLinks.classList.toggle('active'));
+  </script>
 </body>
-
 </html>
