@@ -4,319 +4,897 @@
   <meta charset="UTF-8" />
   <title>Citizen HelpDesk – Government Rules Explained Simply</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Citizen HelpDesk explains traffic rules, documents, police and government schemes in simple language for everyday citizens." />
+
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #f4f6fb;
+      --bg-card: #ffffff;
+      --primary: #1d4ed8;
+      --primary-soft: #e0ebff;
+      --text-main: #0f172a;
+      --text-muted: #6b7280;
+      --border: #e5e7eb;
+      --danger: #b91c1c;
+      --shadow-soft: 0 18px 40px rgba(15, 23, 42, 0.09);
+      --radius-lg: 18px;
+      --radius-md: 12px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
     body {
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: #f5f7fb;
-      color: #0f172a;
+      background: radial-gradient(circle at top left, #e0ebff 0, #f4f6fb 45%, #f4f6fb 100%);
+      color: var(--text-main);
       line-height: 1.5;
     }
+
+    /* HEADER */
+
     header {
-      background: #ffffff;
-      border-bottom: 1px solid #e5e7eb;
-      padding: 12px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(10px);
+      background: rgba(244, 246, 251, 0.9);
+      border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+    }
+
+    .nav-inner {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 10px 14px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      position: sticky;
-      top: 0;
-      z-index: 10;
+      gap: 14px;
     }
+
     .logo {
       display: flex;
       align-items: center;
-      gap: 8px;
-      font-weight: 700;
-      font-size: 1.1rem;
+      gap: 10px;
     }
+
     .logo-icon {
-      width: 30px;
-      height: 30px;
-      border-radius: 8px;
-      background: #1d4ed8;
+      width: 36px;
+      height: 36px;
+      border-radius: 12px;
+      background: radial-gradient(circle at 30% 0, #60a5fa 0, #1d4ed8 55%, #172554 100%);
       display: flex;
       align-items: center;
       justify-content: center;
       color: #fff;
+      font-weight: 700;
       font-size: 18px;
+      box-shadow: 0 10px 25px rgba(37, 99, 235, 0.5);
+      animation: float 2.4s ease-in-out infinite;
     }
+
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .logo-text strong {
+      font-size: 1.05rem;
+    }
+
+    .logo-text span {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 0.9rem;
+    }
+
     nav a {
-      margin-left: 16px;
       text-decoration: none;
-      color: #334155;
-      font-size: 0.95rem;
+      color: #475569;
+      padding: 6px 10px;
+      border-radius: 999px;
     }
+
     nav a:hover {
+      background: var(--primary-soft);
+      color: var(--primary);
+    }
+
+    @media (max-width: 720px) {
+      nav {
+        display: none;
+      }
+    }
+
+    .nav-cta {
+      font-size: 0.8rem;
+      border-radius: 999px;
+      padding: 7px 12px;
+      border: 1px solid rgba(37, 99, 235, 0.4);
+      background: #eff6ff;
       color: #1d4ed8;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
     }
-    .container {
-      max-width: 1000px;
+
+    .nav-cta span {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    /* LAYOUT */
+
+    .page {
+      max-width: 1080px;
       margin: 0 auto;
-      padding: 20px 16px 40px;
+      padding: 18px 16px 40px;
     }
+
+    /* HERO */
+
     .hero {
       display: grid;
-      grid-template-columns: minmax(0, 2fr) minmax(0, 1.4fr);
-      gap: 24px;
+      grid-template-columns: minmax(0, 1.7fr) minmax(0, 1.3fr);
+      gap: 22px;
+      padding: 18px 0 26px;
       align-items: center;
-      padding: 16px 0 32px;
     }
-    @media (max-width: 768px) {
+
+    @media (max-width: 880px) {
       .hero {
         grid-template-columns: 1fr;
       }
     }
-    .hero-title {
-      font-size: 2rem;
-      font-weight: 800;
-      margin-bottom: 10px;
-    }
-    .hero-subtitle {
-      font-size: 1rem;
-      color: #4b5563;
-      margin-bottom: 16px;
-    }
-    .hero-badge {
+
+    .badge-row {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      background: #e0ebff;
-      color: #1d4ed8;
+      gap: 8px;
       padding: 4px 10px;
       border-radius: 999px;
+      background: rgba(22, 163, 74, 0.06);
+      color: #15803d;
       font-size: 0.78rem;
       margin-bottom: 10px;
     }
+
+    .badge-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 0 5px rgba(34, 197, 94, 0.2);
+    }
+
+    .hero h1 {
+      font-size: clamp(1.9rem, 3vw + 0.6rem, 2.5rem);
+      line-height: 1.15;
+      margin-bottom: 10px;
+    }
+
+    .hero h1 span {
+      color: var(--primary);
+    }
+
+    .hero-sub {
+      font-size: 0.98rem;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+      max-width: 32rem;
+    }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 16px;
+      font-size: 0.78rem;
+      color: #1f2937;
+    }
+
+    .hero-tag {
+      background: rgba(37, 99, 235, 0.08);
+      color: #1d4ed8;
+      padding: 3px 9px;
+      border-radius: 999px;
+    }
+
     .hero-actions {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
+
     .btn-primary {
-      background: #1d4ed8;
+      background: var(--primary);
       color: #fff;
       border: none;
-      padding: 8px 16px;
+      padding: 9px 16px;
       border-radius: 999px;
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       cursor: pointer;
+      box-shadow: 0 10px 20px rgba(37, 99, 235, 0.35);
     }
+
     .btn-secondary {
       background: #e5e7eb;
       color: #111827;
       border: none;
-      padding: 8px 16px;
+      padding: 9px 16px;
       border-radius: 999px;
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       cursor: pointer;
     }
+
     .hero-note {
-      font-size: 0.8rem;
-      color: #6b7280;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 4px;
     }
-    .hero-card {
-      background: #ffffff;
-      border-radius: 16px;
-      padding: 16px;
-      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.07);
+
+    .hero-box {
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      padding: 16px 16px 14px;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid rgba(226, 232, 240, 0.9);
+      position: relative;
+      overflow: hidden;
     }
-    .hero-card h3 {
-      font-size: 1rem;
-      margin-bottom: 8px;
+
+    .hero-box::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background: radial-gradient(circle at 10% 0, rgba(59, 130, 246, 0.16), transparent 55%),
+                  radial-gradient(circle at 100% 100%, rgba(37, 99, 235, 0.12), transparent 55%);
+      opacity: 0.6;
+      pointer-events: none;
     }
-    .hero-card ul {
-      font-size: 0.9rem;
-      color: #4b5563;
-      padding-left: 18px;
+
+    .hero-box-inner {
+      position: relative;
+      z-index: 1;
     }
-    .hero-card ul li {
+
+    .hero-box-title {
+      font-size: 0.96rem;
+      font-weight: 600;
       margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
-    .search-box {
-      margin-top: 14px;
+
+    .hero-box-pill {
+      font-size: 0.7rem;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: rgba(239, 246, 255, 0.9);
+      color: var(--primary);
+    }
+
+    .hero-box-sub {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 9px;
+    }
+
+    .search-row {
       display: flex;
       gap: 8px;
+      margin-bottom: 8px;
     }
-    .search-box input {
+
+    .search-row input {
       flex: 1;
-      padding: 8px 10px;
       border-radius: 999px;
-      border: 1px solid #d1d5db;
-      font-size: 0.9rem;
+      border: 1px solid var(--border);
+      padding: 7px 11px;
+      font-size: 0.85rem;
       outline: none;
     }
-    .pill-row {
-      margin-top: 8px;
+
+    .search-row input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.25);
+    }
+
+    .btn-search {
+      border-radius: 999px;
+      border: none;
+      padding: 7px 11px;
+      font-size: 0.84rem;
+      background: #111827;
+      color: #f9fafb;
+      cursor: pointer;
+    }
+
+    .chip-row {
       display: flex;
       flex-wrap: wrap;
       gap: 6px;
-      font-size: 0.75rem;
+      margin-bottom: 10px;
+      font-size: 0.74rem;
     }
-    .pill {
-      padding: 4px 10px;
+
+    .chip {
+      padding: 4px 8px;
       border-radius: 999px;
-      background: #eff6ff;
-      color: #1d4ed8;
+      background: rgba(15, 23, 42, 0.04);
+      color: #111827;
+      border: 1px solid rgba(148, 163, 184, 0.5);
     }
+
+    .hero-checklist {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 4px 10px;
+      font-size: 0.78rem;
+      margin-top: 6px;
+    }
+
+    .hero-check {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #065f46;
+    }
+
+    .hero-check span.icon {
+      width: 16px;
+      height: 16px;
+      border-radius: 999px;
+      border: 1px solid #22c55e;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      background: rgba(34, 197, 94, 0.08);
+    }
+
+    /* SECTION: TOPICS */
+
+    .section {
+      margin-top: 26px;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
     .section-title {
-      font-size: 1.2rem;
+      font-size: 1.1rem;
       font-weight: 700;
-      margin: 24px 0 10px;
     }
+
+    .section-sub {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .link-inline {
+      font-size: 0.8rem;
+      color: var(--primary);
+      text-decoration: none;
+    }
+
     .card-grid {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 12px;
     }
-    @media (max-width: 900px) {
+
+    @media (max-width: 960px) {
       .card-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
     }
-    @media (max-width: 550px) {
+    @media (max-width: 600px) {
       .card-grid {
         grid-template-columns: 1fr;
       }
     }
-    .mini-card {
-      background: #ffffff;
-      border-radius: 12px;
-      padding: 10px 12px;
-      border: 1px solid #e5e7eb;
-      font-size: 0.9rem;
+
+    .card {
+      background: var(--bg-card);
+      border-radius: var(--radius-md);
+      padding: 11px 12px 10px;
+      border: 1px solid var(--border);
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.03);
+      font-size: 0.86rem;
     }
-    .mini-card h4 {
+
+    .card-icon {
+      width: 26px;
+      height: 26px;
+      border-radius: 999px;
+      background: #eff6ff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary);
+      font-size: 0.9rem;
+      margin-bottom: 6px;
+    }
+
+    .card h3 {
       font-size: 0.95rem;
       margin-bottom: 4px;
     }
-    .mini-card p {
+
+    .card p {
       font-size: 0.8rem;
-      color: #6b7280;
+      color: var(--text-muted);
+      margin-bottom: 6px;
     }
-    .faq-list {
-      margin-top: 8px;
-      font-size: 0.9rem;
+
+    .card ul {
+      padding-left: 16px;
+      font-size: 0.78rem;
+      color: #4b5563;
     }
+
+    .card ul li {
+      margin-bottom: 2px;
+    }
+
+    /* QUICK GUIDES */
+
+    .guide-list {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      font-size: 0.82rem;
+    }
+
+    @media (max-width: 900px) {
+      .guide-list {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+    @media (max-width: 600px) {
+      .guide-list {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .guide-item {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 10px;
+      padding: 8px 10px;
+      border: 1px dashed rgba(148, 163, 184, 0.7);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .guide-item-main {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .guide-item-title {
+      font-weight: 600;
+      font-size: 0.84rem;
+    }
+
+    .guide-item-meta {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+
+    .pill-small {
+      font-size: 0.7rem;
+      padding: 3px 7px;
+      border-radius: 999px;
+      background: rgba(37, 99, 235, 0.06);
+      color: var(--primary);
+    }
+
+    /* FAQ */
+
+    .faq-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1.2fr);
+      gap: 18px;
+      font-size: 0.86rem;
+    }
+
+    @media (max-width: 880px) {
+      .faq-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
     .faq-item {
-      margin-bottom: 8px;
+      margin-bottom: 10px;
+      padding: 9px 10px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(226, 232, 240, 0.9);
     }
+
     .faq-q {
       font-weight: 600;
+      margin-bottom: 3px;
     }
+
+    .faq-a {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .note-box {
+      background: #fef2f2;
+      border-radius: 10px;
+      padding: 10px 12px;
+      border: 1px solid #fee2e2;
+      font-size: 0.8rem;
+      color: #7f1d1d;
+    }
+
+    /* FOOTER */
+
     footer {
-      background: #0f172a;
+      background: #020617;
       color: #9ca3af;
       font-size: 0.8rem;
-      padding: 14px 16px;
-      margin-top: 26px;
+      padding: 16px 14px 18px;
+      margin-top: 32px;
     }
-    footer a {
+
+    .footer-inner {
+      max-width: 1080px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .footer-top {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .footer-brand {
+      font-weight: 600;
       color: #e5e7eb;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .footer-links a {
+      color: #9ca3af;
       text-decoration: none;
+    }
+
+    .footer-links a:hover {
+      color: #e5e7eb;
+    }
+
+    @keyframes float {
+      0%   { transform: translateY(-6px); }
+      50%  { transform: translateY(2px); }
+      100% { transform: translateY(-6px); }
     }
   </style>
 </head>
 <body>
   <header>
-    <div class="logo">
-      <div class="logo-icon">CH</div>
-      <span>Citizen HelpDesk</span>
+    <div class="nav-inner">
+      <div class="logo">
+        <div class="logo-icon">CH</div>
+        <div class="logo-text">
+          <strong>Citizen HelpDesk</strong>
+          <span>Government rules, in simple words.</span>
+        </div>
+      </div>
+
+      <nav>
+        <a href="#traffic">Traffic rules</a>
+        <a href="#documents">Documents & IDs</a>
+        <a href="#police">Police & FIR</a>
+        <a href="#schemes">Schemes</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+
+      <button class="nav-cta" type="button">
+        <span>NEW</span> Quick challan guide
+      </button>
     </div>
-    <nav>
-      <a href="#traffic">Traffic Rules</a>
-      <a href="#documents">Documents</a>
-      <a href="#police">Police Help</a>
-      <a href="#schemes">Schemes</a>
-    </nav>
   </header>
 
-  <main class="container">
+  <main class="page">
+    <!-- HERO -->
     <section class="hero">
       <div>
-        <div class="hero-badge">New • Government rules in simple language</div>
-        <h1 class="hero-title">Government rules, explained like you’re a normal person.</h1>
-        <p class="hero-subtitle">
-          Citizen HelpDesk turns complicated traffic laws, documents, police and scheme rules into
-          short, clear guides you can actually understand.
+        <div class="badge-row">
+          <span class="badge-dot"></span>
+          Live now for Indian citizens
+        </div>
+        <h1>
+          Government rules, <span>explained like you ask a friend.</span>
+        </h1>
+        <p class="hero-sub">
+          No legal language, no confusion. Citizen HelpDesk breaks traffic, documents, police and scheme
+          rules into simple, step-by-step guides you can actually follow.
         </p>
+
+        <div class="hero-tags">
+          <span class="hero-tag">Traffic challans</span>
+          <span class="hero-tag">Licence & documents</span>
+          <span class="hero-tag">Online FIR basics</span>
+          <span class="hero-tag">Govt schemes</span>
+        </div>
+
         <div class="hero-actions">
-          <button class="btn-primary">Browse Traffic Rules</button>
-          <button class="btn-secondary">View Documents Help</button>
+          <button class="btn-primary" type="button">Start with traffic rules</button>
+          <button class="btn-secondary" type="button">See document guides</button>
         </div>
         <p class="hero-note">
-          No legal advice. Just simplified public information. Always verify on official government websites.
+          We share simplified public information. This is <strong>not</strong> an official government website.
+          Always confirm details on official portals.
         </p>
       </div>
-      <aside class="hero-card">
-        <h3>Search a rule</h3>
-        <p style="font-size:0.85rem; color:#6b7280; margin-bottom:6px;">
-          Try: “pay challan online”, “lost licence”, “online FIR”.
-        </p>
-        <div class="search-box">
-          <input type="text" placeholder="What do you want to understand today?" />
-          <button class="btn-primary">Go</button>
+
+      <aside class="hero-box" aria-label="Quick help panel">
+        <div class="hero-box-inner">
+          <div class="hero-box-title">
+            <span>What do you need help with today?</span>
+            <span class="hero-box-pill">1–2 minute reads</span>
+          </div>
+          <p class="hero-box-sub">
+            Type a keyword and start reading a clear, to-the-point guide.
+          </p>
+
+          <div class="search-row">
+            <input type="search" placeholder="Example: pay challan online, lost licence, online FIR" />
+            <button class="btn-search" type="button">Search</button>
+          </div>
+
+          <div class="chip-row">
+            <span class="chip">Pay traffic challan</span>
+            <span class="chip">Helmet rule fine</span>
+            <span class="chip">Aadhaar address update</span>
+            <span class="chip">Lost PAN card</span>
+            <span class="chip">Online FIR for lost mobile</span>
+          </div>
+
+          <div class="hero-checklist">
+            <div class="hero-check">
+              <span class="icon">✓</span>
+              <span>Simple English + examples</span>
+            </div>
+            <div class="hero-check">
+              <span class="icon">✓</span>
+              <span>Short, step-by-step guides</span>
+            </div>
+            <div class="hero-check">
+              <span class="icon">✓</span>
+              <span>No fake promises or agents</span>
+            </div>
+            <div class="hero-check">
+              <span class="icon">✓</span>
+              <span>Links to official sites</span>
+            </div>
+          </div>
         </div>
-        <div class="pill-row">
-          <span class="pill">Traffic challan</span>
-          <span class="pill">Helmet rule</span>
-          <span class="pill">Aadhaar update</span>
-          <span class="pill">Online FIR</span>
-        </div>
-        <ul style="margin-top:10px;">
-          <li>Step–by–step explanations</li>
-          <li>Simple English + easy terms</li>
-          <li>No confusing legal language</li>
-        </ul>
       </aside>
     </section>
 
-    <section>
-      <h2 class="section-title">Start with a topic</h2>
+    <!-- TOPIC CARDS -->
+    <section class="section" id="traffic">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">Start with a topic</h2>
+          <p class="section-sub">
+            Pick the area you’re confused about. Each topic has clear explanations and real-life examples.
+          </p>
+        </div>
+      </div>
+
       <div class="card-grid">
-        <div class="mini-card" id="traffic">
-          <h4>Traffic rules</h4>
-          <p>Helmet, challans, signals, speed limits, documents for driving.</p>
+        <article class="card">
+          <div class="card-icon">🚦</div>
+          <h3>Traffic rules & challans</h3>
+          <p>Understand fines, documents and your rights on the road.</p>
+          <ul>
+            <li>Helmet & seat belt rules</li>
+            <li>How to check & pay challan</li>
+            <li>What if police stop you?</li>
+          </ul>
+        </article>
+
+        <article class="card" id="documents">
+          <div class="card-icon">📄</div>
+          <h3>Documents & ID guides</h3>
+          <p>Step-by-step help for common ID and document problems.</p>
+          <ul>
+            <li>Aadhaar update & corrections</li>
+            <li>PAN card apply / reprint</li>
+            <li>Driving licence & RC basics</li>
+          </ul>
+        </article>
+
+        <article class="card" id="police">
+          <div class="card-icon">👮</div>
+          <h3>Police & FIR basics</h3>
+          <p>Know the basics before you panic or sign anything.</p>
+          <ul>
+            <li>FIR vs complaint vs NC</li>
+            <li>Online FIR for lost items</li>
+            <li>What police can & can’t do</li>
+          </ul>
+        </article>
+
+        <article class="card" id="schemes">
+          <div class="card-icon">💰</div>
+          <h3>Government schemes</h3>
+          <p>Short summaries of benefits, eligibility and how to apply.</p>
+          <ul>
+            <li>Who is eligible?</li>
+            <li>Documents you must carry</li>
+            <li>Where to apply online</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- QUICK GUIDES -->
+    <section class="section">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">Popular quick guides</h2>
+          <p class="section-sub">
+            1-page explainers for the problems people face every day.
+          </p>
         </div>
-        <div class="mini-card" id="documents">
-          <h4>Documents & IDs</h4>
-          <p>Aadhaar, PAN, DL, Voter ID – apply, update, replace.</p>
+      </div>
+
+      <div class="guide-list">
+        <div class="guide-item">
+          <div class="guide-item-main">
+            <div class="guide-item-title">How to pay traffic challan online</div>
+            <div class="guide-item-meta">Check challan, pay safely, save receipt.</div>
+          </div>
+          <span class="pill-small">Traffic</span>
         </div>
-        <div class="mini-card" id="police">
-          <h4>Police & FIR basics</h4>
-          <p>What is FIR, complaint, online FIR and your basic rights.</p>
+
+        <div class="guide-item">
+          <div class="guide-item-main">
+            <div class="guide-item-title">Helmet rule & latest fines</div>
+            <div class="guide-item-meta">Rider + pillion, ISI helmet, common myths.</div>
+          </div>
+          <span class="pill-small">Traffic</span>
         </div>
-        <div class="mini-card" id="schemes">
-          <h4>Government schemes</h4>
-          <p>Simple guides to eligibility and how to apply for schemes.</p>
+
+        <div class="guide-item">
+          <div class="guide-item-main">
+            <div class="guide-item-title">Lost PAN card – what to do</div>
+            <div class="guide-item-meta">Online reprint, e-PAN, when FIR is needed.</div>
+          </div>
+          <span class="pill-small">Documents</span>
+        </div>
+
+        <div class="guide-item">
+          <div class="guide-item-main">
+            <div class="guide-item-title">Aadhaar address change online</div>
+            <div class="guide-item-meta">Documents required and common rejection reasons.</div>
+          </div>
+          <span class="pill-small">Documents</span>
+        </div>
+
+        <div class="guide-item">
+          <div class="guide-item-main">
+            <div class="guide-item-title">Online FIR for lost mobile</div>
+            <div class="guide-item-meta">Simple steps and what details you must mention.</div>
+          </div>
+          <span class="pill-small">Police</span>
+        </div>
+
+        <div class="guide-item">
+          <div class="guide-item-main">
+            <div class="guide-item-title">What to do after an accident</div>
+            <div class="guide-item-meta">Police, insurance, medical help – in the right order.</div>
+          </div>
+          <span class="pill-small">Safety</span>
         </div>
       </div>
     </section>
 
-    <section>
-      <h2 class="section-title">Common questions</h2>
-      <div class="faq-list">
-        <div class="faq-item">
-          <div class="faq-q">Can police take my bike keys?</div>
-          <div class="faq-a">In normal checking, they should not forcibly keep your keys or documents without reason.</div>
+    <!-- FAQ + DISCLAIMER -->
+    <section class="section" id="faq">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">Before you rely on any rule...</h2>
+          <p class="section-sub">
+            Read this carefully so you don’t misunderstand what Citizen HelpDesk is.
+          </p>
         </div>
-        <div class="faq-item">
-          <div class="faq-q">Is DigiLocker document valid?</div>
-          <div class="faq-a">Yes, in most places digital RC, DL and other documents from DigiLocker or mParivahan are accepted.</div>
+      </div>
+
+      <div class="faq-grid">
+        <div>
+          <div class="faq-item">
+            <div class="faq-q">Is this an official government website?</div>
+            <div class="faq-a">
+              No. Citizen HelpDesk is an independent information site. We only explain publicly available
+              rules in simple language and link to official portals where possible.
+            </div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">Can I use this as legal advice?</div>
+            <div class="faq-a">
+              No. Our content is for general awareness. For legal disputes, court matters or serious police
+              cases, always talk to a qualified advocate or the concerned authority.
+            </div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">Are the rules always 100% up to date?</div>
+            <div class="faq-a">
+              We try to keep guides updated, but laws and procedures change. Always double-check on the
+              official government website, notice or helpline before taking any big decision.
+            </div>
+          </div>
         </div>
-        <div class="faq-item">
-          <div class="faq-q">How do I check my traffic challan?</div>
-          <div class="faq-a">Use your state traffic portal, e-Challan website or mParivahan app with your vehicle number.</div>
+
+        <div class="note-box">
+          <strong>Important safety note</strong><br /><br />
+          • Never pay any “agent” through random links claiming to fix challans or create documents.
+          Always use official .gov.in or .nic.in websites only.<br /><br />
+          • If a police or government officer behaves illegally or threatens you, stay calm, stay safe and
+          contact a trusted lawyer or local helpline. Don’t argue on the road if it can turn violent.<br /><br />
+          Citizen HelpDesk exists to make rules less scary and more understandable, not to replace
+          professionals. Use it as a clear starting point, not the final word.
         </div>
       </div>
     </section>
   </main>
 
   <footer>
-    <div style="max-width:1000px; margin:0 auto;">
-      Citizen HelpDesk simplifies public information about rules.
-      This is <strong>not</strong> an official government website.
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div>
+          <div class="footer-brand">Citizen HelpDesk</div>
+          <div>Government rules in human language, for everyday citizens.</div>
+        </div>
+        <div class="footer-links">
+          <a href="#traffic">Traffic</a>
+          <a href="#documents">Documents</a>
+          <a href="#police">Police</a>
+          <a href="#schemes">Schemes</a>
+        </div>
+      </div>
+      <div>
+        This website simplifies public information only. It is not affiliated with any government department.
+        Always verify important details on official government portals.
+      </div>
     </div>
   </footer>
 </body>
