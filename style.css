@@ -2822,3 +2822,37 @@ body.home-page {
     padding-right: 0;
   }
 }
+/* =========================
+   CURSOR DOT (DESKTOP)
+   ========================= */
+.cursor-dot {
+  position: fixed;
+  width: 14px;
+  height: 14px;
+  pointer-events: none;
+  border-radius: 999px;
+  background: radial-gradient(circle, rgba(59,130,246,0.9) 0%, rgba(59,130,246,0) 65%);
+  mix-blend-mode: screen;
+  opacity: 0;
+  transform: translate3d(-50%, -50%, 0);
+  transition: opacity 0.18s ease, transform 0.06s linear;
+  z-index: 9999;
+}
+
+/* hide cursor dot on very small screens if you want */
+@media (max-width: 767px) {
+  .cursor-dot {
+    display: none;
+  }
+}
+
+/* =========================
+   TAP / CLICK ANIMATION
+   (works for mobile + desktop)
+   ========================= */
+.topic-card:active,
+.blog-card:active,
+.btn-primary:active,
+.btn-ghost:active {
+  transform: translateY(1px) scale(0.97);
+}

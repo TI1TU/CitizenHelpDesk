@@ -7,16 +7,28 @@
   <link rel="stylesheet" href="style.css?v=3">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
-<body>
+<body class="traffic-page" id="top">
 
   <!-- NAVBAR -->
-  <nav class="navbar">
+  <nav class="navbar" aria-label="Main navigation">
     <div class="container nav-container">
       <a href="index.html" class="logo">
-  Citizen<span>HelpDesk</span>
-</a>
-      <button class="mobile-menu-btn">☰</button>
-      <div class="nav-links">
+        Citizen<span>HelpDesk</span>
+      </a>
+
+      <!-- Mobile menu button -->
+      <button
+        class="mobile-menu-btn"
+        type="button"
+        aria-label="Toggle navigation menu"
+        aria-expanded="false"
+        aria-controls="primary-navigation"
+      >
+        ☰
+      </button>
+
+      <!-- Nav links -->
+      <div class="nav-links" id="primary-navigation">
         <a href="index.html" class="nav-link">Home</a>
         <a href="traffic.html" class="nav-link active">Traffic Rules</a>
         <a href="documents.html" class="nav-link">Documents</a>
@@ -26,131 +38,134 @@
     </div>
   </nav>
 
-  <!-- HERO -->
-  <section class="page-hero bg-traffic-hero">
-    <div class="page-hero-content">
-      <p style="font-size:0.85rem; background:rgba(0,0,0,0.25); display:inline-block; padding:4px 10px; border-radius:999px;">
-      </p>
-      <h1>Traffic Rules & Challans</h1>
-      <p>Simple guide so you don’t panic when police stop your vehicle. Clear, friendly rules explained for everyone.</p>
-    </div>
-  </section>
+  <main>
+    <!-- HERO -->
+    <section class="page-hero bg-traffic-hero">
+      <div class="page-hero-content">
+        <p style="font-size:0.85rem; background:rgba(0,0,0,0.25); display:inline-block; padding:4px 10px; border-radius:999px;">
+          Traffic rules · Explained simply
+        </p>
+        <h1>Traffic Rules & Challans</h1>
+        <p>Simple guide so you don’t panic when police stop your vehicle. Clear, friendly rules explained for everyone.</p>
+      </div>
+    </section>
 
-  <!-- MAIN CONTENT -->
-  <section class="section">
-    <div class="container">
+    <!-- MAIN CONTENT -->
+    <section class="section">
+      <div class="container">
 
-      <!-- Quick Summary + Bike Rules + Offences -->
-      <div class="grid grid-3" style="margin-bottom:2.5rem;">
+        <!-- Quick Summary + Bike Rules + Offences -->
+        <div class="grid grid-3" style="margin-bottom:2.5rem;">
 
-        <!-- Quick Summary -->
-        <div class="card">
-          <h2><i>📃</i> Quick Summary – What You MUST Carry</h2>
-          <p>These 4 documents can be shown in DigiLocker or mParivahan. Police cannot force you to show physical papers if you have them digitally.</p>
-          <ul>
-            <li>Driving Licence (DL)</li>
-            <li>RC (Registration Certificate)</li>
-            <li>Insurance certificate</li>
-            <li>Pollution certificate (PUC)</li>
-          </ul>
-          <p style="font-size:0.85rem; color:var(--text-muted); margin-top:0.5rem;">
-            Digital copies in <strong>DigiLocker</strong> or <strong>mParivahan</strong> are accepted in most states.
-          </p>
+          <!-- Quick Summary -->
+          <div class="card">
+            <h2><i>📃</i> Quick Summary – What You MUST Carry</h2>
+            <p>These 4 documents can be shown in DigiLocker or mParivahan. Police cannot force you to show physical papers if you have them digitally.</p>
+            <ul>
+              <li>Driving Licence (DL)</li>
+              <li>RC (Registration Certificate)</li>
+              <li>Insurance certificate</li>
+              <li>Pollution certificate (PUC)</li>
+            </ul>
+            <p style="font-size:0.85rem; color:var(--text-muted); margin-top:0.5rem;">
+              Digital copies in <strong>DigiLocker</strong> or <strong>mParivahan</strong> are accepted in most states.
+            </p>
+          </div>
+
+          <!-- SHORT BIKE RULES -->
+          <div class="card">
+            <h2><i>🪖</i> Bike Safety Rules</h2>
+            <ul>
+              <li>Always wear a properly strapped helmet (rider + pillion).</li>
+              <li>No triple riding on two-wheelers.</li>
+              <li>Use indicators for every turn.</li>
+              <li>Do not ride on the wrong side of the road.</li>
+              <li>Avoid loud or modified exhausts.</li>
+              <li>No mobile phone use while riding.</li>
+              <li>Keep safe distance from other vehicles.</li>
+            </ul>
+            <a href="bike-safety.html" style="display:inline-block; margin-top:0.75rem; font-weight:500; text-decoration:none; color:var(--primary-color);">
+              Read full bike safety guide →
+            </a>
+          </div>
+
+          <!-- Common Offences -->
+          <div class="card">
+            <h2><i>⚠️</i> Common offences</h2>
+            <ul>
+              <li>Driving without valid DL / RC / PUC / Insurance.</li>
+              <li>Signal jump, wrong-side, rash driving.</li>
+              <li>Over-speeding and drunk driving.</li>
+              <li>Wrong / fancy number plates.</li>
+            </ul>
+          </div>
+
         </div>
 
-        <!-- SHORT BIKE RULES -->
-        <div class="card">
-          <h2><i>🪖</i> Bike Safety Rules</h2>
-          <ul>
-            <li>Always wear a properly strapped helmet (rider + pillion).</li>
-            <li>No triple riding on two-wheelers.</li>
-            <li>Use indicators for every turn.</li>
-            <li>Do not ride on the wrong side of the road.</li>
-            <li>Avoid loud or modified exhausts.</li>
-            <li>No mobile phone use while riding.</li>
-            <li>Keep safe distance from other vehicles.</li>
-          </ul>
-          <a href="bike-safety.html" style="display:inline-block; margin-top:0.75rem; font-weight:500; text-decoration:none; color:var(--primary-color);">
-            Read full bike safety guide →
-          </a>
+        <!-- How to Check + Pay Challan -->
+        <div class="grid grid-2" style="margin-bottom:2.5rem;">
+
+          <article class="card">
+            <h2><i>🔎</i> Check pending challans</h2>
+            <ol>
+              <li>Go to your state traffic police site or <strong>echallan.parivahan.gov.in</strong>.</li>
+              <li>Select “Check Challan Status”.</li>
+              <li>Enter vehicle number or challan number.</li>
+              <li>View list of pending challans with details.</li>
+            </ol>
+            <p style="font-size:0.85rem; color:var(--text-muted); margin-top:0.5rem;">
+              If details look wrong, contact the traffic helpline or local RTO with evidence.
+            </p>
+          </article>
+
+          <article class="card">
+            <h2><i>💳</i> Pay challan online</h2>
+            <ol>
+              <li>Select the challan you want to pay.</li>
+              <li>Confirm vehicle and offence details.</li>
+              <li>Choose payment mode – UPI / net banking / card.</li>
+              <li>Download the payment receipt or save a screenshot.</li>
+            </ol>
+            <p style="font-size:0.85rem; color:var(--text-muted); margin-top:0.5rem;">
+              Only use official .gov.in / .nic.in websites. Avoid agents or random payment links on WhatsApp.
+            </p>
+          </article>
+
         </div>
 
-        <!-- Common Offences -->
-        <div class="card">
-          <h2><i>⚠️</i> Common offences</h2>
-          <ul>
-            <li>Driving without valid DL / RC / PUC / Insurance.</li>
-            <li>Signal jump, wrong-side, rash driving.</li>
-            <li>Over-speeding and drunk driving.</li>
-            <li>Wrong / fancy number plates.</li>
-          </ul>
+        <!-- Police Stop + FAQs -->
+        <div class="grid grid-2">
+
+          <article class="card">
+            <h2><i>🚓</i> When police stop your vehicle</h2>
+            <ul>
+              <li>Park safely on the side and turn on parking indicator.</li>
+              <li>Stay calm, speak politely, and keep documents ready.</li>
+              <li>You can show DigiLocker or mParivahan documents.</li>
+              <li>You can ask for the officer’s name, ID, and police station.</li>
+              <li>Do not offer or accept bribes – ask for proper challan.</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <h2><i>❓</i> Quick FAQs</h2>
+            <p><strong>Q. Can police seize my licence?</strong><br>
+              In serious offences they may take DL details or keep the card and issue a receipt. Rules vary by state.</p>
+
+            <p><strong>Q. Can I record the interaction?</strong><br>
+              Yes. You can calmly record audio/video from a safe distance without interfering.</p>
+
+            <p><strong>Q. Where to complain?</strong><br>
+              Use state traffic police helpline, email, or public grievance portal with vehicle & officer details.</p>
+          </article>
         </div>
 
       </div>
-
-      <!-- How to Check + Pay Challan -->
-      <div class="grid grid-2" style="margin-bottom:2.5rem;">
-
-        <article class="card">
-          <h2><i>🔎</i> Check pending challans</h2>
-          <ol>
-            <li>Go to your state traffic police site or <strong>echallan.parivahan.gov.in</strong>.</li>
-            <li>Select “Check Challan Status”.</li>
-            <li>Enter vehicle number or challan number.</li>
-            <li>View list of pending challans with details.</li>
-          </ol>
-          <p style="font-size:0.85rem; color:var(--text-muted); margin-top:0.5rem;">
-            If details look wrong, contact the traffic helpline or local RTO with evidence.
-          </p>
-        </article>
-
-        <article class="card">
-          <h2><i>💳</i> Pay challan online</h2>
-          <ol>
-            <li>Select the challan you want to pay.</li>
-            <li>Confirm vehicle and offence details.</li>
-            <li>Choose payment mode – UPI / net banking / card.</li>
-            <li>Download the payment receipt or save a screenshot.</li>
-          </ol>
-          <p style="font-size:0.85rem; color:var(--text-muted); margin-top:0.5rem;">
-            Only use official .gov.in / .nic.in websites. Avoid agents or random payment links on WhatsApp.
-          </p>
-        </article>
-
-      </div>
-
-      <!-- Police Stop + FAQs -->
-      <div class="grid grid-2">
-
-        <article class="card">
-          <h2><i>🚓</i> When police stop your vehicle</h2>
-          <ul>
-            <li>Park safely on the side and turn on parking indicator.</li>
-            <li>Stay calm, speak politely, and keep documents ready.</li>
-            <li>You can show DigiLocker or mParivahan documents.</li>
-            <li>You can ask for the officer’s name, ID, and police station.</li>
-            <li>Do not offer or accept bribes – ask for proper challan.</li>
-          </ul>
-        </article>
-
-        <article class="card">
-          <h2><i>❓</i> Quick FAQs</h2>
-          <p><strong>Q. Can police seize my licence?</strong><br>
-            In serious offences they may take DL details or keep the card and issue a receipt. Rules vary by state.</p>
-
-          <p><strong>Q. Can I record the interaction?</strong><br>
-            Yes. You can calmly record audio/video from a safe distance without interfering.</p>
-
-          <p><strong>Q. Where to complain?</strong><br>
-            Use state traffic police helpline, email, or public grievance portal with vehicle & officer details.</p>
-        </article>
-      </div>
-
-    </div>
-  </section>
+    </section>
+  </main>
 
   <!-- FOOTER -->
-  <footer class="section" style="background-color: var(--surface-color); border-top: 1px solid rgba(148,148,148,0.25); padding: 4rem 0 2rem;">
+  <footer class="section footer-section">
     <div class="container">
       <div class="grid grid-3 footer-content">
         <div class="footer-section">
@@ -165,7 +180,7 @@
           <h4>Useful Guides</h4>
           <ul class="footer-links">
             <li><a href="blog-traffic-challan.html">Pay Traffic Challan Online</a></li>
-            <li><a href="blog-helmet.html">Helmet Rule & Fines</a></li>
+            <li><a href="blog-helmet.html">Helmet Rule &amp; Fines</a></li>
           </ul>
         </div>
         <div class="footer-section">
@@ -181,12 +196,79 @@
     </div>
   </footer>
 
+  <!-- Back to top button -->
+  <button id="backToTop" aria-label="Back to top">
+    ↑ Back to top
+  </button>
+
+  <!-- Cursor dot (desktop) -->
+  <div class="cursor-dot"></div>
+
   <script>
-    const mobileBtn = document.querySelector('.mobile-menu-btn');
-    const navLinks = document.querySelector('.nav-links');
-    mobileBtn.addEventListener('click', () => navLinks.classList.toggle('active'));
+    // Fix: when page is shown from back/forward cache, reset scroll to top
+    window.addEventListener('pageshow', function (event) {
+      if (event.persisted) {
+        window.scrollTo(0, 0);
+      }
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+      // Always start at top on first load
+      window.scrollTo(0, 0);
+
+      // Prevent browser auto scroll restoration
+      if ('scrollRestoration' in history) {
+        history.scrollRestoration = 'manual';
+      }
+
+      // Mobile menu toggle
+      var mobileBtn = document.querySelector('.mobile-menu-btn');
+      var navLinks = document.querySelector('.nav-links');
+
+      if (mobileBtn && navLinks) {
+        mobileBtn.addEventListener('click', function () {
+          navLinks.classList.toggle('active');
+
+          var isOpen = navLinks.classList.contains('active');
+          mobileBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        });
+      }
+
+      // Back to top button
+      var backToTopBtn = document.getElementById('backToTop');
+
+      if (backToTopBtn) {
+        window.addEventListener('scroll', function () {
+          if (window.pageYOffset > 300) {
+            backToTopBtn.classList.add('show');
+          } else {
+            backToTopBtn.classList.remove('show');
+          }
+        });
+
+        backToTopBtn.addEventListener('click', function () {
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+        });
+      }
+
+      // === Cursor dot animation (desktop) ===
+      var cursorDot = document.querySelector('.cursor-dot');
+
+      if (cursorDot) {
+        document.addEventListener('mousemove', function (e) {
+          cursorDot.style.opacity = '1';
+          cursorDot.style.transform = 'translate3d(' + e.clientX + 'px,' + e.clientY + 'px,0)';
+        });
+
+        document.addEventListener('mouseleave', function () {
+          cursorDot.style.opacity = '0';
+        });
+      }
+    });
   </script>
 
 </body>
 </html>
-

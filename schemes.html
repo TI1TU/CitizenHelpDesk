@@ -7,14 +7,26 @@
   <link rel="stylesheet" href="style.css?v=3">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
-<body>
-  <nav class="navbar">
+<body class="schemes-page" id="top">
+
+  <!-- NAVBAR -->
+  <nav class="navbar" aria-label="Main navigation">
     <div class="container nav-container">
       <a href="index.html" class="logo">
-  Citizen<span>HelpDesk</span>
-</a>
-      <button class="mobile-menu-btn">☰</button>
-      <div class="nav-links">
+        Citizen<span>HelpDesk</span>
+      </a>
+      <!-- Mobile menu button -->
+      <button
+        class="mobile-menu-btn"
+        type="button"
+        aria-label="Toggle navigation menu"
+        aria-expanded="false"
+        aria-controls="primary-navigation"
+      >
+        ☰
+      </button>
+      <!-- Nav links -->
+      <div class="nav-links" id="primary-navigation">
         <a href="index.html" class="nav-link">Home</a>
         <a href="traffic.html" class="nav-link">Traffic Rules</a>
         <a href="documents.html" class="nav-link">Documents</a>
@@ -24,6 +36,7 @@
     </div>
   </nav>
 
+  <!-- HERO -->
   <section class="page-hero bg-schemes-hero">
     <div class="page-hero-content">
       <p style="font-size:0.85rem; background:rgba(0,0,0,0.25); display:inline-block; padding:4px 10px; border-radius:999px;">
@@ -34,6 +47,7 @@
     </div>
   </section>
 
+  <!-- MAIN CONTENT -->
   <section class="section">
     <div class="container grid grid-3">
       <article class="card">
@@ -52,7 +66,7 @@
         <ul>
           <li>Hospitalisation cover for eligible families.</li>
           <li>Cashless treatment at empanelled hospitals.</li>
-          <li>Use ration card / mobile on pmjay.gov.in to see if you are covered.</li>
+          <li>Use ration card / mobile on <em>pmjay.gov.in</em> to see if you are covered.</li>
         </ul>
       </article>
 
@@ -98,8 +112,8 @@
     </div>
   </section>
 
-  <footer class="section"
-          style="background-color: var(--surface-color); border-top: 1px solid rgba(148,148,148,0.25); padding: 4rem 0 2rem;">
+  <!-- FOOTER -->
+  <footer class="section footer-section">
     <div class="container">
       <div class="grid grid-3 footer-content">
         <div class="footer-section">
@@ -130,10 +144,78 @@
     </div>
   </footer>
 
+  <!-- Back to top button -->
+  <button id="backToTop" aria-label="Back to top">
+    ↑ Back to top
+  </button>
+
+  <!-- Cursor dot (desktop) -->
+  <div class="cursor-dot"></div>
+
   <script>
-    const mobileBtn = document.querySelector('.mobile-menu-btn');
-    const navLinks = document.querySelector('.nav-links');
-    mobileBtn.addEventListener('click', () => navLinks.classList.toggle('active'));
+    // Fix: when page is shown from back/forward cache, reset scroll to top
+    window.addEventListener('pageshow', function (event) {
+      if (event.persisted) {
+        window.scrollTo(0, 0);
+      }
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+      // Always start at top on first load
+      window.scrollTo(0, 0);
+
+      // Prevent browser auto scroll restoration
+      if ('scrollRestoration' in history) {
+        history.scrollRestoration = 'manual';
+      }
+
+      // Mobile menu toggle
+      var mobileBtn = document.querySelector('.mobile-menu-btn');
+      var navLinks = document.querySelector('.nav-links');
+
+      if (mobileBtn && navLinks) {
+        mobileBtn.addEventListener('click', function () {
+          navLinks.classList.toggle('active');
+
+          var isOpen = navLinks.classList.contains('active');
+          mobileBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        });
+      }
+
+      // Back to top button
+      var backToTopBtn = document.getElementById('backToTop');
+
+      if (backToTopBtn) {
+        window.addEventListener('scroll', function () {
+          if (window.pageYOffset > 300) {
+            backToTopBtn.classList.add('show');
+          } else {
+            backToTopBtn.classList.remove('show');
+          }
+        });
+
+        backToTopBtn.addEventListener('click', function () {
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+        });
+      }
+
+      // === Cursor dot animation (desktop) ===
+      var cursorDot = document.querySelector('.cursor-dot');
+
+      if (cursorDot) {
+        document.addEventListener('mousemove', function (e) {
+          cursorDot.style.opacity = '1';
+          cursorDot.style.transform = 'translate3d(' + e.clientX + 'px,' + e.clientY + 'px,0)';
+        });
+
+        document.addEventListener('mouseleave', function () {
+          cursorDot.style.opacity = '0';
+        });
+      }
+    });
   </script>
 </body>
 </html>

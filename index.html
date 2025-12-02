@@ -7,16 +7,28 @@
   <link rel="stylesheet" href="style.css?v=3">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
-<body class="home-page">
+<body class="home-page" id="top">
 
   <!-- NAVBAR -->
-  <nav class="navbar">
+  <nav class="navbar" aria-label="Main navigation">
     <div class="container nav-container">
       <a href="index.html" class="logo">
         Citizen<span>HelpDesk</span>
       </a>
-      <button class="mobile-menu-btn">☰</button>
-      <div class="nav-links">
+
+      <!-- Mobile menu button -->
+      <button
+        class="mobile-menu-btn"
+        type="button"
+        aria-label="Toggle navigation menu"
+        aria-expanded="false"
+        aria-controls="primary-navigation"
+      >
+        ☰
+      </button>
+
+      <!-- Nav links -->
+      <div class="nav-links" id="primary-navigation">
         <a href="index.html" class="nav-link active">Home</a>
         <a href="traffic.html" class="nav-link">Traffic Rules</a>
         <a href="documents.html" class="nav-link">Documents</a>
@@ -26,167 +38,170 @@
     </div>
   </nav>
 
-   <!-- HERO -->
-  <section class="home-hero">
-    <div class="container hero-layout">
+  <main>
+    <!-- HERO -->
+    <section class="home-hero" id="hero">
+      <div class="container hero-layout">
 
-      <!-- LEFT: main text -->
-      <div class="hero-content">
-        <p class="hero-pill">🇮🇳 For Indian citizens · Simple language</p>
-        <h1>Government rules, explained in normal language.</h1>
-        <p class="hero-subtitle">
-          No legal jargon, no confusion. Clear guides for traffic rules,
-          documents, police processes and government schemes.
-        </p>
+        <!-- LEFT: main text -->
+        <div class="hero-content">
+          <p class="hero-pill">🇮🇳 For Indian citizens · Simple language</p>
+          <h1>Government rules, explained in normal language.</h1>
+          <p class="hero-subtitle">
+            No legal jargon, no confusion. Clear guides for traffic rules,
+            documents, police processes and government schemes.
+          </p>
 
-        <div class="hero-actions">
-          <a href="traffic.html" class="btn-primary">Start with Traffic Rules</a>
-          <a href="documents.html" class="btn-ghost">Fix my documents</a>
+          <div class="hero-actions">
+            <a href="traffic.html" class="btn-primary">Start with Traffic Rules</a>
+            <a href="documents.html" class="btn-ghost">Fix my documents</a>
+          </div>
+
+          <div class="hero-meta">
+            <span>✅ We are not an official govt website – we only explain rules.</span>
+            <span>✅ Designed for students, parents and everyday citizens.</span>
+          </div>
         </div>
 
-        <div class="hero-meta">
-          <span>✅ We are not an official govt website – we only explain rules.</span>
-          <span>✅ Designed for students, parents and everyday citizens.</span>
+        <!-- RIGHT: image + quick check -->
+        <div class="hero-side">
+          <div class="hero-image-wrapper">
+            <img src="hero-image.png" alt="CitizenHelpDesk – Government rules illustration" class="hero-main-image">
+          </div>
+
+          <aside class="hero-card" aria-label="Today's quick checklist">
+            <p class="hero-card-label">TODAY’S QUICK CHECK</p>
+            <ul>
+              <li>Do you carry DL, RC, Insurance &amp; PUC while driving?</li>
+              <li>Do you know if DigiLocker is accepted by police?</li>
+              <li>Do you know how to pay challan online safely?</li>
+            </ul>
+            <a href="traffic.html" class="btn-link">Open Traffic Rules guide →</a>
+          </aside>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- WHAT DO YOU WANT HELP WITH -->
+    <section class="section" id="topics">
+      <div class="container">
+        <header class="section-header">
+          <p class="section-tag">Start here</p>
+          <h2>What do you want help with?</h2>
+          <p>Pick a topic to see all simple guides and examples.</p>
+        </header>
+
+        <div class="grid grid-4 topic-grid">
+          <a href="traffic.html" class="topic-card">
+            <div class="topic-icon">🚦</div>
+            <h3>Traffic rules &amp; challans</h3>
+            <p>Understand fines, documents and your rights on the road.</p>
+            <ul>
+              <li>Helmet &amp; seat belt rules</li>
+              <li>Check &amp; pay challan</li>
+              <li>What if police stop you?</li>
+            </ul>
+          </a>
+
+          <a href="documents.html" class="topic-card">
+            <div class="topic-icon">🪪</div>
+            <h3>Documents &amp; ID</h3>
+            <p>Clear guides for Aadhaar, PAN, DL, RC and more.</p>
+            <ul>
+              <li>Aadhaar address change</li>
+              <li>Lost PAN – what to do</li>
+              <li>DL renewal &amp; duplicate RC</li>
+            </ul>
+          </a>
+
+          <a href="police.html" class="topic-card">
+            <div class="topic-icon">👮‍♂️</div>
+            <h3>Police &amp; FIR basics</h3>
+            <p>Know the process before you panic or sign anything.</p>
+            <ul>
+              <li>FIR vs Complaint vs NC</li>
+              <li>Online FIR for lost items</li>
+              <li>What police can &amp; can’t do</li>
+            </ul>
+          </a>
+
+          <a href="schemes.html" class="topic-card">
+            <div class="topic-icon">🏛️</div>
+            <h3>Government schemes</h3>
+            <p>Short explainers of benefits, eligibility and how to apply.</p>
+            <ul>
+              <li>Who is eligible</li>
+              <li>Required documents</li>
+              <li>Official apply links</li>
+            </ul>
+          </a>
         </div>
       </div>
+    </section>
 
-      <!-- RIGHT: image + quick check -->
-      <div class="hero-side">
-        <div class="hero-image-wrapper">
-          <img src="hero-image.png" alt="CitizenHelpDesk – Government rules illustration" class="hero-main-image">
+    <!-- LATEST GUIDES -->
+    <section class="section section-alt" id="guides">
+      <div class="container">
+        <header class="section-header">
+          <p class="section-tag">Latest guides</p>
+          <h2>Most useful right now</h2>
+          <p>Quick reads for problems citizens face every day.</p>
+        </header>
+
+        <div class="grid grid-3 blog-grid">
+          <article class="card blog-card">
+            <p class="blog-tag">Traffic Rules</p>
+            <h3><a href="blog-traffic-challan.html">How to Pay Traffic Challan Online – Full Guide (2025)</a></h3>
+            <p>Pay your challan safely from home, step by step. No agents, no confusion.</p>
+            <a href="blog-traffic-challan.html" class="btn-link">Read guide →</a>
+          </article>
+
+          <article class="card blog-card">
+            <p class="blog-tag">Police Help</p>
+            <h3><a href="blog-fir-vs-nc.html">FIR vs Complaint vs NC – What’s the Difference?</a></h3>
+            <p>Understand the basic terms so your complaint gets registered correctly.</p>
+            <a href="blog-fir-vs-nc.html" class="btn-link">Read guide →</a>
+          </article>
+
+          <article class="card blog-card">
+            <p class="blog-tag">Documents &amp; ID</p>
+            <h3><a href="blog-aadhaar-address.html">Aadhaar Address Change – Step-by-Step (2025)</a></h3>
+            <p>Moved to a new house? Update your Aadhaar address online in a few simple steps.</p>
+            <a href="blog-aadhaar-address.html" class="btn-link">Read guide →</a>
+          </article>
+
+          <article class="card blog-card">
+            <p class="blog-tag">Traffic Rules</p>
+            <h3><a href="blog-helmet.html">Helmet Rule in India – Updated Penalties (2025)</a></h3>
+            <p>Helmet rules for rider and pillion, latest fines and common myths.</p>
+            <a href="blog-helmet.html" class="btn-link">Read guide →</a>
+          </article>
+
+          <article class="card blog-card">
+            <p class="blog-tag">Documents &amp; ID</p>
+            <h3><a href="blog-pan-lost.html">Lost Your PAN Card? Here’s Exactly What to Do</a></h3>
+            <p>Don’t panic. Follow these steps to get a reprint and keep your PAN details safe.</p>
+            <a href="blog-pan-lost.html" class="btn-link">Read guide →</a>
+          </article>
         </div>
+      </div>
+    </section>
 
-        <div class="hero-card">
-          <p class="hero-card-label">TODAY’S QUICK CHECK</p>
-          <ul>
-            <li>Do you carry DL, RC, Insurance & PUC while driving?</li>
-            <li>Do you know if DigiLocker is accepted by police?</li>
-            <li>Do you know how to pay challan online safely?</li>
-          </ul>
-          <a href="traffic.html" class="btn-link">Open Traffic Rules guide →</a>
+    <!-- CTA -->
+    <section class="section section-cta" id="updates">
+      <div class="container cta-box">
+        <div>
+          <h2>Get updates when important rules change</h2>
+          <p>We are building simple guides for new traffic rules, schemes and digital services. Soon you’ll be able to receive major updates in your inbox.</p>
+        </div>
+        <div>
+          <button class="btn-primary btn-primary-outline" disabled>Newsletter coming soon</button>
+          <p class="cta-note">No spam, only important rule changes that impact daily life.</p>
         </div>
       </div>
-
-    </div>
-  </section>
-  <!-- WHAT DO YOU WANT HELP WITH -->
-  <section class="section">
-    <div class="container">
-      <header class="section-header">
-        <p class="section-tag">Start here</p>
-        <h2>What do you want help with?</h2>
-        <p>Pick a topic to see all simple guides and examples.</p>
-      </header>
-
-      <div class="grid grid-4 topic-grid">
-        <a href="traffic.html" class="topic-card">
-          <div class="topic-icon">🚦</div>
-          <h3>Traffic rules & challans</h3>
-          <p>Understand fines, documents and your rights on the road.</p>
-          <ul>
-            <li>Helmet & seat belt rules</li>
-            <li>Check & pay challan</li>
-            <li>What if police stop you?</li>
-          </ul>
-        </a>
-
-        <a href="documents.html" class="topic-card">
-          <div class="topic-icon">🪪</div>
-          <h3>Documents & ID</h3>
-          <p>Clear guides for Aadhaar, PAN, DL, RC and more.</p>
-          <ul>
-            <li>Aadhaar address change</li>
-            <li>Lost PAN – what to do</li>
-            <li>DL renewal & duplicate RC</li>
-          </ul>
-        </a>
-
-        <a href="police.html" class="topic-card">
-          <div class="topic-icon">👮‍♂️</div>
-          <h3>Police & FIR basics</h3>
-          <p>Know the process before you panic or sign anything.</p>
-          <ul>
-            <li>FIR vs Complaint vs NC</li>
-            <li>Online FIR for lost items</li>
-            <li>What police can & can’t do</li>
-          </ul>
-        </a>
-
-        <a href="schemes.html" class="topic-card">
-          <div class="topic-icon">🏛️</div>
-          <h3>Government schemes</h3>
-          <p>Short explainers of benefits, eligibility and how to apply.</p>
-          <ul>
-            <li>Who is eligible</li>
-            <li>Required documents</li>
-            <li>Official apply links</li>
-          </ul>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- LATEST GUIDES -->
-  <section class="section section-alt">
-    <div class="container">
-      <header class="section-header">
-        <p class="section-tag">Latest guides</p>
-        <h2>Most useful right now</h2>
-        <p>Quick reads for problems citizens face every day.</p>
-      </header>
-
-      <div class="grid grid-3 blog-grid">
-        <article class="card blog-card">
-          <p class="blog-tag">Traffic Rules</p>
-          <h3><a href="blog-traffic-challan.html">How to Pay Traffic Challan Online – Full Guide (2025)</a></h3>
-          <p>Pay your challan safely from home, step by step. No agents, no confusion.</p>
-          <a href="blog-traffic-challan.html" class="btn-link">Read guide →</a>
-        </article>
-
-        <article class="card blog-card">
-          <p class="blog-tag">Police Help</p>
-          <h3><a href="blog-fir-vs-nc.html">FIR vs Complaint vs NC – What’s the Difference?</a></h3>
-          <p>Understand the basic terms so your complaint gets registered correctly.</p>
-          <a href="blog-fir-vs-nc.html" class="btn-link">Read guide →</a>
-        </article>
-
-        <article class="card blog-card">
-          <p class="blog-tag">Documents & ID</p>
-          <h3><a href="blog-aadhaar-address.html">Aadhaar Address Change – Step-by-Step (2025)</a></h3>
-          <p>Moved to a new house? Update your Aadhaar address online in a few simple steps.</p>
-          <a href="blog-aadhaar-address.html" class="btn-link">Read guide →</a>
-        </article>
-
-        <article class="card blog-card">
-          <p class="blog-tag">Traffic Rules</p>
-          <h3><a href="blog-helmet.html">Helmet Rule in India – Updated Penalties (2025)</a></h3>
-          <p>Helmet rules for rider and pillion, latest fines and common myths.</p>
-          <a href="blog-helmet.html" class="btn-link">Read guide →</a>
-        </article>
-
-        <article class="card blog-card">
-          <p class="blog-tag">Documents & ID</p>
-          <h3><a href="blog-pan-lost.html">Lost Your PAN Card? Here’s Exactly What to Do</a></h3>
-          <p>Don’t panic. Follow these steps to get a reprint and keep your PAN details safe.</p>
-          <a href="blog-pan-lost.html" class="btn-link">Read guide →</a>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA -->
-  <section class="section section-cta">
-    <div class="container cta-box">
-      <div>
-        <h2>Get updates when important rules change</h2>
-        <p>We are building simple guides for new traffic rules, schemes and digital services. Soon you’ll be able to receive major updates in your inbox.</p>
-      </div>
-      <div>
-        <button class="btn-primary btn-primary-outline" disabled>Newsletter coming soon</button>
-        <p class="cta-note">No spam, only important rule changes that impact daily life.</p>
-      </div>
-    </div>
-  </section>
+    </section>
+  </main>
 
   <!-- FOOTER -->
   <footer class="section footer-section">
@@ -204,7 +219,7 @@
           <h4>Quick Links</h4>
           <ul class="footer-links">
             <li><a href="traffic.html">Traffic Rules</a></li>
-            <li><a href="documents.html">Documents & ID</a></li>
+            <li><a href="documents.html">Documents &amp; ID</a></li>
             <li><a href="police.html">Police Help</a></li>
             <li><a href="schemes.html">Government Schemes</a></li>
           </ul>
@@ -227,9 +242,26 @@
     ↑ Back to top
   </button>
 
+  <!-- Cursor dot (desktop) -->
+  <div class="cursor-dot"></div>
+
   <!-- All scripts -->
   <script>
+    // Force scroll to top every time this page is shown (including back button)
+    window.addEventListener('pageshow', function () {
+      window.scrollTo(0, 0);
+      setTimeout(function () { window.scrollTo(0, 0); }, 50);
+      setTimeout(function () { window.scrollTo(0, 0); }, 150);
+    });
+
     document.addEventListener('DOMContentLoaded', function () {
+      // Always start at top on first load
+      window.scrollTo(0, 0);
+
+      // Prevent browser auto scroll restoration
+      if ('scrollRestoration' in history) {
+        history.scrollRestoration = 'manual';
+      }
 
       // Mobile menu toggle
       var mobileBtn = document.querySelector('.mobile-menu-btn');
@@ -238,15 +270,15 @@
       if (mobileBtn && navLinks) {
         mobileBtn.addEventListener('click', function () {
           navLinks.classList.toggle('active');
+
+          // Update aria-expanded for accessibility
+          var isOpen = navLinks.classList.contains('active');
+          mobileBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
         });
       }
 
       // Back to top button
       var backToTopBtn = document.getElementById('backToTop');
-
-      if ('scrollRestoration' in history) {
-        history.scrollRestoration = 'manual';
-      }
 
       if (backToTopBtn) {
         window.addEventListener('scroll', function () {
@@ -265,7 +297,7 @@
         });
       }
 
-      // Smooth scroll
+      // Smooth scroll for internal links (like #hero, #topics, etc.)
       var internalLinks = document.querySelectorAll('a[href^="#"]');
       internalLinks.forEach(function (link) {
         link.addEventListener('click', function (event) {
@@ -279,6 +311,20 @@
         });
       });
 
+      // === Cursor dot animation (desktop) ===
+      var cursorDot = document.querySelector('.cursor-dot');
+
+      if (cursorDot) {
+        document.addEventListener('mousemove', function (e) {
+          cursorDot.style.opacity = '1';
+          cursorDot.style.transform =
+            'translate3d(' + e.clientX + 'px,' + e.clientY + 'px,0)';
+        });
+
+        document.addEventListener('mouseleave', function () {
+          cursorDot.style.opacity = '0';
+        });
+      }
     });
   </script>
 
