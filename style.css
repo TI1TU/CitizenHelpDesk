@@ -2524,15 +2524,17 @@ body.home-page {
 
 /* Soft fade-up on sections */
 
+/* Fade animation without moving content (no scroll jump) */
 .home-page .home-hero,
 .home-page .section {
-  animation: fadeUpSoft 0.3s ease-out;
+  animation: fadeSoft 0.35s ease-out;
 }
 
-@keyframes fadeUpSoft {
-  from { opacity: 0; transform: translateY(10px); }
-  to   { opacity: 1; transform: translateY(0); }
+@keyframes fadeSoft {
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
+
 
 /* Responsive tweaks */
 
@@ -2559,4 +2561,15 @@ body.home-page {
   .grid.grid-4.topic-grid {
     grid-template-columns: minmax(0, 1fr);
   }
+}
+/* Hero fade-in effect */
+.hero-fade {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.9s ease-out, transform 0.9s ease-out;
+}
+
+.hero-fade.show {
+  opacity: 1;
+  transform: translateY(0);
 }

@@ -225,3 +225,16 @@
   </script>
 </body>
 </html>
+<script>
+  const mobileBtn = document.querySelector('.mobile-menu-btn');
+  const navLinks = document.querySelector('.nav-links');
+  if (mobileBtn && navLinks) {
+    mobileBtn.addEventListener('click', () => navLinks.classList.toggle('active'));
+  }
+
+  if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
+  }
+  window.scrollTo(0, 0);
+
+ 
