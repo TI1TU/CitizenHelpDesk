@@ -394,6 +394,8 @@ a {
 .animated-page .btn { padding: 0.5rem 0.9rem; border-radius: 999px; background: var(--primary-color); color: white; border:none; cursor:pointer; }
 
 
+
+
 /* Footer */
 footer {
     background-color: var(--surface-color);

@@ -26,13 +26,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Main object: smooth icosahedron
   const geo = new THREE.IcosahedronGeometry(1.4, 3);
-  const mat = new THREE.MeshStandardMaterial({ color: 0x2563eb, roughness: 0.3, metalness: 0.2 });
+  const mat = new THREE.MeshStandardMaterial({ color: 0x2563eb, roughness: 0.28, metalness: 0.25 });
   const main = new THREE.Mesh(geo, mat);
   group.add(main);
 
   // Accent small orb
   const orbGeo = new THREE.SphereGeometry(0.12, 24, 24);
-  const orbMat = new THREE.MeshStandardMaterial({ color: 0x3b82f6, metalness: 0.8, roughness: 0.2, emissive: 0x3b82f6, emissiveIntensity: 0.4 });
+  const orbMat = new THREE.MeshStandardMaterial({ color: 0x3b82f6, metalness: 0.9, roughness: 0.15, emissive: 0x3b82f6, emissiveIntensity: 0.35 });
   const orb = new THREE.Mesh(orbGeo, orbMat);
   orb.position.set(2.2, 1.0, 0.5);
   group.add(orb);
@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   const particlesGeo = new THREE.BufferGeometry();
   particlesGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-  const particlesMat = new THREE.PointsMaterial({ color: 0x94a3b8, size: 0.03, opacity: 0.9, transparent: true });
+  const particlesMat = new THREE.PointsMaterial({ color: 0x94a3b8, size: 0.03, opacity: 0.95, transparent: true });
   const particles = new THREE.Points(particlesGeo, particlesMat);
   scene.add(particles);
 
@@ -62,14 +62,16 @@ document.addEventListener('DOMContentLoaded', () => {
   const cursorDot = document.getElementById('cursorDot');
 
   function onMove(e) {
-    const x = e.clientX - container.getBoundingClientRect().left;
-    const y = e.clientY - container.getBoundingClientRect().top;
+    const rect = container.getBoundingClientRect();
+    const x = (e.clientX || (e.touches && e.touches[0].clientX)) - rect.left;
+    const y = (e.clientY || (e.touches && e.touches[0].clientY)) - rect.top;
     const nx = (x / container.clientWidth) * 2 - 1;
     const ny = -(y / container.clientHeight) * 2 + 1;
     mouseX = nx; mouseY = ny;
 
     // move CSS cursor dot
-    cursorDot.style.transform = `translate(${x}px, ${y}px)`;
+    cursorDot.style.left = `${x}px`;
+    cursorDot.style.top = `${y}px`;
 
     // Make orb follow with some offset
     const orbTargetX = nx * 2.4;
@@ -94,7 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let particlesOn = true;
   toggleBtn.addEventListener('click', () => {
     particlesOn = !particlesOn;
-    gsap.to(particles.material, { opacity: particlesOn ? 0.9 : 0.0, duration: 0.6 });
+    gsap.to(particles.material, { opacity: particlesOn ? 0.95 : 0.0, duration: 0.6 });
     toggleBtn.textContent = particlesOn ? 'Hide particles' : 'Show particles';
   });
 
