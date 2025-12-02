@@ -352,6 +352,43 @@ a {
     }
 }
 
+/* Animated prototype styles (scoped) */
+.animated-page {
+  height: 100vh;
+  width: 100%;
+  background: linear-gradient(180deg, #f8fafc 0%, #eef2ff 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+.animated-page .ui-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 28px;
+}
+.animated-page .logo.small { font-size: 1.05rem; }
+.animated-page .hint { color: var(--text-muted); font-size: 0.95rem; }
+#animated-root { width: 100%; flex: 1 1 auto; }
+.controls { padding: 12px 28px; display:flex; justify-content:flex-end; gap:8px; }
+.cursor-dot {
+  position: fixed;
+  width: 12px;
+  height: 12px;
+  background: rgba(37,99,235,0.95);
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  mix-blend-mode: multiply;
+  transition: transform 0.06s linear;
+  z-index: 9999;
+  box-shadow: 0 4px 14px rgba(37,99,235,0.18);
+}
+
+/* Make the page buttons look consistent */
+.animated-page .btn { padding: 0.5rem 0.9rem; border-radius: 999px; background: var(--primary-color); color: white; border:none; cursor:pointer; }
+
+
 /* Footer */
 footer {
     background-color: var(--surface-color);
