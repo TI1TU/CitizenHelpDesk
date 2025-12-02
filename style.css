@@ -310,7 +310,12 @@ a {
     color: var(--text-main);
 }
 
-@media (max-width: 768px) {
+/* Fix hero pill hidden under navbar on mobile */
+@media (max-width: 640px) {
+  body.home-page {
+    padding-top: 72px;   /* try 64–80px depending on your navbar height */
+  }
+}
     .nav-links {
         display: none;
         position: absolute;
