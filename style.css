@@ -2091,3 +2091,92 @@ footer {
     grid-template-columns: minmax(0, 1fr);
   }
 }
+/* ==== COLOR FIX & HIGH-CONTRAST UI OVERRIDES ==== */
+
+/* Overall page: dark background, content on white cards */
+body {
+  background: #020617;          /* very dark navy */
+  color: #e5e7eb;               /* light grey text */
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* Navbar clearly separated from hero */
+.navbar {
+  background: rgba(2, 6, 23, 0.95);
+  border-bottom: 1px solid rgba(15, 23, 42, 0.7);
+  backdrop-filter: blur(12px);
+}
+
+.navbar .nav-link {
+  color: #cbd5f5;
+}
+
+.navbar .nav-link.active {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+/* Hero: keep it dark, make all text bright */
+.home-hero {
+  color: #f9fafb;
+}
+
+.home-hero h1,
+.home-hero p,
+.home-hero .hero-meta span {
+  color: #f9fafb;
+}
+
+/* Cards: pure white with dark text */
+.card,
+.topic-card,
+.blog-card,
+.hero-card {
+  background: #ffffff;
+  color: #0f172a; /* almost black */
+}
+
+.card p,
+.card li,
+.topic-card p,
+.topic-card li,
+.blog-card p {
+  color: #475569; /* slate grey, easy to read */
+}
+
+/* Make hero-side quick card stay dark (so it looks like a widget) */
+.home-hero .hero-card {
+  background: #020617;
+  color: #e5e7eb;
+  border-color: rgba(148, 163, 184, 0.5);
+}
+
+/* Sections: remove strange background overlaps */
+.section {
+  background: transparent;
+}
+
+/* Light grey for "alt" sections to separate blocks */
+.section-alt {
+  background: #f8fafc;
+}
+
+/* CTA stays dark with bright text */
+.section-cta {
+  background: #020617;
+  color: #e5e7eb;
+}
+
+/* Footer: darker and clear */
+.footer-section {
+  color: #e5e7eb;
+}
+
+.footer-section p,
+.footer-section a {
+  color: #9ca3af;
+}
+
+.footer-section a:hover {
+  color: #e5e7eb;
+}
