@@ -13,8 +13,7 @@
   <nav class="navbar">
     <div class="container nav-container">
       <a href="index.html" class="logo">
-  Citizen<span>HelpDesk</span>
-</a>
+        Citizen<span>HelpDesk</span>
       </a>
       <button class="mobile-menu-btn">☰</button>
       <div class="nav-links">
@@ -27,14 +26,18 @@
     </div>
   </nav>
 
-  <!-- HERO -->
-  <section class="home-hero">
-    <div class="container hero-layout">
+ <!-- HERO -->
+<section class="home-hero">
+  <div class="container hero-layout">
+
+    <div class="hero-left-column">
+
       <div class="hero-content">
         <p class="hero-pill">🇮🇳 For Indian citizens · Simple language</p>
         <h1>Government rules, explained in normal language.</h1>
         <p class="hero-subtitle">
-          No legal jargon, no confusion. Clear guides for traffic rules, documents, police processes and government schemes.
+          No legal jargon, no confusion. Clear guides for traffic rules,
+          documents, police processes and government schemes.
         </p>
 
         <div class="hero-actions">
@@ -48,23 +51,25 @@
         </div>
       </div>
 
-      <div class="hero-side">
-        <div class="hero-card">
-          <p class="hero-card-label">Today’s quick check</p>
-          <ul>
-            <li>Do you carry DL, RC, Insurance & PUC while driving?</li>
-            <li>Do you know if DigiLocker is accepted by police?</li>
-            <li>Do you know how to pay challan online safely?</li>
-          </ul>
-          <a href="traffic.html" class="btn-link">Open Traffic Rules guide →</a>
-        </div>
-        <div class="hero-image-wrapper">
-          <img src="hero-image.png" alt="CitizenHelpDesk – Government rules illustration">
-        </div>
+      <!-- Quick Check BOX inside LEFT COLUMN -->
+      <div class="hero-card">
+        <p class="hero-card-label">TODAY’S QUICK CHECK</p>
+        <ul>
+          <li>Do you carry DL, RC, Insurance & PUC while driving?</li>
+          <li>Do you know if DigiLocker is accepted by police?</li>
+          <li>Do you know how to pay challan online safely?</li>
+        </ul>
+        <a href="traffic.html" class="btn-link">Open Traffic Rules guide →</a>
       </div>
-    </div>
-  </section>
 
+    </div>
+
+    <div class="hero-image-wrapper">
+      <img src="hero-image.png" alt="CitizenHelpDesk – Government rules illustration">
+    </div>
+
+  </div>
+</section>
   <!-- WHAT DO YOU WANT HELP WITH -->
   <section class="section">
     <div class="container">
@@ -218,23 +223,65 @@
     </div>
   </footer>
 
+  <!-- Back to top button -->
+  <button id="backToTop" aria-label="Back to top">
+    ↑ Back to top
+  </button>
+
+  <!-- All scripts -->
   <script>
-    const mobileBtn = document.querySelector('.mobile-menu-btn');
-    const navLinks = document.querySelector('.nav-links');
-    mobileBtn.addEventListener('click', () => navLinks.classList.toggle('active'));
+    document.addEventListener('DOMContentLoaded', function () {
+
+      // Mobile menu toggle
+      var mobileBtn = document.querySelector('.mobile-menu-btn');
+      var navLinks = document.querySelector('.nav-links');
+
+      if (mobileBtn && navLinks) {
+        mobileBtn.addEventListener('click', function () {
+          navLinks.classList.toggle('active');
+        });
+      }
+
+      // Back to top button
+      var backToTopBtn = document.getElementById('backToTop');
+
+      if ('scrollRestoration' in history) {
+        history.scrollRestoration = 'manual';
+      }
+
+      if (backToTopBtn) {
+        window.addEventListener('scroll', function () {
+          if (window.pageYOffset > 300) {
+            backToTopBtn.classList.add('show');
+          } else {
+            backToTopBtn.classList.remove('show');
+          }
+        });
+
+        backToTopBtn.addEventListener('click', function () {
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+        });
+      }
+
+      // Smooth scroll
+      var internalLinks = document.querySelectorAll('a[href^="#"]');
+      internalLinks.forEach(function (link) {
+        link.addEventListener('click', function (event) {
+          var targetId = this.getAttribute('href').substring(1);
+          var target = document.getElementById(targetId);
+
+          if (target) {
+            event.preventDefault();
+            target.scrollIntoView({ behavior: 'smooth' });
+          }
+        });
+      });
+
+    });
   </script>
+
 </body>
 </html>
-<script>
-  const mobileBtn = document.querySelector('.mobile-menu-btn');
-  const navLinks = document.querySelector('.nav-links');
-  if (mobileBtn && navLinks) {
-    mobileBtn.addEventListener('click', () => navLinks.classList.toggle('active'));
-  }
-
-  if ('scrollRestoration' in history) {
-    history.scrollRestoration = 'manual';
-  }
-  window.scrollTo(0, 0);
-
- 
