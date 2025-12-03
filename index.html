@@ -12,9 +12,9 @@
   <!-- NAVBAR -->
   <nav class="navbar" aria-label="Main navigation">
     <div class="container nav-container">
-      <a href="index.html" class="logo">
-        Citizen<span>HelpDesk</span>
-      </a>
+      <a href="index.html" class="logo logo-anim-shimmer">
+  Citizen<span>HelpDesk</span>
+</a>
 
       <!-- Mobile menu button -->
       <button
@@ -45,22 +45,39 @@
 
         <!-- LEFT: main text -->
         <div class="hero-content">
-          <p class="hero-pill">🇮🇳 For Indian citizens · Simple language</p>
-          <h1>Government rules, explained in normal language.</h1>
-          <p class="hero-subtitle">
-            No legal jargon, no confusion. Clear guides for traffic rules,
-            documents, police processes and government schemes.
+
+          <p style="font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase; color:#2563eb; margin:0 0 0.5rem;">
+            For Indian citizens · Simple language
           </p>
 
-          <div class="hero-actions">
-            <a href="traffic.html" class="btn-primary">Start with Traffic Rules</a>
-            <a href="documents.html" class="btn-ghost">Fix my documents</a>
+          <h1 style="margin:0 0 0.75rem; font-size: 2rem; line-height:1.25;">
+            Government rules, explained in normal language.
+          </h1>
+
+          <p style="margin:0 0 1.25rem; color:#475569; font-size:0.95rem;">
+            No legal jargon, no confusion. Clear guides for traffic rules, important documents,
+            police processes and government schemes.
+          </p>
+
+          <div style="display:flex; flex-wrap:wrap; gap:0.75rem; margin-bottom:1.25rem;">
+            <a href="traffic.html"
+               style="background:#2563eb; color:white; padding:0.6rem 1.2rem; border-radius:999px;
+                      font-weight:600; text-decoration:none; font-size:0.95rem;">
+              Start with Traffic Rules
+            </a>
+
+            <a href="documents.html"
+               style="border:1px solid #cbd5f5; color:#2563eb; padding:0.6rem 1.2rem; border-radius:999px;
+                      font-weight:600; text-decoration:none; font-size:0.95rem; background:white;">
+              Fix my documents
+            </a>
           </div>
 
-          <div class="hero-meta">
-            <span>✅ We are not an official govt website – we only explain rules.</span>
-            <span>✅ Designed for students, parents and everyday citizens.</span>
-          </div>
+          <p style="font-size:0.85rem; color:#64748b; max-width:40rem;">
+            ✅ <strong>Important:</strong> We are <u>not</u> an official govt website.
+            We only explain rules in simple language for students, parents and everyday citizens.
+          </p>
+
         </div>
 
         <!-- RIGHT: image + quick check -->
@@ -84,58 +101,117 @@
     </section>
 
     <!-- WHAT DO YOU WANT HELP WITH -->
-    <section class="section" id="topics">
+    <section id="topics" style="padding: 2rem 0;">
       <div class="container">
-        <header class="section-header">
-          <p class="section-tag">Start here</p>
-          <h2>What do you want help with?</h2>
-          <p>Pick a topic to see all simple guides and examples.</p>
-        </header>
 
-        <div class="grid grid-4 topic-grid">
-          <a href="traffic.html" class="topic-card">
-            <div class="topic-icon">🚦</div>
-            <h3>Traffic rules &amp; challans</h3>
-            <p>Understand fines, documents and your rights on the road.</p>
-            <ul>
-              <li>Helmet &amp; seat belt rules</li>
-              <li>Check &amp; pay challan</li>
-              <li>What if police stop you?</li>
-            </ul>
+        <!-- Heading -->
+        <div style="margin-bottom: 1.5rem;">
+          <p style="font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; color:#2563eb; margin:0 0 0.4rem;">
+            Start here
+          </p>
+          <h2 style="margin:0 0 0.4rem; font-size: 1.4rem;">
+            What do you want help with?
+          </h2>
+          <p style="margin:0; font-size:0.95rem; color:#64748b;">
+            Pick a topic to see clear guides in simple language.
+          </p>
+        </div>
+
+        <!-- Topic cards -->
+        <div style="
+          display:grid;
+          gap:1rem;
+          grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
+        ">
+
+          <!-- Traffic rules card -->
+          <a href="traffic.html" style="text-decoration:none; color:inherit;">
+            <div style="
+              background:#ffffff;
+              border:1px solid #e2e8f0;
+              border-radius:0.9rem;
+              padding:1rem;
+              box-shadow:0 6px 16px rgba(15,23,42,0.04);
+            ">
+              <div style="font-size:1.4rem; margin-bottom:0.4rem;">🚦</div>
+              <h3 style="margin:0 0 0.3rem; font-size:1rem;">
+                Traffic rules &amp; challans
+              </h3>
+              <p style="margin:0 0 0.4rem; font-size:0.9rem; color:#64748b;">
+                Helmet rules, challans, documents and what to do if police stop you.
+              </p>
+              <p style="margin:0; font-size:0.82rem; color:#2563eb;">
+                Open traffic guides →
+              </p>
+            </div>
           </a>
 
-          <a href="documents.html" class="topic-card">
-            <div class="topic-icon">🪪</div>
-            <h3>Documents &amp; ID</h3>
-            <p>Clear guides for Aadhaar, PAN, DL, RC and more.</p>
-            <ul>
-              <li>Aadhaar address change</li>
-              <li>Lost PAN – what to do</li>
-              <li>DL renewal &amp; duplicate RC</li>
-            </ul>
+          <!-- Documents card -->
+          <a href="documents.html" style="text-decoration:none; color:inherit;">
+            <div style="
+              background:#ffffff;
+              border:1px solid #e2e8f0;
+              border-radius:0.9rem;
+              padding:1rem;
+              box-shadow:0 6px 16px rgba(15,23,42,0.04);
+            ">
+              <div style="font-size:1.4rem; margin-bottom:0.4rem;">🪪</div>
+              <h3 style="margin:0 0 0.3rem; font-size:1rem;">
+                Documents &amp; ID
+              </h3>
+              <p style="margin:0 0 0.4rem; font-size:0.9rem; color:#64748b;">
+                Aadhaar, PAN, licence, RC – how to apply, update or fix mistakes.
+              </p>
+              <p style="margin:0; font-size:0.82rem; color:#2563eb;">
+                See document help →
+              </p>
+            </div>
           </a>
 
-          <a href="police.html" class="topic-card">
-            <div class="topic-icon">👮‍♂️</div>
-            <h3>Police &amp; FIR basics</h3>
-            <p>Know the process before you panic or sign anything.</p>
-            <ul>
-              <li>FIR vs Complaint vs NC</li>
-              <li>Online FIR for lost items</li>
-              <li>What police can &amp; can’t do</li>
-            </ul>
+          <!-- Police help card -->
+          <a href="police.html" style="text-decoration:none; color:inherit;">
+            <div style="
+              background:#ffffff;
+              border:1px solid #e2e8f0;
+              border-radius:0.9rem;
+              padding:1rem;
+              box-shadow:0 6px 16px rgba(15,23,42,0.04);
+            ">
+              <div style="font-size:1.4rem; margin-bottom:0.4rem;">👮‍♂️</div>
+              <h3 style="margin:0 0 0.3rem; font-size:1rem;">
+                Police help &amp; complaints
+              </h3>
+              <p style="margin:0 0 0.4rem; font-size:0.9rem; color:#64748b;">
+                FIR basics, complaints, NC and what to expect at the police station.
+              </p>
+              <p style="margin:0; font-size:0.82rem; color:#2563eb;">
+                Learn police process →
+              </p>
+            </div>
           </a>
 
-          <a href="schemes.html" class="topic-card">
-            <div class="topic-icon">🏛️</div>
-            <h3>Government schemes</h3>
-            <p>Short explainers of benefits, eligibility and how to apply.</p>
-            <ul>
-              <li>Who is eligible</li>
-              <li>Required documents</li>
-              <li>Official apply links</li>
-            </ul>
+          <!-- Schemes card -->
+          <a href="schemes.html" style="text-decoration:none; color:inherit;">
+            <div style="
+              background:#ffffff;
+              border:1px solid #e2e8f0;
+              border-radius:0.9rem;
+              padding:1rem;
+              box-shadow:0 6px 16px rgba(15,23,42,0.04);
+            ">
+              <div style="font-size:1.4rem; margin-bottom:0.4rem;">🏛️</div>
+              <h3 style="margin:0 0 0.3rem; font-size:1rem;">
+                Govt schemes &amp; benefits
+              </h3>
+              <p style="margin:0 0 0.4rem; font-size:0.9rem; color:#64748b;">
+                Popular schemes explained in short – who can apply and how.
+              </p>
+              <p style="margin:0; font-size:0.82rem; color:#2563eb;">
+                Explore schemes overview →
+              </p>
+            </div>
           </a>
+
         </div>
       </div>
     </section>
@@ -204,7 +280,7 @@
   </main>
 
   <!-- FOOTER -->
-  <footer class="section footer-section">
+  <footer class="section footer-section" style="border-top:1px solid #e2e8f0; padding-top:1.5rem;">
     <div class="container">
       <div class="grid grid-3 footer-content">
         <div class="footer-section">
@@ -231,7 +307,7 @@
           </p>
         </div>
       </div>
-      <div class="copyright" style="text-align:center;">
+      <div class="copyright" style="text-align:center; margin-top:1.25rem; font-size:0.85rem; color:#64748b;">
         <p>&copy; 2025 CitizenHelpDesk. Information for general guidance only, not legal advice.</p>
       </div>
     </div>

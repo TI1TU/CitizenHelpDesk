@@ -2856,3 +2856,222 @@ body.home-page {
 .btn-ghost:active {
   transform: translateY(1px) scale(0.97);
 }
+/* --- TOPIC CARDS (match dark theme) --- */
+
+#topics a > div {
+  background: linear-gradient(135deg, #020617, #0b1120) !important;
+  border: 1px solid #1f2937 !important;
+  border-radius: 1rem !important;
+  padding: 1.25rem !important;
+  color: #e5e7eb !important;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(10px);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease,
+              background 0.2s ease;
+}
+
+/* Icon */
+#topics a > div > div {
+  font-size: 1.8rem !important;
+  margin-bottom: 0.6rem !important;
+}
+
+/* Heading text */
+#topics a > div h3 {
+  color: #f9fafb !important;
+  font-weight: 700 !important;
+  font-size: 1.05rem !important;
+  margin-bottom: 0.35rem !important;
+}
+
+/* Body text */
+#topics a > div p {
+  color: #cbd5e1 !important;
+  font-size: 0.92rem !important;
+  line-height: 1.5 !important;
+}
+
+/* Link line */
+#topics a > div p:last-child {
+  color: #60a5fa !important;
+  font-weight: 500 !important;
+}
+
+/* Hover effect */
+#topics a > div:hover {
+  background: linear-gradient(135deg, #020617, #111827) !important;
+  border-color: #3b82f6 !important;
+  transform: translateY(-4px);
+  box-shadow: 0 22px 55px rgba(15, 23, 42, 0.9);
+}
+/* Make topic cards equal height in each row */
+#topics a {
+  height: 100%;
+}
+
+#topics a > div {
+  display: flex;
+  flex-direction: column;  /* stack content vertically */
+  height: 100%;
+}
+
+/* Push the last line (link) to the bottom of the card */
+#topics a > div p:last-child {
+  margin-top: auto;
+}
+/* --- Logo styling --- */
+
+.navbar .logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 1.3rem;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  text-decoration: none;
+  color: #e5edff;
+  position: relative;
+  transition: transform 0.15s ease, text-shadow 0.15s ease, opacity 0.15s ease;
+}
+
+/* blue "Citizen", white "HelpDesk" */
+.navbar .logo {
+  color: #60a5ff;
+}
+.navbar .logo span {
+  color: #f9fafb;
+}
+
+/* small glowing dot before logo */
+.navbar .logo::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #3b82f6, #22d3ee);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.45);
+}
+
+/* hover effect */
+.navbar .logo:hover {
+  transform: translateY(-1px);
+  text-shadow: 0 0 18px rgba(59, 130, 246, 0.8);
+  opacity: 0.98;
+}
+/* ========= LOGO BASE STYLE (keep your colors) ========= */
+
+.navbar .logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  text-decoration: none;
+  color: #60a5ff;              /* "Citizen" blue */
+  position: relative;
+}
+
+/* white "HelpDesk" */
+.navbar .logo span {
+  color: #f9fafb;
+}
+
+/* glowing dot before logo */
+.navbar .logo::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #3b82f6, #22d3ee);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.45);
+  margin-right: 0.2rem;
+}
+
+/* subtle hover for all variants */
+.navbar .logo:hover {
+  opacity: 0.98;
+}
+
+/* ========= KEYFRAMES ========= */
+
+/* A) Soft glow pulse */
+@keyframes logoPulse {
+  0%, 100% {
+    text-shadow: 0 0 0 rgba(59, 130, 246, 0.0);
+    transform: translateY(0);
+  }
+  50% {
+    text-shadow: 0 0 18px rgba(59, 130, 246, 0.9);
+    transform: translateY(-1px);
+  }
+}
+
+/* B) Slide in from left on load */
+@keyframes logoSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateX(-18px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* C) Shimmer (shine across letters) */
+@keyframes logoShimmer {
+  0% {
+    text-shadow: -40px 0 18px rgba(96, 165, 250, 0);
+  }
+  50% {
+    text-shadow: 0 0 22px rgba(96, 165, 250, 0.85);
+  }
+  100% {
+    text-shadow: 40px 0 18px rgba(96, 165, 250, 0);
+  }
+}
+
+/* D) Bounce on hover */
+@keyframes logoBounce {
+  0%   { transform: translateY(0); }
+  30%  { transform: translateY(-4px); }
+  60%  { transform: translateY(1px); }
+  100% { transform: translateY(0); }
+}
+
+/* E) Dot orbit-ish motion */
+@keyframes logoDotOrbit {
+  0%, 100% { transform: translateY(0); }
+  25%      { transform: translateY(-3px); }
+  50%      { transform: translateY(0); }
+  75%      { transform: translateY(3px); }
+}
+
+/* ========= VARIANTS ========= */
+
+/* A) Glow pulse – continuous soft breathing */
+.logo-anim-pulse {
+  animation: logoPulse 2.4s ease-in-out infinite;
+}
+
+/* B) Slide in once on page load */
+.logo-anim-slide {
+  animation: logoSlideIn 0.7s ease-out both;
+}
+
+/* C) Shimmer – soft shine every few seconds */
+.logo-anim-shimmer {
+  animation: logoShimmer 2.6s ease-in-out infinite;
+}
+
+/* D) Bounce only when hovering */
+.logo-anim-bounce:hover {
+  animation: logoBounce 0.45s ease-out;
+}
+
+/* E) Orbit – only moves the dot */
+.logo-anim-orbit::before {
+  animation: logoDotOrbit 2.2s ease-in-out infinite;
+}
+
