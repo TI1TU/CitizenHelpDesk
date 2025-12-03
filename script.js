@@ -1,26 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- Dark / Light Mode Toggle (for fancy switch) ---
-    const themeToggle = document.querySelector('.theme-toggle');
-    const body = document.body;
-    const savedTheme = localStorage.getItem('chd-theme');
-
-    // Apply saved theme on load
-    if (savedTheme === 'dark') {
-        body.classList.add('dark-mode');
-        if (themeToggle) {
-            themeToggle.classList.add('is-dark'); // move knob to DARK side
-        }
-    }
-
-    // Handle button click
-    if (themeToggle) {
-        themeToggle.addEventListener('click', () => {
-            const isDark = body.classList.toggle('dark-mode');
-            themeToggle.classList.toggle('is-dark', isDark);
-            localStorage.setItem('chd-theme', isDark ? 'dark' : 'light');
-        });
-    }
+    
 
     // --- Mobile Menu Toggle ---
     const mobileBtn = document.querySelector('.mobile-menu-btn');

@@ -7,8 +7,7 @@
   <link rel="stylesheet" href="style.css?v=3">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-  <!-- NEW CSS for NAVBAR (paste here) -->
-  <style>
+    <style>
   /* === NAVBAR BRAND WITH LOGO === */
   .navbar {
     background: #020617;
@@ -73,77 +72,8 @@
     }
   }
 
-      /* === Neumorphic Light / Dark Switch === */
-  .theme-toggle {
-    background: transparent;
-    border: none;
-    padding: 0;
-    cursor: pointer;
-    font: inherit;
-  }
-
-    .toggle-track {
-    position: relative;
-    width: 140px;              /* a bit smaller so text doesn’t spread too far */
-    height: 40px;
-    border-radius: 999px;
-    background: #f3f4f6;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 16px;           /* slightly less padding */
-    box-shadow:
-      inset 4px 4px 8px rgba(209, 213, 219, 0.9),
-      inset -4px -4px 8px rgba(255, 255, 255, 0.9);
-    box-sizing: border-box;
-    overflow: hidden;
-  }
-
-  .toggle-thumb {
-    position: absolute;
-    top: 4px;
-    left: 4px;
-    width: 32px;               /* a bit smaller thumb */
-    height: 32px;
-    border-radius: 50%;
-    background: #ffffff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow:
-      0 6px 10px rgba(15, 23, 42, 0.18),
-      0 0 0 1px rgba(209, 213, 219, 0.9);
-    transition: transform 0.25s ease, background 0.25s ease;
-  }
-
-  .light-text {
-    margin-left: 4px;
-  }
-
-  .dark-text {
-    margin-right: 4px;
-    opacity: 0.4;
-  }
-
-  .theme-toggle.is-dark .toggle-thumb {
-    transform: translateX(78px);  /* was 92px – now stops before the “DARK” text */
-  }
-
-
-  .theme-toggle.is-dark .toggle-thumb::before {
-    content: "☾";
-    font-size: 1.2rem;
-    color: #4b5563;
-  }
-
-  .theme-toggle.is-dark .light-text {
-    opacity: 0.35;
-  }
-
-  .theme-toggle.is-dark .dark-text {
-    opacity: 1;
-    color: #e5e7eb;
-  }
+  /*
+  </style>
 
 
   </style>
@@ -163,14 +93,7 @@
   </div>
 </a>
 
-      <!-- Dark/Light Switch Button -->
-<button class="theme-toggle" aria-label="Toggle dark mode">
-  <span class="toggle-track">
-    <span class="toggle-thumb"></span>
-    <span class="toggle-text light-text">LIGHT</span>
-    <span class="toggle-text dark-text">DARK</span>
-  </span>
-</button>
+ 
 
 <!-- Mobile menu button -->
 <button
@@ -186,12 +109,13 @@
 
       <!-- Nav links -->
       <div class="nav-links" id="primary-navigation">
-        <a href="index.html" class="nav-link active">Home</a>
-        <a href="traffic.html" class="nav-link">Traffic Rules</a>
-        <a href="documents.html" class="nav-link">Documents</a>
-        <a href="police.html" class="nav-link">Police Help</a>
-        <a href="schemes.html" class="nav-link">Schemes</a>
-      </div>
+  <a href="index.html" class="nav-link active">Home</a>
+  <a href="traffic.html" class="nav-link">Traffic Rules</a>
+  <a href="documents.html" class="nav-link">Documents</a>
+  <a href="police.html" class="nav-link">Police Help</a>
+  <a href="schemes.html" class="nav-link">Schemes</a>
+  <a href="search.html" class="nav-link">Search</a>
+</div>
     </div>
   </nav>
 
