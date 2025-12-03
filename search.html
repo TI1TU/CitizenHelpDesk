@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search – CitizenHelpDesk</title>
+  <link rel="stylesheet" href="style.css?v=3">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* Same navbar style as home page */
+    .navbar {
+      background: #020617;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.35);
+    }
+
+    .nav-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+    }
+
+    .brand-logo {
+      width: 44px;
+      height: 44px;
+      border-radius: 18px;
+      object-fit: cover;
+      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.4);
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+    }
+
+    .brand-title {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #e5f0ff;
+    }
+
+    .brand-subtitle {
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: #818cf8;
+    }
+
+    .nav-link {
+      color: #e2e8f0;
+    }
+
+    .nav-link.active {
+      color: #38bdf8;
+    }
+
+    @media (max-width: 768px) {
+      .brand-title { font-size: 0.98rem; }
+      .brand-subtitle { font-size: 0.7rem; }
+    }
+
+    /* Search page styling */
+    .search-wrapper {
+      padding: 3rem 0;
+    }
+
+    .search-box {
+      max-width: 540px;
+      margin: 0 auto;
+      background: #0f172a;
+      border-radius: 1.25rem;
+      padding: 2rem 1.75rem;
+      box-shadow: 0 18px 45px rgba(15,23,42,0.4);
+      color: #e2e8f0;
+    }
+
+    .search-box h1 {
+      margin: 0 0 0.5rem;
+      font-size: 1.6rem;
+    }
+
+    .search-box p {
+      margin: 0 0 1.5rem;
+      font-size: 0.95rem;
+      color: #cbd5f5;
+    }
+
+    .search-form {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .search-form input[type="text"] {
+      flex: 1;
+      min-width: 0;
+      padding: 0.75rem 0.9rem;
+      border-radius: 999px;
+      border: 1px solid #1d4ed8;
+      font-size: 0.95rem;
+      outline: none;
+    }
+
+    .search-form button {
+      padding: 0.75rem 1.3rem;
+      border-radius: 999px;
+      border: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      background: #2563eb;
+      color: white;
+    }
+
+    .search-hint {
+      margin-top: 0.9rem;
+      font-size: 0.8rem;
+      color: #9ca3af;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" aria-label="Main navigation">
+    <div class="container nav-container">
+      <a href="index.html" class="brand">
+        <img src="logo.png" alt="Citizen HelpDesk Logo" class="brand-logo">
+        <div class="brand-text">
+          <span class="brand-title">Citizen HelpDesk</span>
+          <span class="brand-subtitle">Government rules in simple words</span>
+        </div>
+      </a>
+
+      <button
+        class="mobile-menu-btn"
+        type="button"
+        aria-label="Toggle navigation menu"
+        aria-expanded="false"
+        aria-controls="primary-navigation"
+      >
+        ☰
+      </button>
+
+      <div class="nav-links" id="primary-navigation">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="traffic.html" class="nav-link">Traffic Rules</a>
+        <a href="documents.html" class="nav-link">Documents</a>
+        <a href="police.html" class="nav-link">Police Help</a>
+        <a href="schemes.html" class="nav-link">Schemes</a>
+        <a href="search.html" class="nav-link active">Search</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <section class="search-wrapper">
+      <div class="container">
+        <div class="search-box">
+          <h1>Search CitizenHelpDesk</h1>
+          <p>Type any rule, document or topic. Results will open in Google, but only from this website.</p>
+
+          <form class="search-form" action="https://www.google.com/search" method="GET" target="_blank">
+            <!-- your query -->
+            <input type="text" name="q" placeholder="Example: helmet challan, PAN address change..." required>
+            <!-- limit results to your site -->
+            <input type="hidden" name="as_sitesearch" value="ti1tu.github.io">
+            <button type="submit">Search</button>
+          </form>
+
+          <p class="search-hint">
+            Tip: try keywords like <strong>“DL documents”</strong>, <strong>“FIR vs NC”</strong>, or <strong>“Aadhaar address change”</strong>.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
