@@ -8,69 +8,35 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
-    /* === NAVBAR BRAND WITH LOGO === */
-    .navbar {
-      background: #020617;
-      border-bottom: 1px solid rgba(148, 163, 184, 0.35);
-    }
+    <!-- NAVBAR -->
+<nav class="navbar" aria-label="Main navigation">
+  <div class="container nav-container">
 
-    .nav-container {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1.5rem;
-    }
+    <!-- LOGO -->
+    <a href="index.html" class="brand">
+      <img src="logo.png" alt="Citizen HelpDesk Logo" class="brand-logo">
+      <div class="brand-text">
+        <span class="brand-title">Citizen HelpDesk</span>
+        <span class="brand-subtitle">Government rules in simple words</span>
+      </div>
+    </a>
 
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      text-decoration: none;
-    }
+    <!-- MOBILE MENU BUTTON -->
+    <button class="mobile-menu-btn">☰</button>
 
-    .brand-logo {
-      width: 44px;
-      height: 44px;
-      border-radius: 18px;
-      object-fit: cover;
-      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.4);
-    }
+    <!-- NAV LINKS -->
+    <div class="nav-links">
+      <a href="index.html" class="nav-link active">Home</a>
+      <a href="traffic.html" class="nav-link">Traffic Rules</a>
+      <a href="documents.html" class="nav-link">Documents</a>
+      <a href="police.html" class="nav-link">Police Help</a>
+      <a href="schemes.html" class="nav-link">Schemes</a>
+      <a href="search.html" class="nav-link">Search</a>
+    </div>
 
-    .brand-text {
-      display: flex;
-      flex-direction: column;
-      line-height: 1.1;
-    }
+  </div>
+</nav>
 
-    .brand-title {
-      font-size: 1.05rem;
-      font-weight: 800;
-      color: #e5f0ff;
-    }
-
-    .brand-subtitle {
-      font-size: 0.75rem;
-      font-weight: 500;
-      color: #818cf8;
-    }
-
-    .nav-link {
-      color: #e2e8f0;
-    }
-
-    .nav-link.active {
-      color: #38bdf8;
-    }
-
-      @media (max-width: 768px) {
-    .brand-title {
-      font-size: 0.98rem;
-    }
-
-    .brand-subtitle {
-      font-size: 0.7rem;
-    }
-  }
   </style>
 
   </style>
