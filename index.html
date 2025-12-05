@@ -161,6 +161,136 @@
     .home-page .nav-links {
       display: none;
     }
+
+    /* Floating chatbot button */
+    .chatbot-fab {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      width: 54px;
+      height: 54px;
+      border-radius: 999px;
+      border: none;
+      background: #22c55e;
+      color: #0b1120;
+      font-size: 1.6rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.5);
+      cursor: pointer;
+      z-index: 9999;
+    }
+
+    /* Chat window */
+    .chatbot-window {
+      position: fixed;
+      right: 20px;
+      bottom: 90px;
+      width: 320px;
+      max-height: 420px;
+      background: #020617;
+      border-radius: 18px;
+      box-shadow: 0 18px 45px rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      display: none; /* hidden by default */
+      overflow: hidden;
+      z-index: 9999;
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+
+    .chatbot-header {
+      padding: 0.75rem 0.9rem;
+      background: linear-gradient(135deg, #0f172a, #1d283a);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .chatbot-header-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #e5e7eb;
+    }
+
+    .chatbot-header-subtitle {
+      font-size: 0.7rem;
+      color: #9ca3af;
+    }
+
+    .chatbot-close {
+      background: transparent;
+      border: none;
+      color: #9ca3af;
+      font-size: 1.1rem;
+      cursor: pointer;
+    }
+
+    .chatbot-messages {
+      padding: 0.75rem;
+      max-height: 260px;
+      overflow-y: auto;
+      background: #020617;
+    }
+
+    .chatbot-bubble {
+      padding: 0.45rem 0.7rem;
+      border-radius: 11px;
+      font-size: 0.8rem;
+      margin-bottom: 0.35rem;
+      line-height: 1.35;
+    }
+
+    .chatbot-bubble.bot {
+      background: #0f172a;
+      color: #e5e7eb;
+    }
+
+    .chatbot-bubble.user {
+      background: #2563eb;
+      color: #eff6ff;
+      text-align: right;
+    }
+
+    .chatbot-footer {
+      border-top: 1px solid rgba(51, 65, 85, 0.8);
+      padding: 0.55rem;
+      display: flex;
+      gap: 0.4rem;
+      background: #020617;
+    }
+
+    .chatbot-input {
+      flex: 1;
+      font-size: 0.8rem;
+      padding: 0.35rem 0.6rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      background: #020617;
+      color: #e5e7eb;
+    }
+
+    .chatbot-send {
+      padding: 0.35rem 0.9rem;
+      border-radius: 999px;
+      border: none;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      background: #2563eb;
+      color: #eff6ff;
+      cursor: pointer;
+    }
+
+    @media (max-width: 480px) {
+      .chatbot-window {
+        width: calc(100% - 32px);
+        right: 16px;
+        bottom: 80px;
+      }
+    }
+
   </style>
 </head>
 
@@ -479,6 +609,37 @@
     </div>
   </footer>
 
+  <!-- Floating Chatbot -->
+  <div class="chatbot-window" id="chatbotWindow">
+    <div class="chatbot-header">
+      <div>
+        <div class="chatbot-header-title">Citizen Assistant</div>
+        <div class="chatbot-header-subtitle">Ask about traffic, documents, police, schemes</div>
+      </div>
+      <button class="chatbot-close" id="chatbotClose" aria-label="Close chat">×</button>
+    </div>
+
+    <div class="chatbot-messages" id="chatbotMessages">
+      <div class="chatbot-bubble bot">
+        👋 Hi! I can guide you.<br>
+        Try asking things like:<br>
+        • "Traffic challan rules"<br>
+        • "Aadhaar address change"<br>
+        • "Police complaint"<br>
+        • "Govt schemes for students"
+      </div>
+    </div>
+
+    <form class="chatbot-footer" id="chatbotForm">
+      <input type="text" id="chatbotInput" class="chatbot-input" placeholder="Type your question..." autocomplete="off">
+      <button type="submit" class="chatbot-send">Send</button>
+    </form>
+  </div>
+
+  <button class="chatbot-fab" id="chatbotFab" aria-label="Open chat">
+    💬
+  </button>
+
   <!-- Back to top button -->
   <button id="backToTop" aria-label="Back to top">
     ↑ Back to top
@@ -619,6 +780,118 @@
           cursorDot.style.opacity = '0';
         });
       }
+
+      /* ---------- FLOATING CHATBOT (AI-STYLE FAQ) ---------- */
+      var chatbotWindow = document.getElementById('chatbotWindow');
+      var chatbotFab = document.getElementById('chatbotFab');
+      var chatbotClose = document.getElementById('chatbotClose');
+      var chatbotForm = document.getElementById('chatbotForm');
+      var chatbotInput = document.getElementById('chatbotInput');
+      var chatbotMessages = document.getElementById('chatbotMessages');
+
+      function toggleChatbot(open) {
+        if (!chatbotWindow) return;
+        chatbotWindow.style.display = open ? 'block' : 'none';
+      }
+
+      if (chatbotFab) {
+        chatbotFab.addEventListener('click', function () {
+          toggleChatbot(true);
+          if (chatbotInput) chatbotInput.focus();
+        });
+      }
+
+      if (chatbotClose) {
+        chatbotClose.addEventListener('click', function () {
+          toggleChatbot(false);
+        });
+      }
+
+      function addMessage(text, who) {
+        if (!chatbotMessages) return;
+        var bubble = document.createElement('div');
+        bubble.className = 'chatbot-bubble ' + (who === 'user' ? 'user' : 'bot');
+        bubble.innerHTML = text;
+        chatbotMessages.appendChild(bubble);
+        chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+      }
+
+      // Simple FAQ "AI" – answers based on keywords
+      function getBotReply(text) {
+        var t = text.toLowerCase();
+
+        // Aadhaar
+        if (t.includes('aadhaar') || t.includes('aadhar')) {
+          return "🪪 <strong>Aadhaar basics (summary):</strong><br><br>" +
+                 "• Aadhaar is a 12-digit ID issued by UIDAI.<br>" +
+                 "• You can update address, phone etc. online using the UIDAI portal.<br>" +
+                 "• Never share your Aadhaar OTP with anyone.<br><br>" +
+                 "For full steps, see the Aadhaar guide in the Documents section of this website.";
+        }
+
+        // PAN
+        if (t.includes('pan')) {
+          return "🧾 <strong>PAN card info:</strong><br><br>" +
+                 "• PAN is needed for bank accounts, salary, tax and many financial tasks.<br>" +
+                 "• If you lose your PAN, you can apply online for a reprint with the same number.<br>" +
+                 "• Keep your PAN details safe and don’t share with unknown people.<br><br>" +
+                 "You’ll find detailed PAN help in the Documents section on this site.";
+        }
+
+        // Traffic rules / challan / helmet
+        if (t.includes('traffic') || t.includes('challan') || t.includes('helmet')) {
+          return "🚦 <strong>Traffic rules highlights:</strong><br><br>" +
+                 "• Always wear a proper helmet; pillion rider should also wear one.<br>" +
+                 "• Carry DL, RC, Insurance and PUC – physical or in DigiLocker/mParivahan (if accepted in your state).<br>" +
+                 "• Pay challans only on official government portals, avoid agents and fake links.<br><br>" +
+                 "More details are available in the Traffic Rules section of this website.";
+        }
+
+        // Police help / FIR
+        if (t.includes('police') || t.includes('fir') || t.includes('complaint') || t.includes('nc')) {
+          return "👮 <strong>Police help basics:</strong><br><br>" +
+                 "• FIR is for serious cognizable offences (like theft, assault etc.).<br>" +
+                 "• Non-cognizable issues may be recorded as a complaint/NC.<br>" +
+                 "• You can ask for a free copy of the FIR after it is registered.<br><br>" +
+                 "Your Police Help page on this site explains this in simple language.";
+        }
+
+        // Schemes / yojana / benefits
+        if (t.includes('scheme') || t.includes('schemes') ||
+            t.includes('yojana') || t.includes('pension') || t.includes('scholarship')) {
+          return "🏛️ <strong>Government schemes overview:</strong><br><br>" +
+                 "• Many schemes exist for students, farmers, senior citizens and low-income families.<br>" +
+                 "• Always read eligibility, required documents and the official website carefully.<br>" +
+                 "• Avoid paying agents who promise quick scheme benefits.<br><br>" +
+                 "See the Schemes section of this website for specific schemes and details.";
+        }
+
+        // Default reply
+        return "🤖 I’m a simple helper bot for CitizenHelpDesk.<br><br>" +
+               "I can answer about:<br>" +
+               "• traffic rules and challans<br>" +
+               "• Aadhaar / PAN / documents<br>" +
+               "• police complaints / FIR<br>" +
+               "• government schemes / yojana<br><br>" +
+               "Try asking: <em>“Aadhaar address change”</em> or <em>“traffic helmet rule”</em>.";
+      }
+
+      if (chatbotForm && chatbotInput) {
+        chatbotForm.addEventListener('submit', function (e) {
+          e.preventDefault();
+          var text = chatbotInput.value.trim();
+          if (!text) return;
+
+          // Show user message
+          addMessage(text, 'user');
+          chatbotInput.value = '';
+
+          // Bot reply
+          var reply = getBotReply(text);
+          addMessage(reply, 'bot');
+        });
+      }
+
     });
   </script>
 
