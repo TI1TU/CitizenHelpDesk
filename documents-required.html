@@ -9,157 +9,331 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 </head>
 
-<body>
+<body class="documents-page" id="top">
 
-<!-- Header -->
-<header class="site-header">
-  <div class="container header-inner">
-    <a href="index.html" class="logo">
-      <img src="logo1.png" alt="CitizenHelpDesk logo">
-      <span>CitizenHelpDesk</span>
-    </a>
+  <!-- NAVBAR -->
+  <nav class="navbar" aria-label="Main navigation">
+    <div class="container nav-container">
+      <a href="index.html" class="logo">
+        Citizen<span>HelpDesk</span>
+      </a>
 
-    <nav class="main-nav">
-      <a href="index.html">Home</a>
-      <a href="traffic.html">Traffic Rules</a>
-      <a href="documents.html" class="active">Documents</a>
-      <a href="police.html">Police Help</a>
-      <a href="schemes.html">Schemes</a>
-      <a href="about.html">About</a>
-    </nav>
-  </div>
-</header>
+      <!-- Mobile menu button -->
+      <button
+        class="mobile-menu-btn"
+        type="button"
+        aria-label="Toggle navigation menu"
+        aria-expanded="false"
+        aria-controls="primary-navigation"
+      >
+        ☰
+      </button>
 
-<!-- Main Content -->
-<main class="page-main">
-  <section class="hero-section">
-    <div class="container hero-inner">
-      <div class="hero-text">
-        <p class="eyebrow">Driving Essentials</p>
-        <h1>Documents You Must Carry While Driving in India </h1>
-        <p class="hero-subtitle">
-          Driving without proper documents can lead to fines, trouble with police, or even your vehicle being detained.
-          Here’s a simple explanation for every driver and rider in India.
+      <!-- Nav links -->
+      <div class="nav-links" id="primary-navigation">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="traffic.html" class="nav-link">Traffic Rules</a>
+        <a href="documents.html" class="nav-link active">Documents</a>
+        <a href="police.html" class="nav-link">Police Help</a>
+        <a href="schemes.html" class="nav-link">Schemes</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <!-- HERO -->
+    <section class="page-hero">
+      <div class="page-hero-content">
+        <p style="font-size:0.85rem; background:rgba(0,0,0,0.25); display:inline-block; padding:4px 10px; border-radius:999px;">
+          Driving essentials · Updated for 2025
         </p>
-      </div>
-    </div>
-  </section>
-
-  <section class="content-section">
-    <div class="container narrow">
-
-      <h2>1. Why These Documents Matter</h2>
-      <p>
-        Traffic rules come from the Motor Vehicles Act, 1988. Police can ask you to show your documents anytime during checking.
-        If you cannot show them (physical or digital), you may receive a challan.
-      </p>
-
-      <h2>2. Mandatory Documents You Must Carry</h2>
-
-      <h3>1. Driving Licence (DL)</h3>
-      <p>
-        Your DL proves that you are legally allowed to drive.
-      </p>
-      <ul>
-        <li>No licence at all → serious offence.</li>
-        <li>Have licence but forgot it → smaller offence but still a fine.</li>
-        <li>You can show DL in DigiLocker or mParivahan.</li>
-      </ul>
-      <p><strong>Tip:</strong> Keep your DL in your wallet + also save it digitally.</p>
-
-      <h3>2. Registration Certificate (RC)</h3>
-      <ul>
-        <li>No RC → vehicle may be detained.</li>
-        <li>RC exists but not carried → fine for “not producing documents”.</li>
-        <li>Digital RC is accepted in many states.</li>
-      </ul>
-      <p><strong>Tip:</strong> Keep a photo + physical card + DigiLocker version.</p>
-
-      <h3>3. Insurance (Third-Party Minimum)</h3>
-      <ul>
-        <li>Valid insurance is compulsory.</li>
-        <li>Expired insurance → heavy fine.</li>
-        <li>Repeat offences may require court appearance.</li>
-        <li>Insurance PDF on phone is usually accepted.</li>
-      </ul>
-      <p><strong>Tip:</strong> Set a reminder before expiry and renew on time.</p>
-
-      <h3>4. Pollution Under Control (PUC)</h3>
-      <ul>
-        <li>No PUC / expired PUC → fine.</li>
-        <li>Metro cities check PUC more strictly.</li>
-        <li>PUC renewal is cheap and quick.</li>
-      </ul>
-      <p><strong>Tip:</strong> Keep a photo of your PUC slip on your phone.</p>
-
-      <h2>3. Are Digital Documents Accepted?</h2>
-      <p>Yes, MOST states accept:</p>
-      <ul>
-        <li>DigiLocker</li>
-        <li>mParivahan</li>
-      </ul>
-      <p>
-        These apps show official data, but some officers may still prefer physical copies.
-      </p>
-      <p><strong>Best practice:</strong> Carry both physical and digital copies.</p>
-
-      <h2>4. What Happens if You Can’t Show Documents?</h2>
-      <p>Police may:</p>
-      <ul>
-        <li>Issue a challan</li>
-        <li>Impound your vehicle (in serious cases)</li>
-        <li>Ask you to appear in court</li>
-        <li>Add extra penalty for non-cooperation</li>
-      </ul>
-      <p><strong>Tip:</strong> Stay calm, be polite, and show documents clearly.</p>
-
-      <h2>5. Quick Summary</h2>
-      <p>Carry these documents every time:</p>
-      <ul>
-        <li>Driving Licence (DL)</li>
-        <li>Registration Certificate (RC)</li>
-        <li>Insurance</li>
-        <li>PUC Certificate</li>
-      </ul>
-      <p><strong>Best:</strong> Keep all in DigiLocker + also carry physical copies.</p>
-
-      <p><a href="documents.html">← Back to Documents</a></p>
-    </div>
-  </section>
-</main>
-
-<!-- Footer -->
-<footer class="site-footer">
-  <div class="container footer-inner">
-    <div class="footer-brand">
-      <h3>CitizenHelpDesk</h3>
-      <p>Simplifying government rules and procedures for every Indian citizen – in easy language.</p>
-    </div>
-
-    <div class="footer-columns">
-      <div class="footer-column">
-        <h4>Quick Links</h4>
-        <ul>
-          <li><a href="traffic.html">Traffic Rules</a></li>
-          <li><a href="documents.html">Documents & ID</a></li>
-          <li><a href="police.html">Police Help</a></li>
-          <li><a href="schemes.html">Government Schemes</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-column">
-        <h4>Disclaimer</h4>
+        <h1>Documents You Must Carry While Driving in India (2025)</h1>
         <p>
-          CitizenHelpDesk is not an official government website. Information is collected from official public sources and simplified for general awareness. Always verify important details on official government portals.
+          Driving without proper documents can lead to fines, trouble with police, or even your vehicle
+          being detained. This simple guide explains what every rider and driver should keep ready –
+          in both physical and digital form.
         </p>
       </div>
-    </div>
+    </section>
 
-    <div class="footer-bottom">
-      <p>©  CitizenHelpDesk. All rights reserved.</p>
+    <!-- MAIN CONTENT -->
+    <section class="section">
+      <div class="container">
+
+        <!-- OVERVIEW BLOCKS -->
+        <div class="grid grid-2" style="margin-bottom: 2.5rem;">
+
+          <!-- Checklist -->
+          <article class="card">
+            <h2><i>✅</i> Quick checklist before you start</h2>
+            <p>Every time you take out your vehicle, make sure these 4 documents are ready:</p>
+            <ul>
+              <li>Driving Licence (DL)</li>
+              <li>Registration Certificate (RC)</li>
+              <li>Valid Insurance (at least third-party)</li>
+              <li>Pollution Under Control (PUC) certificate</li>
+            </ul>
+            <p style="font-size:0.85rem; color:var(--text-muted); margin-top:0.5rem;">
+              If you can’t show them during checking (physical or digital), police may issue a challan
+              and in some cases detain the vehicle.
+            </p>
+          </article>
+
+          <!-- Why it matters -->
+          <article class="card">
+            <h2><i>📘</i> Why these documents matter</h2>
+            <p>
+              Traffic rules are based on the <strong>Motor Vehicles Act, 1988</strong> and later amendments.
+              Police have the power to ask for your documents during checking, nakabandi or routine stops.
+            </p>
+            <p>
+              Keeping your documents ready:
+            </p>
+            <ul>
+              <li>Saves time during checking</li>
+              <li>Prevents unnecessary arguments on the road</li>
+              <li>Reduces the chance of heavy fines or vehicle seizure</li>
+            </ul>
+          </article>
+        </div>
+
+        <!-- SECTION TITLE: MANDATORY DOCUMENTS -->
+        <div style="margin-bottom: 1rem;">
+          <h2>Mandatory documents you must carry</h2>
+          <p style="color: var(--text-muted); max-width: 720px;">
+            These four are the basic documents every driver and rider should always keep ready.
+          </p>
+        </div>
+
+        <!-- MANDATORY DOCUMENT CARDS -->
+        <div class="grid grid-2" style="margin-bottom: 2.5rem; gap: 1.75rem;">
+
+          <!-- DL -->
+          <article class="card">
+            <h3><i>🪪</i> 1. Driving Licence (DL)</h3>
+            <p>
+              Your DL proves that you are legally allowed to drive that category of vehicle
+              (bike, car, commercial etc.).
+            </p>
+            <ul>
+              <li><strong>No licence at all</strong> → treated as a serious offence.</li>
+              <li><strong>You have a licence but didn’t carry it</strong> → smaller offence but still a fine.</li>
+              <li>You can show your DL from <strong>DigiLocker</strong> or <strong>mParivahan</strong>.</li>
+            </ul>
+            <p><strong>Tip:</strong> Keep the original DL in your wallet and also save it digitally.</p>
+          </article>
+
+          <!-- RC -->
+          <article class="card">
+            <h3><i>🚗</i> 2. Registration Certificate (RC)</h3>
+            <p>
+              RC proves that the vehicle is registered with the RTO and is not illegally on the road.
+            </p>
+            <ul>
+              <li><strong>No RC at all</strong> → vehicle may be detained or towed.</li>
+              <li><strong>RC exists but not with you</strong> → challan for “not producing documents”.</li>
+              <li>In many states, digital RC in DigiLocker / mParivahan is accepted.</li>
+            </ul>
+            <p><strong>Tip:</strong> Keep a photo of RC, the physical smart card, and a DigiLocker copy.</p>
+          </article>
+
+          <!-- Insurance -->
+          <article class="card">
+            <h3><i>📄</i> 3. Insurance (Third-party minimum)</h3>
+            <p>
+              Having valid motor insurance is compulsory. At minimum, you must have a
+              <strong>third-party insurance</strong> policy.
+            </p>
+            <ul>
+              <li><strong>Expired insurance</strong> → heavy fine; repeat offences may go to court.</li>
+              <li>Soft copy (PDF) on your phone is usually accepted.</li>
+              <li>Policy details help in case of accident, claim or police case.</li>
+            </ul>
+            <p><strong>Tip:</strong> Set a reminder 10–15 days before expiry and renew online on time.</p>
+          </article>
+
+          <!-- PUC -->
+          <article class="card">
+            <h3><i>🌫️</i> 4. Pollution Under Control (PUC)</h3>
+            <p>
+              PUC confirms that your vehicle’s emission is within the permitted limit.
+              It is especially checked more strictly in metro cities.
+            </p>
+            <ul>
+              <li>No PUC or expired PUC can lead to a challan.</li>
+              <li>PUC test is cheap and quick – usually done at petrol pumps or authorised centres.</li>
+              <li>Some states also show PUC details inside mParivahan.</li>
+            </ul>
+            <p><strong>Tip:</strong> Take a photo of the PUC slip and keep it on your phone.</p>
+          </article>
+
+        </div>
+
+        <!-- DIGITAL DOCS & IF YOU CAN'T SHOW -->
+        <div class="grid grid-2" style="margin-bottom: 2.5rem;">
+
+          <article class="card">
+            <h2><i>📱</i> Are digital documents accepted?</h2>
+            <p>Yes, in MOST states the following are accepted as valid digital documents:</p>
+            <ul>
+              <li><strong>DigiLocker</strong> – linked to your Aadhaar / mobile</li>
+              <li><strong>mParivahan</strong> – official app for DL and RC details</li>
+            </ul>
+            <p>
+              These apps show data directly from government servers, so they are treated as
+              official records.
+            </p>
+            <p><strong>Best practice:</strong> Keep both – physical copies + digital documents in these apps.</p>
+          </article>
+
+          <article class="card">
+            <h2><i>🚨</i> If you cannot show documents</h2>
+            <p>During checking, if you fail to show required documents, police may:</p>
+            <ul>
+              <li>Issue an on-the-spot challan</li>
+              <li>Impound your vehicle in serious situations</li>
+              <li>Ask you to appear in court for certain offences</li>
+              <li>Add extra penalty if you argue or do not cooperate</li>
+            </ul>
+            <p><strong>Tip:</strong> Stay calm, be polite, and show whatever documents you have clearly.
+              You can ask for a proper challan instead of paying any “on the side” amount.</p>
+          </article>
+
+        </div>
+
+        <!-- FINAL SUMMARY BLOCK -->
+        <article class="card" style="margin-bottom: 2rem;">
+          <h2><i>🧾</i> Quick summary – Don’t leave home without these</h2>
+          <p>For every ride or drive, make sure you carry:</p>
+          <ul>
+            <li>✅ Driving Licence (DL)</li>
+            <li>✅ Registration Certificate (RC)</li>
+            <li>✅ Valid Insurance policy</li>
+            <li>✅ PUC certificate</li>
+          </ul>
+          <p>
+            <strong>Smart habit:</strong> Keep them in a small folder in your vehicle,
+            and also store digital versions in <strong>DigiLocker</strong> and <strong>mParivahan</strong>.
+          </p>
+          <p style="margin-top:0.75rem;">
+            <a href="traffic.html" style="text-decoration:none; color:var(--primary-color); font-weight:500;">
+              ← Back to Traffic Rules
+            </a>
+          </p>
+        </article>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="section footer-section">
+    <div class="container">
+      <div class="grid grid-3 footer-content">
+        <div class="footer-section">
+          <a href="index.html" class="logo" style="margin-bottom: 1rem; display: inline-block;">
+            Citizen<span>HelpDesk</span>
+          </a>
+          <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
+            Simple explanations of traffic rules and documents so you don’t panic on the road.
+          </p>
+        </div>
+        <div class="footer-section">
+          <h4>Useful Guides</h4>
+          <ul class="footer-links">
+            <li><a href="traffic.html">Traffic Rules &amp; Challans</a></li>
+            <li><a href="blog-traffic-challan.html">Pay Traffic Challan Online</a></li>
+            <li><a href="blog-helmet.html">Helmet Rule &amp; Fines</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Note</h4>
+          <p style="color: var(--text-muted);">
+            Laws and fines can change and may vary by state. Always confirm latest rules on your
+            state transport or traffic police website. This information is for general awareness,
+            not legal advice.
+          </p>
+        </div>
+      </div>
+      <div class="copyright" style="text-align:center;">
+        <p>&copy; 2025 CitizenHelpDesk. Information for general guidance only, not legal advice.</p>
+      </div>
     </div>
-  </div>
-</footer>
+  </footer>
+
+  <!-- Back to top button -->
+  <button id="backToTop" aria-label="Back to top">
+    ↑ Back to top
+  </button>
+
+  <!-- Cursor dot (desktop) -->
+  <div class="cursor-dot"></div>
+
+  <script>
+    // Fix: when page is shown from back/forward cache, reset scroll to top
+    window.addEventListener('pageshow', function (event) {
+      if (event.persisted) {
+        window.scrollTo(0, 0);
+      }
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+      // Always start at top on first load
+      window.scrollTo(0, 0);
+
+      // Prevent browser auto scroll restoration
+      if ('scrollRestoration' in history) {
+        history.scrollRestoration = 'manual';
+      }
+
+      // Mobile menu toggle
+      var mobileBtn = document.querySelector('.mobile-menu-btn');
+      var navLinks = document.querySelector('.nav-links');
+
+      if (mobileBtn && navLinks) {
+        mobileBtn.addEventListener('click', function () {
+          navLinks.classList.toggle('active');
+
+          var isOpen = navLinks.classList.contains('active');
+          mobileBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        });
+      }
+
+      // Back to top button
+      var backToTopBtn = document.getElementById('backToTop');
+
+      if (backToTopBtn) {
+        window.addEventListener('scroll', function () {
+          if (window.pageYOffset > 300) {
+            backToTopBtn.classList.add('show');
+          } else {
+            backToTopBtn.classList.remove('show');
+          }
+        });
+
+        backToTopBtn.addEventListener('click', function () {
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+        });
+      }
+
+      // Cursor dot animation (desktop)
+      var cursorDot = document.querySelector('.cursor-dot');
+
+      if (cursorDot) {
+        document.addEventListener('mousemove', function (e) {
+          cursorDot.style.opacity = '1';
+          cursorDot.style.transform = 'translate3d(' + e.clientX + 'px,' + e.clientY + 'px,0)';
+        });
+
+        document.addEventListener('mouseleave', function () {
+          cursorDot.style.opacity = '0';
+        });
+      }
+    });
+  </script>
 
 </body>
 </html>
