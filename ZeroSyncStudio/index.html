@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZeroSync Studio | Future Fashion</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
+    <!-- Three.js CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- GSAP CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo">ZeroSync</div>
+        <div class="nav-links">
+            <a href="index.html" class="active">Home</a>
+            <a href="#shop">Shop</a>
+            <a href="product.html">3D Viewer</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+        </div>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <a href="index.html">Home</a>
+        <a href="#shop">Shop</a>
+        <a href="product.html">3D Viewer</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>ZeroSync <br> Studio</h1>
+            <p>Future-Ready Unisex Streetwear</p>
+            <a href="#shop" class="btn-primary">Explore Collection</a>
+        </div>
+        <div id="hero-canvas-container" class="hero-canvas"></div>
+    </section>
+
+    <!-- Product Section -->
+    <section id="shop" class="products">
+        <h2>Latest Drops</h2>
+        <div class="product-grid">
+            <!-- Product Cards will be injected here or hardcoded -->
+            <div class="product-card">
+                <div class="product-image-placeholder"></div>
+                <h3>Cyber Hoodie</h3>
+                <p>$120.00</p>
+                <a href="product.html" class="btn-secondary">View in 3D</a>
+            </div>
+            <div class="product-card">
+                <div class="product-image-placeholder"></div>
+                <h3>Neon Tee</h3>
+                <p>$60.00</p>
+                <a href="product.html" class="btn-secondary">View in 3D</a>
+            </div>
+            <div class="product-card">
+                <div class="product-image-placeholder"></div>
+                <h3>Tech Joggers</h3>
+                <p>$95.00</p>
+                <a href="product.html" class="btn-secondary">View in 3D</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <h2>About ZeroSync</h2>
+        <p>Minimal. Dark. Premium. We define the future of streetwear.</p>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <h2>Get in Touch</h2>
+        <p>contact@zerosync.studio</p>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 ZeroSync Studio. All rights reserved.</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="three-handler.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
